@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+    <meta http-equiv="Content-Language" content="en_US">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    
+    <title></title>
+	
+    <script src="../../Scripts/Third Party/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+	<script src="../../Scripts/Third Party/knockout-3.2.0/knockout-3.2.0.js"></script>
+	<script src="../../Scripts/Helpers.js"></script>
+</head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <div id="header"></div>
+				<script>Helpers.LoadPartial("#header","Common/Header")</script>
+            </header>
+
+            <div class="site-main">
+                <header> 
+                    <div id="page-header"></div>
+                </header>
+                <section id="main-body">
+				<script>Helpers.LoadPartial("#main-body","Common/Main")</script>
+                </section>
+            </div>
+            
+            <footer>
+                <div id="footer"></div>
+				<script>Helpers.LoadPartial("#footer","Common/Footer")</script>
+            </footer>
+        </div>
+        
+        <nav id="site-navigation">
+            <div id="navigation"></div>
+			<script>Helpers.LoadPartial("#navigation","Common/Navigation")</script>
+        </nav>        
+    </body>
+</html>
+
