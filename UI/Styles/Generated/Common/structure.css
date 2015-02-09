@@ -1,0 +1,33 @@
+/* line 3, ../../Sass/Common/structure.sass */
+html {
+  height: 100%; }
+
+/* line 6, ../../Sass/Common/structure.sass */
+body {
+  height: 100%;
+  min-width: 1500px; }
+  /* line 10, ../../Sass/Common/structure.sass */
+  body > .wrapper {
+    min-height: 100%;
+    position: relative; }
+    /* line 13, ../../Sass/Common/structure.sass */
+    body > .wrapper > header {
+      width: 100%; }
+      /* line 15, ../../Sass/Common/structure.sass */
+      body > .wrapper > header .settings {
+        margin-left: 40%; }
+    /* line 17, ../../Sass/Common/structure.sass */
+    body > .wrapper > .site-main {
+      width: 100%;
+      min-height: 100vh; }
+    /* line 20, ../../Sass/Common/structure.sass */
+    body > .wrapper > footer {
+      width: 100%;
+      height: 30px;
+      text-align: center; }
+  /* line 24, ../../Sass/Common/structure.sass */
+  body > nav {
+    position: fixed;
+    height: 100%;
+    width: 215px;
+    top: 0; }

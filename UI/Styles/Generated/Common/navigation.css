@@ -1,0 +1,28 @@
+/* line 3, ../../Sass/Common/navigation.sass */
+body > nav li a {
+  display: block;
+  width: 90%;
+  padding: 10px 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
+  text-decoration: none; }
+
+/* line 12, ../../Sass/Common/navigation.sass */
+body > nav {
+  background-color: #35363A;
+  color: white;
+  padding: 45px 0 30px 0; }
+  /* line 17, ../../Sass/Common/navigation.sass */
+  body > nav li a {
+    border-bottom: 1px solid #292A2D;
+    border-top: 1px solid #414247; }
+  /* line 21, ../../Sass/Common/navigation.sass */
+  body > nav li.active, body > nav li:hover {
+    border-right: 4px solid #1dAec7; }
+  /* line 23, ../../Sass/Common/navigation.sass */
+  body > nav li a {
+    background: none repeat scroll 0 0 #222225;
+    border-bottom: 1px solid #222225;
+    border-top: 1px solid #222225; }

@@ -2,6 +2,6 @@ Helpers = (new function(){
 	var self = this;
 	
 	self.LoadPartial = function(element, location){
-		$(element).load("ajax/../" + location + ".html"); 
+		$(element).load("../" + location + ".html"); 
 	};
 }());

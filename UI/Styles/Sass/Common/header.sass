@@ -1,0 +1,28 @@
+@import "../_variables"
+
+body > .wrapper > header 
+	color: white
+
+	#environment-text
+		color: black
+		float: left
+		padding: 5px
+		position: absolute
+		font-weight: bold
+
+	.header-bar 
+		display: flex
+		align-items: center
+		height: $site-header-height
+		background-color: $site-header-colour
+		border-top: 1px solid $site-header-top-colour
+		border-bottom: 1px solid $site-header-bottom-colour
+
+		.title 
+			font-size: 2.5em
+			font-style: italic
+			margin-left: 50px
+			flex-grow: 2		
+
+		.settings 
+			margin-right: 30px
