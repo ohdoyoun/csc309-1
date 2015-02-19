@@ -14,3 +14,8 @@ var Controller = (new function (){
 	}
 
 }());
+
+$(".header-link").click(function(){
+		var navLink = $(this).attr('data-nav');
+		Controller.navigation.changeCurrentNavigation(navLink);
+	});
