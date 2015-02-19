@@ -24,11 +24,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <table style="width:98%">
               <tr>
                 <td><div style="text-align: left;"><a href="https://csc309-gwlodarek.c9.io">Fund You</a></div></td>
+                  <td><div style="text-align: center;"><a href="/accounts">Account</a> | Projects | Communities | 
+                    <?php if ($logged_in): ?>
+                        <?php echo $this->Html->link('Sign Out', array('controller'=>'users', 'action'=>'logout')); ?>
+                    <?php else: ?>
+                        <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
+                    <?php endif; ?>
+                        </div></td>
                 <td><div style="text-align: right;">
                 <?php if ($logged_in): ?>
-                    Welcome, <?php echo $current_user['username']; ?>. <?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?>
-                <?php else: ?>
-                    <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
+                    Welcome, <?php echo $current_user['username']; ?>.            
                 <?php endif; ?>
             </div></td> 
               </tr>
