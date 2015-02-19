@@ -43,5 +43,10 @@ NavigationModel = function(){
 			self.currentNavigation(value);
 		}
 	};
+	
+	$(".header-link").click(function(element){
+		var navLink = element.attr('data-nav');
+		self.changeCurrentNavigation(navLink);
+	});
 
 }
