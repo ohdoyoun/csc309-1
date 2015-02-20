@@ -1,0 +1,32 @@
+@import "../_variables"
+
+%nav-anchor 
+	display: block
+	
+	padding: 10px 15px
+	color: #FFFFFF
+	font-size: 14px
+	font-weight: 300
+	margin: 0
+	text-decoration: none
+body > nav 
+	background-color: $site-nav-colour
+	color: white
+	padding: 45px 0 $site-footer-height 0
+	ul
+		padding: 0
+		li 
+			list-style: none
+			padding: 0
+			a 
+				@extend %nav-anchor
+				border-bottom: 1px solid #292A2D
+				border-top: 1px solid #414247
+			&.active, &:hover 
+				border-right: 4px solid $primary-colour
+				a 
+					@extend %nav-anchor
+					width: 90%
+					background: none repeat scroll 0 0 #222225
+					border-bottom: 1px solid #222225
+					border-top: 1px solid #222225

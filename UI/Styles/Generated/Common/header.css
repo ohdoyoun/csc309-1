@@ -1,0 +1,27 @@
+/* line 3, ../../Sass/Common/header.sass */
+body > .wrapper > header {
+  color: white; }
+  /* line 6, ../../Sass/Common/header.sass */
+  body > .wrapper > header #environment-text {
+    color: black;
+    float: left;
+    padding: 5px;
+    position: absolute;
+    font-weight: bold; }
+  /* line 13, ../../Sass/Common/header.sass */
+  body > .wrapper > header .header-bar {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    background-color: #282828;
+    border-top: 1px solid #282828;
+    border-bottom: 1px solid #777777; }
+    /* line 21, ../../Sass/Common/header.sass */
+    body > .wrapper > header .header-bar .title {
+      font-size: 2.5em;
+      font-style: italic;
+      margin-left: 50px;
+      flex-grow: 2; }
+    /* line 27, ../../Sass/Common/header.sass */
+    body > .wrapper > header .header-bar .settings {
+      margin-right: 30px; }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+    <meta http-equiv="Content-Language" content="en_US">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    
+    <title></title>
+	
+    <script src="../../Scripts/Third Party/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+	<script src="../../Scripts/Third Party/knockout-3.2.0/knockout-3.2.0.js"></script>
+	<script src="../../Scripts/Helpers.min.js"></script>
+	<script src="../../Scripts/PageModel.min.js"></script>
+	<script src="../../Scripts/Navigation.min.js"></script>
+	<script src="../../Scripts/Controller.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../../Styles/Generated/Common/header.min.css">
+	<link rel="stylesheet" type="text/css" href="../../Styles/Generated/Common/navigation.min.css">
+	<link rel="stylesheet" type="text/css" href="../../Styles/Generated/Common/footer.min.css">
+	<link rel="stylesheet" type="text/css" href="../../Styles/Generated/Common/structure.min.css">
+</head>
+    <body>
+        <div class="wrapper">
+            <header id="header">
+				<script>Helpers.LoadPartial("#header","Common/Header")</script>
+            </header>
+
+            <div class="site-main">
+                <header> 
+                    <div id="page-header"></div>
+                </header>
+                <section id="main-body">
+					<script>Helpers.LoadPartial("#main-body","Common/Main")</script>
+                </section>
+            </div>
+            
+            <footer id="footer">
+				<script>Helpers.LoadPartial("#footer","Common/Footer")</script>
+            </footer>
+        </div>
+        
+        <nav id="navigation">
+			<script>Helpers.LoadPartial("#navigation","Common/Navigation")</script>
+        </nav>        
+    </body>
+	
+	<script>
+		Controller.init({
+			urls:{},
+			pageModel:{}
+		});
+	</script>
+</html>
+
