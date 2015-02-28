@@ -3,6 +3,12 @@
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 class User extends AppModel{
+	
+	private var $roles = array(
+		'User',
+		'Admin'
+	);
+	
 	public var $hasOne = array(
 		'Profile' => array(
 			'classname' => 'Profile',
