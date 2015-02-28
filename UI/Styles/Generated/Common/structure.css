@@ -19,13 +19,14 @@ body {
     /* line 17, ../../Sass/Common/structure.sass */
     body > .wrapper > .site-main {
       width: 100%;
-      min-height: 100vh; }
-    /* line 20, ../../Sass/Common/structure.sass */
+      min-height: 100vh;
+      margin-left: 225px; }
+    /* line 21, ../../Sass/Common/structure.sass */
     body > .wrapper > footer {
       width: 100%;
       height: 30px;
       text-align: center; }
-  /* line 24, ../../Sass/Common/structure.sass */
+  /* line 25, ../../Sass/Common/structure.sass */
   body > nav {
     position: fixed;
     height: 100%;

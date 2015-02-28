@@ -4,4 +4,8 @@ Helpers = (new function(){
 	self.LoadPartial = function(element, location){
 		$(element).load("../" + location + ".html"); 
 	};
+	
+	self.UnloadPartial = function(element){
+		$(element).remove();
+	};
 }());
