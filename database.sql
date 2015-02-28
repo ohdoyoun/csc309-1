@@ -34,6 +34,7 @@ create table profiles(
 create table status_tags(
 	id int not null auto_increment,
 	name varchar(20),
+	status_date datetime not null,
 	Primary Key (id)
 );
 
