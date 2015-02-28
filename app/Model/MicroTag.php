@@ -1,6 +1,6 @@
 <?php 
-
-class MicroTag extends AppModel{
+App::import('Model','Tag'); 
+class MicroTag extends Tag{
 
 	public var $hasAndBelongsToMany = array(
 		'MacroTag' => array(
@@ -26,6 +26,10 @@ class MicroTag extends AppModel{
 		)
 	);
 
+	public var $actAs = array( 'Inherit' );
+
+	/* Global $validate takes care of this due to Inheritence.
+
 	public var $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
@@ -43,5 +47,6 @@ class MicroTag extends AppModel{
 			
 		)
 	);
+	*/
 }
 ?>
