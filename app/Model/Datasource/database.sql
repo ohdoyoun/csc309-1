@@ -4,7 +4,7 @@ create table users(
 	username varchar(25) not null
 	password varchar(16) not null,
 	email varchar(50) not null,
-	role varchar(20) not null,
+	role varchar(20) default 'User',
 	Primary Key (id),
 	Unique (username),
 	Unique (email)
@@ -34,7 +34,7 @@ create table profiles(
 create table status_tags(
 	id int not null auto_increment,
 	name varchar(50),
-	status_date datetime not null,
+	status_date datetime default NOW(),
 	Primary Key (id)
 );
 
@@ -46,7 +46,7 @@ create table projects(
 	id int not null auto_increment,
 	project_name varchar(50) not null,
 	goal decimal(10, 2) not null,
-	start_date Date not null,
+	start_date Date default GETDATE(),
 	end_date Date not null,
 	status_tag_id int not null,
 	details varchar(75) not null,
@@ -129,7 +129,7 @@ Note:
  */
 create table transactions(
 	id not null auto_increment,
-	update_date datetime not null,
+	update_date datetime default NOW(),
 	project_id int not null,
 	profile_id int not null,
 	funds decimal(10, 2) not null,
@@ -162,7 +162,7 @@ create table wallets(
  */
 create table wallet_transactions(
 	id not null auto_increment,
-	update_date datetime not null,
+	update_date datetime default NOW(),
 	wallet_id int not null,
 	funds decimal(10, 2) not null,
 	Foreign Key (wallet_id) References wallets(id),
