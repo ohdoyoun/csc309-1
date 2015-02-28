@@ -1,8 +1,8 @@
 /* This table represents all the user accounts on the website. */
 create table users(
 	id int not null auto_increment,
-	username varchar(25) not null,
-	password varchar(60) not null,
+	username varchar(25) not null
+	password varchar(16) not null,
 	email varchar(50) not null,
 	role varchar(20) not null,
 	Primary Key (id),
@@ -17,15 +17,8 @@ create table profiles(
 	user_id int not null,
 	first_name varchar(50) not null,
 	last_name varchar(50) not null,
-    dob varchar(50),
+	age int(100),
 	gender varchar(15),
-    country varchar(50),
-    province varchar(50),
-    city varchar(100),
-    address varchar(100),
-    postal_code varchar(20),
-    phone_number varchar(20),
-    bio varchar(2000),
 	Primary Key (id),
 	Foreign Key (user_id) References users(id)
 );
@@ -33,7 +26,8 @@ create table profiles(
 /* This table represents all the statuses a project can have. */
 create table status_tags(
 	id int not null auto_increment,
-	name varchar(20),
+	name varchar(50),
+	status_date datetime not null,
 	Primary Key (id)
 );
 
@@ -56,7 +50,7 @@ create table projects(
 
 /* This table represents users that are initiators of projects. */
 create table initiators(
-	id int not null auto_increment,
+	id int not null, auto_increment,
 	project_id int not null,
 	profile_id int not null,
 	Foreign Key (project_id) References projects(id),
@@ -101,23 +95,23 @@ create table project_micro_tags(
 );
 
 /* This table represents macro tags that are linked to user profiles. */
-create table profiles_macro_tags(
-    id int not null auto_increment,
-    macro_tag_id int not null,
-    profile_id int not null,
-    Foreign Key (profile_id) References profiles(id),
-    Foreign Key (macro_tag_id) References macro_tags(id),
-    Primary Key (id)
+create table project_macro_tags(
+	id int not null auto_increment,
+	macro_tag_id int not null,
+	project_id int not null,
+	Foreign Key (project_id) References projects(id),
+	Foreign Key (macro_tag_id) References macro_tags(id),
+	Primary Key (id)
 );
 
 /* This table represents micro tags that are linked to user profiles. */
-create table profiles_micro_tags(
-    id int not null auto_increment,
-    micro_tag_id int not null,
-    profile_id int not null,
-    Foreign Key (profile_id) References profiles(id),
-    Foreign Key (micro_tag_id) References micro_tags(id),
-    Primary Key (id)
+create table project_micro_tags(
+	id int not null auto_increment,
+	micro_tag_id int not null,
+	profile_id int not null,
+	Foreign Key (profile_id) References profiles(id),
+	Foreign Key (micro_tag_id) References micro_tags(id),
+	Primary Key (id)
 );
 
 /* This table represents transfers of website credit between users and projects.
@@ -127,13 +121,13 @@ Note:
 	  call to Insert function. http://www.w3schools.com/sql/sql_dates.asp
  */
 create table transactions(
-	id int not null auto_increment,
+	id not null auto_increment,
 	update_date datetime not null,
 	project_id int not null,
 	profile_id int not null,
 	funds decimal(10, 2) not null,
 	Foreign Key (project_id) References projects(id),
-	Foreign Key (profile_id) References users(id),
+	Foreign Key (user_id) References users(id),
 	Primary Key (id)
 	
 );
@@ -147,7 +141,7 @@ create table payment_methods(
 
 /* This table represents the wallets of users. */
 create table wallets(
-	id int not null auto_increment,
+	id not null auto_increment,
 	user_id int not null,
 	payment_method_id int,
 	account_number varchar(50),
@@ -160,7 +154,7 @@ create table wallets(
 /* This table represents transfers from actual money to website credit.
  */
 create table wallet_transactions(
-	id int not null auto_increment,
+	id not null auto_increment,
 	update_date datetime not null,
 	wallet_id int not null,
 	funds decimal(10, 2) not null,
@@ -169,12 +163,13 @@ create table wallet_transactions(
 	
 );
 
-/* Not quite sure of this, but unsure how else to link the tags for searching. */
+/*This table represents the relations between the macro tags and micro tags. 
+Note: 	This allows for the creation of the communities and for searching.*/
 create table communities(
 	id int not null auto_increment,
 	macro_tag_id int not null,
 	micro_tag_id int not null,
-	Foreign Key (macro_tag_id) References macro_tags(id),
-	Foreign Key (micro_tag_id) References micro_tags(id),
+	Foreign Key (macro_tag_id) References MacroTags(id),
+	Foreign Key (micro_tag_id) References MicroTags(id),
 	Primary key (id)
 );
