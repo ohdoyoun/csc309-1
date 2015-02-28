@@ -1,5 +1,6 @@
 <?php 
-class StatusTag extends AppModel{
+App::import('Model','Tag'); 
+class StatusTag extends Tag{
 
 	private var $status = array(
 		'Active',
@@ -16,8 +17,12 @@ class StatusTag extends AppModel{
 		)
 	);
 
+	public var $actAs = array( 'Inherit' );
+
 	public var $validate = array(
 		'name' => array(
+			/* Global $validate takes care of this due to Inheritence.
+
 			'alphaNumeric' => array(
 				'rule' => 'alphaNumeric',
 				'required' => true,
@@ -28,6 +33,7 @@ class StatusTag extends AppModel{
 				'rule' => array('lengthBetween', 1, 20),
 				'message' => 'Status Tag names must be between 1 to 20 characters.'
 			)
+			*/
 			'oneOf' => array(
 				'rule' => 'oneOf',
 				'required' => true,
