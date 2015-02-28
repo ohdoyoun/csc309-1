@@ -1,5 +1,6 @@
 <?php 
-class MacroTag extends AppModel{
+App::import('Model','Tag'); 
+class MacroTag extends Tag{
 
 	public var $hasAndBelongsToMany = array(
 		'MicroTag' => array(
@@ -24,6 +25,10 @@ class MacroTag extends AppModel{
 			'associationForeignKey' => 'profile_id'
 		)
 	);
+
+	public var $actAs = array( 'Inherit' );
+	
+	/* Global $validate takes care of this due to Inheritence.
 	
 	public var $validate = array(
 		'name' => array(
@@ -42,5 +47,6 @@ class MacroTag extends AppModel{
 			
 		)
 	);
+	*/
 }
 ?>
