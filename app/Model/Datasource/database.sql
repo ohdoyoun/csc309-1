@@ -13,15 +13,22 @@ create table users(
 
 /* This table represents all the user profiles on the website. */
 create table profiles(
-	id int not null auto_increment,
-	user_id int not null,
-	first_name varchar(50) not null,
-	last_name varchar(50) not null,
-	age int(100),
-	gender varchar(15),
-	Primary Key (id),
-	Foreign Key (user_id) References users(id)
-);
+   	id int not null auto_increment,
+   	user_id int not null,
+    	first_name varchar(50) not null,
+    	last_name varchar(50) not null,
+	dob date,
+    	gender varchar(15),
+   	country varchar(50),
+   	province varchar(50),
+   	city varchar(100),
+   	address varchar(100),
+   	postal_code varchar(20),
+   	phone_number varchar(20),
+   	bio varchar(2000),
+    	Primary Key (id),
+    	Foreign Key (user_id) References users(id)
+); 
 
 /* This table represents all the statuses a project can have. */
 create table status_tags(
