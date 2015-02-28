@@ -58,6 +58,21 @@ class User extends AppModel{
 				'message' => 'Your password must be between 5 and 16 characters long.'	
 			)
 		),
+		'role' => array(
+			'alphaNumeric' =>array(
+				'rule' => 'alphaNumeric',
+				'required' => true,
+				'message' => 'Your role may only be alpha-numeric characters.'
+			),
+			'between' => array(
+				'rule' => array('lengthBetween', 1, 20),
+				'message' => 'Role must be between 1 to 20 characters.'
+			),
+			'oneOf' => array(
+				'rule' => 'oneOf',
+				'message' => 'Role must be either User or Admin.'
+			)
+		)
 		'email' => array(
 			'between' => array(
 				'rule' => array('lengthBetween', 1, 50),
@@ -81,6 +96,21 @@ class User extends AppModel{
 	public function matchPassword($data){
 		if(isset($this->data[$this->alias]['password2'])){
 			return $this->data[$this->alias]['password2'] === current($data);
+		}
+		return true;
+	}
+	
+	/* Checks if the chosen role is one of the given choices.
+	- Used for validation.
+	*/
+	public function oneOf($data){
+		if(isset($this->data[$this->alias]['role'])){
+			foreach($roles as $i){
+				if($this->data[$this->alias]['role'] == $i){
+					return true;
+				}
+			}
+			return false;
 		}
 		return true;
 	}
