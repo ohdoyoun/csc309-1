@@ -2,36 +2,62 @@ NavigationModel = function(){
 	var self = this;
 	self.urls = {};
 	
-	self.fakeSetupCallback = function(){};
+	self.setupProfilePage = function(){	};
 	
-	self.setupProfilePage = function(){
-		
-	};
+	self.setupWalletPage = function(){	};
+	
+	self.setupAccountSettingsPage = function(){	};
+	
+	self.setupNotifications = function(){	};
+	
+	self.setupMyProjectsPage = function(){	};
+	
+	self.setupBackedProjectsPage = function(){	};
+	
+	self.setupDiscoverProjectsPage = function(){	};
+	
+	self.setupCreateProjectsPage = function(){	};
+	
+	self.setupGlobalStatsPage = function(){	};
+	
+	self.setupActiveCommunitiesPage = function(){	};
+	
+	self.setupCommunityListPage = function(){	};
+	
+	self.setupDashboardPage = function(){	};
+	
+	self.setupStatsPage = function(){	};
+	
+	self.setupBackerInfoPage = function(){	};
+	
+	self.setupSurveysPage = function(){	};
+	
+	self.setupPrivateMessagesPage = function(){	};
 	
 	self.navigation = {
 		Account: {
 			"Profile":{content:"Account/Profile", setupCallback:self.setupProfilePage},
-			"Wallet":{content:"Account/Wallet", setupCallback:self.fakeSetupCallback},
-			"Account Settings":{content:"Account/AccountSettings", setupCallback:self.fakeSetupCallback},
-			"Notifications":{content:"Account/Notifications", setupCallback:self.fakeSetupCallback}
+			"Wallet":{content:"Account/Wallet", setupCallback:self.setupWalletPage},
+			"Account Settings":{content:"Account/AccountSettings", setupCallback:self.setupAccountSettingsPage},
+			"Notifications":{content:"Account/Notifications", setupCallback:self.setupNotifications}
 		},
 		Projects: {
-			"My Projects":{content:"Projects/ProjectLists/MyProjects", setupCallback:self.fakeSetupCallback},
-			"Backed Projects":{content:"Projects/ProjectLists/BackedProjects", setupCallback:self.fakeSetupCallback},
-			"Discover Projects":{content:"Projects/ProjectLists/DiscoverProjects", setupCallback:self.fakeSetupCallback},
-			"Create Project":{content:"Projects/CreateProject", setupCallback:self.fakeSetupCallback},
-			"Statistics":{content:"Projects/GlobalStatistics", setupCallback:self.fakeSetupCallback}
+			"My Projects":{content:"Projects/ProjectLists/MyProjects", setupCallback:self.setupMyProjectsPage},
+			"Backed Projects":{content:"Projects/ProjectLists/BackedProjects", setupCallback:self.setupBackedProjectsPage},
+			"Discover Projects":{content:"Projects/ProjectLists/DiscoverProjects", setupCallback:self.setupDiscoverProjectsPage},
+			"Create Project":{content:"Projects/CreateProject", setupCallback:self.setupCreateProjectsPage},
+			"Statistics":{content:"Projects/GlobalStatistics", setupCallback:self.setupGlobalStatsPage}
 		},
 		Communities: {
-			"Active Communities":{content:"Communities/ActiveCommunities", setupCallback:self.fakeSetupCallback},
-			"Community List":{content:"Communities/CommunityList", setupCallbackcallback:self.fakeSetupCallback}
+			"Active Communities":{content:"Communities/ActiveCommunities", setupCallback:self.setupActiveCommunitiesPage},
+			"Community List":{content:"Communities/CommunityList", setupCallback:self.setupCommunityListPage}
 		},
 		ProjectDetails:{
-			"Dashboard":{content:"Projects/Dashboard", setupCallback:self.fakeSetupCallback},
-			"Statistics":{content:"Projects/Statistics", setupCallback:self.fakeSetupCallback},
-			"Backer Information":{content:"Projects/BackerInformation", setupCallback:self.fakeSetupCallback},
-			"Surveys":{content:"Projects/Surveys/Surveys", setupCallback:self.fakeSetupCallback},
-			"Private Messages":{content:"Projects/PrivateMessages", setupCallback:self.fakeSetupCallback}
+			"Dashboard":{content:"Projects/Dashboard", setupCallback:self.setupDashboardPage},
+			"Statistics":{content:"Projects/Statistics", setupCallback:self.setupStatsPage},
+			"Backer Information":{content:"Projects/BackerInformation", setupCallback:self.setupBackerInfoPage},
+			"Surveys":{content:"Projects/Surveys/Surveys", setupCallback:self.setupSurveysPage},
+			"Private Messages":{content:"Projects/PrivateMessages", setupCallback:self.setupPrivateMessagesPage}
 		}
 	};
 	
