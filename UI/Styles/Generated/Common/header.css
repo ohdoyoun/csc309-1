@@ -25,3 +25,8 @@ body > .wrapper > header {
     /* line 27, ../../Sass/Common/header.sass */
     body > .wrapper > header .header-bar .settings {
       margin-right: 30px; }
+      /* line 29, ../../Sass/Common/header.sass */
+      body > .wrapper > header .header-bar .settings a {
+        padding-right: 8px;
+        color: white;
+        text-decoration: none; }

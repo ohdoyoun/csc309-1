@@ -7,15 +7,10 @@ var Controller = (new function (){
 	self.init = function(properties)
 	{
 		self.pageModel = new PageModel(properties.pageModel);
+		self.navigation.init();
 		self.urls = properties.urls;
 		self.navigation.changeCurrentNavigation("Account");
-		
-		ko.applyBindings(this);
+		ko.applyBindings(self.navigation, document.getElementById("navigation"))
 	}
 
 }());
-
-$(".header-link").click(function(){
-		var navLink = $(this).attr('data-nav');
-		Controller.navigation.changeCurrentNavigation(navLink);
-	});
