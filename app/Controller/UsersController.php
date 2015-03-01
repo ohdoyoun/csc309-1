@@ -1,7 +1,19 @@
 <?php
 class UsersController extends AppController {
 	
-	var $name = 'Users';
+	public $name = 'Users';
+    
+    #Change hasher to blowfish to be able to login
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
     
     public function beforeFilter() {
         parent::beforeFilter(); 

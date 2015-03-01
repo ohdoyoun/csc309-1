@@ -1,14 +1,14 @@
 <?php 
 class Profile extends AppModel{
 
-	public var $belongsTo = array(
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id'
 		)
 	);
 
-	public var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'Project' => array(
 			'className' => 'Project',
 			'joinTable' => 'initiators',
@@ -32,7 +32,7 @@ class Profile extends AppModel{
 		)
 	);
 
- 	public var $validate = array(
+ 	public $validate = array(
 		'first_name' => array
 		(	
 			'alphaNumeric' => array

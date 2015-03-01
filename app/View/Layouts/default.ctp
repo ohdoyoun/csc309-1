@@ -23,7 +23,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             
             <table style="width:98%">
               <tr>
-                <td><div style="text-align: left;"><a href="https://csc309-gwlodarek.c9.io">Fund You</a></div></td>
+                <td><div style="text-align: left;"><a href="../">Fund You</a></div></td>
                   <td><div style="text-align: center;"><a href="/accounts">Account</a> | Projects | Communities | 
                     <?php if ($logged_in): ?>
                         <?php echo $this->Html->link('Sign Out', array('controller'=>'users', 'action'=>'logout')); ?>
@@ -46,7 +46,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		</div>
 		<div id="footer">
 			<p>
-				Grzegorz Wlodarek
+				AwesomeCSC309
 			</p>
 		</div>
 	</div>

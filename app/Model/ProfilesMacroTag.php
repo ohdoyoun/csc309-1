@@ -1,7 +1,7 @@
 <?php 
 class ProfilesMacroTag extends AppModel{
 
-	public var $useTable = 'profiles_macro_tags';
+	public $useTable = 'profile_macro_tags';
 }
 
 ?>

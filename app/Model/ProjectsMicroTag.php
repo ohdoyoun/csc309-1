@@ -1,7 +1,7 @@
 <?php 
 class ProjectsMicroTag extends AppModel{
 
-	public var $useTable = 'projects_micro_tags';
+	public $useTable = 'project_micro_tags';
 }
 
 ?>

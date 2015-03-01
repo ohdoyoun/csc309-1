@@ -1,14 +1,14 @@
 <?php 
 class Project extends AppModel{
 	
-	public var $hasMany = array(
+	public $hasMany = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
 			'dependent' => true
 		)
 	);
 
-	public var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'Project' => array(
 			'className' => 'Project',
 			'joinTable' => 'initiators',
@@ -32,7 +32,7 @@ class Project extends AppModel{
 		)
 	);
 
-	public var $validate = array(
+	public $validate = array(
 		'project_name' => array(
 			'alphaNumeric' => array
 			(

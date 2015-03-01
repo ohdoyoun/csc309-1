@@ -1,7 +1,7 @@
 <?php
-public class Tag extends AppModel{
+class Tag extends AppModel{
 	
-	public var $validate = array(
+	public $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
 			(
@@ -21,29 +21,29 @@ public class Tag extends AppModel{
 	
 	/* Searches though tags for tags given a certain tag name. */
 	public function search($tag_name){
-		var $ans = find('all', 
+		$ans = find('all', 
 			array(
 				'conditions' => array('name' => $tag_name),
 				'fields' => array('id', 'name'),
 				'callbacks' => false
 			)
 		);
-		return $ans
+		return $ans;
 	}
 
 	/* Searches though tags for tags given a certain tag name.
 	- Uses LIKE comparison
 	 */
 	public function searchLike($tag_name){
-		var $condition = '%' + $tag_name + '%';
-		var $ans = find('all', 
+		$condition = '%' + $tag_name + '%';
+		$ans = find('all', 
 			array(
 				'conditions' => array('name LIKE' => $condition),
 				'fields' => array('id', 'name'),
 				'callbacks' => false
 			)
 		);
-		return $ans
+		return $ans;
 	}
 }
 ?>

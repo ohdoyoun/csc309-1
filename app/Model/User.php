@@ -5,13 +5,13 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 class User extends AppModel{
 	
 	/* Roles array used to store possible values of the role field.	*/
-	private var $roles = array(
+	private $roles = array(
 		'User',
 		'Admin'
 	);
 	
 	/* The associations of this Model with other Models based on the database. */
-	public var $hasOne = array(
+	public $hasOne = array(
 		'Profile' => array(
 			'classname' => 'Profile',
 			'dependent' => true
@@ -27,7 +27,7 @@ class User extends AppModel{
 	/* The validation rules that this model must follow. 
 	- Mostly dervived from the database.
 	*/
-	public var $validate = array(
+	public $validate = array(
 		'username' => array(
 			'alphaNumeric' =>array(
 				'rule' => 'alphaNumeric',
@@ -63,21 +63,6 @@ class User extends AppModel{
 				'message' => 'Your password must be between 5 and 16 characters long.'	
 			)
 		),
-		'role' => array(
-			'alphaNumeric' =>array(
-				'rule' => 'alphaNumeric',
-				'required' => true,
-				'message' => 'Your role may only be alpha-numeric characters.'
-			),
-			'between' => array(
-				'rule' => array('lengthBetween', 1, 20),
-				'message' => 'Role must be between 1 to 20 characters.'
-			),
-			'oneOf' => array(
-				'rule' => 'oneOf',
-				'message' => 'Role must be either User or Admin.'
-			)
-		)
 		'email' => array(
 			'between' => array(
 				'rule' => array('lengthBetween', 1, 50),
@@ -98,12 +83,13 @@ class User extends AppModel{
 	/* Checks if the password and password2 field contain the same password.
 	 - Used for the match passwords validation check. 
 	*/
-	public function matchPassword($data){
-		if(isset($this->data[$this->alias]['password2'])){
-			return $this->data[$this->alias]['password2'] === current($data);
-		}
-		return true;
-	}
+    public function matchPasswords($data) {
+        if ($data['password'] == $this->data['User']['password_confirmation']) {
+            return true;
+        }
+        $this->invalidate('password_confirmation', 'Your passwords do not match.');
+        return false;
+    }
 	
 	/* Checks if the chosen role is one of the given choices.
 	- Used for validation.
