@@ -34,7 +34,7 @@ create table profiles(
 create table status_tags(
 	id int not null auto_increment,
 	name varchar(50),
-	status_date datetime default NOW(),
+	status_date timestamp default CURRENT_TIMESTAMP,
 	Primary Key (id)
 );
 
@@ -129,7 +129,7 @@ Note:
  */
 create table transactions(
 	id int not null auto_increment,
-	update_date datetime default NOW(),
+	update_date timestamp default CURRENT_TIMESTAMP,
 	project_id int not null,
 	profile_id int not null,
 	funds decimal(10, 2) not null,
@@ -162,7 +162,7 @@ create table wallets(
  */
 create table wallet_transactions(
 	id int not null auto_increment,
-	update_date datetime default NOW(),
+	update_date timestamp default CURRENT_TIMESTAMP,
 	wallet_id int not null,
 	funds decimal(10, 2) not null,
 	Foreign Key (wallet_id) References wallets(id),
