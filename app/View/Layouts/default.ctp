@@ -24,7 +24,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <table style="width:98%">
               <tr>
                 <td><div style="text-align: left;"><a href="../">Fund You</a></div></td>
-                  <td><div style="text-align: center;"><a href="/accounts">Account</a> | Projects | Communities | 
+                  <td><div style="text-align: center;"><a href="/accounts">Account</a> | <a href="/projects">Projects</a> | Communities | 
                     <?php if ($logged_in): ?>
                         <?php echo $this->Html->link('Sign Out', array('controller'=>'users', 'action'=>'logout')); ?>
                     <?php else: ?>
