@@ -6,26 +6,44 @@ html {
 body {
   height: 100%;
   min-width: 1200px; }
-  /* line 10, ../../Sass/Common/structure.sass */
+  /* line 9, ../../Sass/Common/structure.sass */
+  body button {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    -webkit-box-shadow: 1px 1px 4px #666666;
+    -moz-box-shadow: 1px 1px 4px #666666;
+    box-shadow: 1px 1px 4px #666666;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 18px;
+    background: #3498db;
+    padding: 15px 20px 15px 20px;
+    text-decoration: none; }
+  /* line 24, ../../Sass/Common/structure.sass */
+  body button:hover {
+    background: #3cb0fd;
+    text-decoration: none; }
+  /* line 29, ../../Sass/Common/structure.sass */
   body > .wrapper {
     min-height: 100%;
     position: relative; }
-    /* line 13, ../../Sass/Common/structure.sass */
+    /* line 32, ../../Sass/Common/structure.sass */
     body > .wrapper > header {
       width: 100%; }
-      /* line 15, ../../Sass/Common/structure.sass */
+      /* line 34, ../../Sass/Common/structure.sass */
       body > .wrapper > header .settings {
         margin-left: 40%; }
-    /* line 17, ../../Sass/Common/structure.sass */
+    /* line 36, ../../Sass/Common/structure.sass */
     body > .wrapper > .site-main {
       min-height: 100vh;
       margin-left: 225px; }
-    /* line 20, ../../Sass/Common/structure.sass */
+    /* line 39, ../../Sass/Common/structure.sass */
     body > .wrapper > footer {
       width: 100%;
       height: 30px;
       text-align: center; }
-  /* line 24, ../../Sass/Common/structure.sass */
+  /* line 43, ../../Sass/Common/structure.sass */
   body > nav {
     position: fixed;
     height: 100%;
