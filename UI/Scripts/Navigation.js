@@ -2,6 +2,9 @@ NavigationModel = function(){
 	var self = this;
 	self.urls = {};
 	
+	self.navigationItems = ko.observableArray();
+	self.currentNavigation = ko.observable();
+	
 	self.setupProfilePage = function(){	};
 	
 	self.setupWalletPage = function(){	};
@@ -33,6 +36,12 @@ NavigationModel = function(){
 	self.setupSurveysPage = function(){	};
 	
 	self.setupPrivateMessagesPage = function(){	};
+	self.landingPages = {
+		Account: "Profile",
+		Projects: "My Projects",
+		Communities: "Active Communities",
+		ProjectDetails:"Dashboard"
+	};
 	
 	self.navigation = {
 		Account: {
@@ -61,18 +70,19 @@ NavigationModel = function(){
 		}
 	};
 	
-	self.navigationItems = ko.observableArray();
-	self.currentNavigation = ko.observable();
+	self.changePage = function(page){
+		var info = self.navigation[self.currentNavigation()][page];
+		$("#main-body").remove.apply($("#main-body").children());
+		Helpers.LoadPartial($("#main-body"),info.content);
+		info.setupCallback();
+	};
 	
 	self.init = function(){
 		$(".header-link").click(function(event){
 			self.changeCurrentNavigation(event.target.attributes["data-nav"].value);
 		});
 		$("#navigation-links").click(function(event){
-			var info = self.navigation[self.currentNavigation()][event.target.text];
-			$("#main-body").remove.apply($("#main-body").children());
-			Helpers.LoadPartial($("#main-body"),info.content);
-			info.setupCallback();
+			self.changePage(event.target.text);
 		});
 	};
 	
@@ -85,6 +95,7 @@ NavigationModel = function(){
 			self.navigationItems.removeAll();
 			self.navigationItems.push.apply(self.navigationItems, newNavigations);
 			self.currentNavigation(value);
+			self.changePage(self.landingPages[value])
 		}
 	};
 
