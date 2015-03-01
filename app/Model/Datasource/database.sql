@@ -105,8 +105,8 @@ create table project_micro_tags(
 create table profile_macro_tags(
 	id int not null auto_increment,
 	macro_tag_id int not null,
-	project_id int not null,
-	Foreign Key (project_id) References projects(id),
+	profile_id int not null,
+	Foreign Key (profile_id) References projects(id),
 	Foreign Key (macro_tag_id) References macro_tags(id),
 	Primary Key (id)
 );

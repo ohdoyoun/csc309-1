@@ -1,36 +1,34 @@
 <h3>Profile of <?php echo $current_user['username']; ?></h3>
 
 <?php 
-if (!empty($users)){
-    foreach($users as $user):    
-        echo $this->Form->create('Profile', array('action'=>"edit"));
-        echo $this->Form->input('first_name', array('default'=>$user['first_name']));
-        echo $this->Form->input('last_name', array('default'=>$user['last_name']));
-        echo $this->Form->input('email', array('default'=>$email));
-        echo $this->Form->input('country', array('default'=>$user['country']));
-        echo $this->Form->input('province', array('default'=>$user['province']));
-        echo $this->Form->input('city', array('default'=>$user['city']));
-        echo $this->Form->input('address', array('default'=>$user['address'], 'label'=>"Street Address"));
-        echo $this->Form->input('postal_code', array('default'=>$user['postal_code']));
-        echo $this->Form->input('phone_number', array('default'=>$user['phone_number']));
-    
-    
-        echo $this->Form->input('dob', 
-                                    array(
-                                        'type' => 'date',
-                                        'label' => 'Date of Birth:',
-                                        'dateFormat' => 'MDY',
-                                        'minYear' => date('Y')-130,
-                                        'maxYear' => date('Y'),
-                                        'options' => array('1','2'),
-                                        'monthNames' => false,
-                                        'selected' => date($user['dob'])
-                                    )
-                                );
-        echo $this->Form->input('gender', array('options' => array('Male'=>'Male', 'Female'=>'Female'), 'default'=>$user['gender']));
-        echo $this->Form->input('bio', array('default'=>$user['bio'], 'label'=>"Biography"));
-        echo $this->Form->end('Save changes');
-    endforeach;
+if (!empty($users)){  
+    echo $this->Form->create('Profile', array('action'=>"edit"));
+    echo $this->Form->input('first_name', array('default'=>$users['first_name']));
+    echo $this->Form->input('last_name', array('default'=>$users['last_name']));
+    echo $this->Form->input('email', array('default'=>$email));
+    echo $this->Form->input('country', array('default'=>$users['country']));
+    echo $this->Form->input('province', array('default'=>$users['province']));
+    echo $this->Form->input('city', array('default'=>$users['city']));
+    echo $this->Form->input('address', array('default'=>$users['address'], 'label'=>"Street Address"));
+    echo $this->Form->input('postal_code', array('default'=>$users['postal_code']));
+    echo $this->Form->input('phone_number', array('default'=>$users['phone_number']));
+
+
+    echo $this->Form->input('dob', 
+                                array(
+                                    'type' => 'date',
+                                    'label' => 'Date of Birth:',
+                                    'dateFormat' => 'MDY',
+                                    'minYear' => date('Y')-130,
+                                    'maxYear' => date('Y'),
+                                    'options' => array('1','2'),
+                                    'monthNames' => false,
+                                    'selected' => date($users['dob'])
+                                )
+                            );
+    echo $this->Form->input('gender', array('options' => array('Male'=>'Male', 'Female'=>'Female'), 'default'=>$users['gender']));
+    echo $this->Form->input('bio', array('default'=>$users['bio'], 'label'=>"Biography"));
+    echo $this->Form->end('Save changes');
 } else {
     echo $this->Form->create('Profile', array('action'=>"edit"));
     echo $this->Form->input('first_name');

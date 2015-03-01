@@ -26,10 +26,8 @@ class ProfilesController extends AppController {
         $userprofile = NULL;
         if (!empty($userprofile = $this->Profile->find('first', array('conditions' => $conditions)))) {
             $this->Session->setFlash("Your Profile");
-            $this->set('users', $userprofile);
-            foreach ($userprofile as $up)
-                $this->Profile->id = $up['id'];
-                $prof_id = $up['id'];
+            $this->set('users', $userprofile['Profile']);
+            $prof_id = $userprofile['Profile']['id'];#$up['id'];
 
             
         } else {

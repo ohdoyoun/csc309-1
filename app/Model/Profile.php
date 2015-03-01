@@ -18,14 +18,14 @@ class Profile extends AppModel{
 		),
 		'MacroTag' => array(
 			'className' => 'MacroTag',
-			'joinTable' => 'profiles_macro_tags',
+			'joinTable' => 'profile_macro_tags',
 			'with' => 'ProfilesMacroTag',
 			'foreignKey' => 'profile_id',
 			'associationForeignKey' => 'macro_tag_id'
 		),
 		'MicroTag' => array(
 			'className' => 'MicroTag',
-			'joinTable' => 'profiles_micro_tags',
+			'joinTable' => 'profile_micro_tags',
 			'with' => 'ProfilesMicroTag',
 			'foreignKey' => 'profile_id',
 			'associationForeignKey' => 'micro_tag_id'
