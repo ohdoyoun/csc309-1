@@ -5,7 +5,7 @@ html {
 /* line 6, ../../Sass/Common/structure.sass */
 body {
   height: 100%;
-  min-width: 1500px; }
+  min-width: 1200px; }
   /* line 10, ../../Sass/Common/structure.sass */
   body > .wrapper {
     min-height: 100%;
@@ -18,15 +18,14 @@ body {
         margin-left: 40%; }
     /* line 17, ../../Sass/Common/structure.sass */
     body > .wrapper > .site-main {
-      width: 100%;
       min-height: 100vh;
       margin-left: 225px; }
-    /* line 21, ../../Sass/Common/structure.sass */
+    /* line 20, ../../Sass/Common/structure.sass */
     body > .wrapper > footer {
       width: 100%;
       height: 30px;
       text-align: center; }
-  /* line 25, ../../Sass/Common/structure.sass */
+  /* line 24, ../../Sass/Common/structure.sass */
   body > nav {
     position: fixed;
     height: 100%;
