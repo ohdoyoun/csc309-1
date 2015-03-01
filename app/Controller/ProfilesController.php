@@ -37,8 +37,7 @@ class ProfilesController extends AppController {
         
         if (!empty($this->data)) {         
             $this->request->data['Profile']['user_id'] = $this->Auth->user('id');
-            $this->request->data['Profile']['id'] = $prof_id;
-            
+            $this->request->data['Profile']['id'] = $prof_id;            
             $this->request->data['Profile']['dob'] = $this->request->data['Profile']['dob']['year'] . "-" . $this->request->data['Profile']['dob']['month'] . "-" . $this->request->data['Profile']['dob']['day'];
             
             $dataSave = array();
@@ -56,8 +55,14 @@ class ProfilesController extends AppController {
             $dataSave['Profile']['gender'] = $this->request->data['Profile']['gender'];
             $dataSave['Profile']['bio'] = $this->request->data['Profile']['bio'];
             
+            $dataUser = array();
+            $dataUser['User']['id'] = $this->Auth->user('id');
+            $dataUser['User']['email'] = $this->request->data['Profile']['email'];
             
-			if ($this->Profile->save($dataSave, false)) {
+			if ($this->Profile->save($dataSave, false) and $this->Profile->User->save($dataUser, false)) {
+                
+                #Update users email in session
+                $this->Session->write('Auth.User.email', $dataUser['User']['email']);
 				$this->Session->setFlash('Changes successful.');
 				$this->redirect(array('action' => 'edit'));
 			}
