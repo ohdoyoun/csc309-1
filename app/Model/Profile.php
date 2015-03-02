@@ -9,13 +9,6 @@ class Profile extends AppModel{
 	);
 
 	public $hasAndBelongsToMany = array(
-		'Project' => array(
-			'className' => 'Project',
-			'joinTable' => 'initiators',
-			'with' => 'Initiator',
-			'foreignKey' => 'profile_id',
-			'associationForeignKey' => 'project_id'
-		),
 		'MacroTag' => array(
 			'className' => 'MacroTag',
 			'joinTable' => 'profile_macro_tags',
