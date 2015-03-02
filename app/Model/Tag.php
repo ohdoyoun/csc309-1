@@ -25,31 +25,29 @@ class Tag extends AppModel{
 		)
 	);
 	
-	/* Searches though tags for tags given a certain tag name. */
-	public function search($tag_name){
-		$ans = find('all', 
-			array(
-				'conditions' => array('name' => $tag_name),
-				'fields' => array('id', 'name'),
+	/* Searches though tags for tags given a certain tag name.
+	- If $like = true, then searches using the SQL LIKE operator.
+	- Otherwise, searches for exact $tag_name.*/
+	public function search($tag_name, $like=true){
+		if($like){
+			$condition = '%' + $tag_name + '%';
+			$ans = find('all', array(
+				'conditions' => array('name LIKE' => $condition),
+				'fields' => array('id'),
 				'callbacks' => false
-			)
-		);
-		return $ans;
+				)
+			);
+			return $ans;
+		}else{
+			$ans = find('all', array(
+				'conditions' => array('name' => $tag_name),
+				'fields' => array('id'),
+				'callbacks' => false
+				)
+			);
+			return $ans;
+		}
 	}
 
-	/* Searches though tags for tags given a certain tag name.
-	- Uses LIKE comparison
-	 */
-	public function searchLike($tag_name){
-		$condition = '%' + $tag_name + '%';
-		$ans = find('all', 
-			array(
-				'conditions' => array('name LIKE' => $condition),
-				'fields' => array('id', 'name'),
-				'callbacks' => false
-			)
-		);
-		return $ans;
-	}
 }
 ?>
