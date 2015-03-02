@@ -3,6 +3,8 @@ App::uses('AppModel', 'Model');
 class Profile extends AppModel{
 	
 	public var $name = 'Profile';
+	
+	public var $useTable = 'profiles';
 
 	public var $belongsTo = array(
 		'User' => array(
