@@ -7,9 +7,7 @@ class Tag extends AppModel{
 	
 	public var $name = 'Tag';
 	
-	/* Overrides the AppModel->add($data) function. 
-	- Does nothing since this Model is not associated with any table. */
-	public function add($data){}
+	public var $useTable = null;
 	
 	public var $validate = array(
 		'name' => array(
