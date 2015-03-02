@@ -34,7 +34,7 @@ class ProjectsController extends AppController {
             	)
             );
             
-            $this->Project->addProject($new_project_data);
+            $this->Project->add($new_project_data);
             
             $user_id = $this->Auth->user('id'); 
             $project_id = $this->Project->find('first', array(
@@ -50,7 +50,7 @@ class ProjectsController extends AppController {
             	)
             );
             
-            $this->Initiator->addInitiator($new_initiator_data);
+            $this->Initiator->add($new_initiator_data);
 
             
             debug($this->data);
