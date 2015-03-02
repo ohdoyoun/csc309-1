@@ -1,7 +1,13 @@
 <?php
+/* Abstract class for Tags! 
+- Not associated with any table in the database!
+*/
+App::uses('AppModel', 'Model');
 class Tag extends AppModel{
 	
-	public $validate = array(
+	public var $name = 'Tag';
+	
+	public var $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
 			(
