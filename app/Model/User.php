@@ -23,6 +23,17 @@ class User extends AppModel{
 		*/
 		)
 	);
+	
+	/* Associations with the Project Model. */
+	public $hasAndBelongsToMany = array(
+		'Project' => array(
+			'className' => 'Project',
+			'joinTable' => 'initiators',
+			'with' => 'Initiator',
+			'foreignKey' => 'user_id',
+			'associationForeignKey' => 'project_id'
+		)
+	);
 
 	/* The validation rules that this model must follow. 
 	- Mostly dervived from the database.
