@@ -1,17 +1,19 @@
 <?php 
-
+App::uses('AppModel', 'Model');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 class User extends AppModel{
 	
+	public var $name = 'User';
+	
 	/* Roles array used to store possible values of the role field.	*/
-	private $roles = array(
+	private var $roles = array(
 		'User',
 		'Admin'
 	);
 	
 	/* The associations of this Model with other Models based on the database. */
-	public $hasOne = array(
+	public var $hasOne = array(
 		'Profile' => array(
 			'classname' => 'Profile',
 			'dependent' => true
@@ -25,7 +27,7 @@ class User extends AppModel{
 	);
 	
 	/* Associations with the Project Model. */
-	public $hasAndBelongsToMany = array(
+	public var $hasAndBelongsToMany = array(
 		'Project' => array(
 			'className' => 'Project',
 			'joinTable' => 'initiators',
@@ -38,7 +40,7 @@ class User extends AppModel{
 	/* The validation rules that this model must follow. 
 	- Mostly dervived from the database.
 	*/
-	public $validate = array(
+	public var $validate = array(
 		'username' => array(
 			'alphaNumeric' =>array(
 				'rule' => 'alphaNumeric',
