@@ -16,6 +16,10 @@ class ProfilesController extends AppController {
 		$this->set('profiles', $this->Profile->find('all'));
 	}
     
+    function view($id = NULL) {
+        $this->set('profile', $this->Profile->find('first', array('conditions' => array('Profile.id' => $id))));    
+    }
+    
     function edit() {
         
         $this->set('email', $this->Auth->user('email'));
