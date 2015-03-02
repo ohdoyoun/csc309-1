@@ -12,6 +12,8 @@ class StatusTag extends Tag{
 	
 	public var $name = 'StatusTag';
 	
+	public var $useTable = 'status_tags';
+	
 	public var $belongsTo = array(
 		'Project' => array(
 			'classname' => 'Project',
