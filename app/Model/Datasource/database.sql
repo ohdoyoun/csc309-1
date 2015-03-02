@@ -34,7 +34,6 @@ create table profiles(
 create table status_tags(
 	id int not null auto_increment,
 	name varchar(50),
-	status_date timestamp default CURRENT_TIMESTAMP,
 	Primary Key (id)
 );
 
@@ -48,7 +47,7 @@ create table projects(
 	goal decimal(10, 2) not null,
 	start_date timestamp default CURRENT_TIMESTAMP,
 	end_date timestamp not null,
-	status_tag_id int not null,
+	status_tag_id int default 0,
 	details varchar(75) not null,
 	Primary Key (id),
 	Foreign Key (status_tag_id) References status_tags(id),
