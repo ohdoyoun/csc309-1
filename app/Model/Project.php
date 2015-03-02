@@ -1,7 +1,7 @@
 <?php 
 class Project extends AppModel{
 	
-	public $hasMany = array(
+	public $hasOne = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
 			'dependent' => true
@@ -96,6 +96,14 @@ class Project extends AppModel{
 			return $this->data[$this->alias]['start'] < $this->data[$this->alias]['end'];
 		}
 		return true;
+	}
+	
+	/* Inserts a new Project */
+	public function addProject($data){
+		if(!empty($data)){
+			$this->Project->create();
+			$this->Project->save($data);
+		}
 	}
 
 }
