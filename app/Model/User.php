@@ -6,6 +6,8 @@ class User extends AppModel{
 	
 	public var $name = 'User';
 	
+	public var $useTable = 'users';
+	
 	/* Roles array used to store possible values of the role field.	*/
 	private var $roles = array(
 		'User',
