@@ -3,6 +3,8 @@ App::import('Tag', 'Model');
 class MacroTag extends Tag{
 	
 	public var $name = 'MacroTag';
+	
+	public var $useTable = 'macro_tags';
 
 	public var $hasAndBelongsToMany = array(
 		'MicroTag' => array(
