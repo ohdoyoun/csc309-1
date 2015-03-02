@@ -50,6 +50,7 @@ create table projects(
 	status_tag_id int default 0,
 	details varchar(75) not null,
 	Primary Key (id),
+	Unique(project_name),
 	Foreign Key (status_tag_id) References status_tags(id),
 	CHECK (start_date < end_date)
 );
