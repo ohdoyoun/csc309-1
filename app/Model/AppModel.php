@@ -31,11 +31,15 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
   
+  public var $useTable = null;
+  
     /* Add function for all Models. */
     public function add($data){
-      if(!empty($data)){
-        $this->create();
-        $this->save($data);
+      if($useTable != null){
+        if(!empty($data)){
+          $this->create();
+          $this->save($data);
+        }
       }
     }
 }
