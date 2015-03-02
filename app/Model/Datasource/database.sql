@@ -58,9 +58,9 @@ create table projects(
 create table initiators(
 	id int not null auto_increment,
 	project_id int not null,
-	profile_id int not null,
+	user_id int not null,
 	Foreign Key (project_id) References projects(id),
-	Foreign Key (profile_id) References profiles(id),
+	Foreign Key (user_id) References users(id),
 	Primary Key (id)
 );
 
@@ -130,10 +130,10 @@ create table transactions(
 	id int not null auto_increment,
 	update_date timestamp default CURRENT_TIMESTAMP,
 	project_id int not null,
-	profile_id int not null,
+	user_id int not null,
 	funds decimal(10, 2) not null,
 	Foreign Key (project_id) References projects(id),
-	Foreign Key (profile_id) References users(id),
+	Foreign Key (user_id) References users(id),
 	Primary Key (id)
 	
 );
