@@ -20,12 +20,12 @@ class ProjectsController extends AppController {
             #$this->Project->set('user_id', $this->Auth->user('id'));
             
             #Status tag 0 = beginning
-            $project_name = $this->request->data['Project']['project_name'];
-            $goal = $this->request->data['Project']['goal'];
-            $end_date = $this->request->data['Project']['end_date'];
-            $details = $this->request->data['Project']['details'];
+            var $project_name = $this->request->data['Project']['project_name'];
+            var $goal = $this->request->data['Project']['goal'];
+            var $end_date = $this->request->data['Project']['end_date'];
+            var $details = $this->request->data['Project']['details'];
             
-            $new_project_data = array(
+            var $new_project_data = array(
             	'Project' => array(
             		'project_name' => $project_name,
             		'goal' => $goal,
@@ -36,14 +36,14 @@ class ProjectsController extends AppController {
             
             $this->Project->add($new_project_data);
             
-            $user_id = $this->Auth->user('id'); 
-            $project_id = $this->Project->find('first', array(
+            var $user_id = $this->Auth->user('id'); 
+            var $project_id = $this->Project->find('first', array(
             	'conditions' => array('project_name' => $project_name),
             	'fields' => array('id')
             	)
             );
             
-            $new_initiator_data = array(
+            var $new_initiator_data = array(
             	'Initiator' => array(
             		'project_id' => $project_id,
             		'user_id' => $user_id
