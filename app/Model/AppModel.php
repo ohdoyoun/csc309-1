@@ -34,8 +34,8 @@ class AppModel extends Model {
     /* Add function for all Models. */
     public function add($data){
       if(!empty($data)){
-        $this->$name->create();
-        $this->$name->save($data);
+        $this->create();
+        $this->save($data);
       }
     }
 }
