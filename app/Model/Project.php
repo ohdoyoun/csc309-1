@@ -9,12 +9,12 @@ class Project extends AppModel{
 	);
 
 	public $hasAndBelongsToMany = array(
-		'Project' => array(
-			'className' => 'Project',
+		'User' => array(
+			'className' => 'User',
 			'joinTable' => 'initiators',
 			'with' => 'Initiator',
 			'foreignKey' => 'project_id',
-			'associationForeignKey' => 'profile_id'
+			'associationForeignKey' => 'user_id'
 		),
 		'MacroTag' => array(
 			'className' => 'MacroTag',
@@ -44,6 +44,14 @@ class Project extends AppModel{
 			(
 				'rule' => array('lengthBetween', 1, 50),
 				'message' => 'Project name must be between 1 to 50 characters.'
+			),	
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => true,
+				'allowEmpty' => false,
+				'on' => 'create',
+				'last' => false,
+				'message' => 'That Project name aslready exists! Please choose another name.'
 			)
 		),
 		'goal' => array(
