@@ -1,14 +1,15 @@
 <?php 
+App::uses('AppModel', 'Model');
 class Project extends AppModel{
 	
-	public $hasOne = array(
+	public var $hasOne = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
 			'dependent' => true
 		)
 	);
 
-	public $hasAndBelongsToMany = array(
+	public var $hasAndBelongsToMany = array(
 		'User' => array(
 			'className' => 'User',
 			'joinTable' => 'initiators',
@@ -32,7 +33,7 @@ class Project extends AppModel{
 		)
 	);
 
-	public $validate = array(
+	public var $validate = array(
 		'project_name' => array(
 			'alphaNumeric' => array
 			(
@@ -98,13 +99,14 @@ class Project extends AppModel{
 		return true;
 	}
 	
-	/* Inserts a new Project */
+	/* Inserts a new Project 
 	public function addProject($data){
 		if(!empty($data)){
 			$this->Project->create();
 			$this->Project->save($data);
 		}
 	}
+	*/
 
 }
 ?>
