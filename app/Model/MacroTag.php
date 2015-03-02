@@ -1,8 +1,10 @@
 <?php 
-App::import('Model','Tag'); 
+App::import('Tag', 'Model'); 
 class MacroTag extends Tag{
+	
+	public var $name = 'MacroTag';
 
-	public $hasAndBelongsToMany = array(
+	public var $hasAndBelongsToMany = array(
 		'MicroTag' => array(
 			'className' => 'MicroTag',
 			'joinTable' => 'communities',
@@ -26,7 +28,7 @@ class MacroTag extends Tag{
 		)
 	);
 
-	public $actAs = array( 'Inherit' );
+	public var $actAs = array( 'Inherit' );
 	
 	/* Global $validate takes care of this due to Inheritence.
 	
