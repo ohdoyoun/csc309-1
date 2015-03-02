@@ -2,6 +2,10 @@
 App::uses('AppModel', 'Model');
 class Project extends AppModel{
 	
+	public var $name = 'Project';
+	
+	public var $useTable = 'projects';
+	
 	public var $hasOne = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
