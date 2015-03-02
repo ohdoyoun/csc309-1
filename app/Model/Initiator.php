@@ -4,6 +4,8 @@ class Initiator extends AppModel{
 	
 	public var $name = 'Initiator';
 	
+	public var $useTable = 'initiators';
+	
 	/*
 	public function addInitiator($data){
 		if(!empty($data)){
