@@ -39,7 +39,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Your first name may only be alphanumeric characters.'
+				'message' => 'Your first name may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -53,7 +54,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Your first name may only be alphanumeric characters.'
+				'message' => 'Your first name may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -83,7 +85,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Country may only be alphanumeric characters.'
+				'message' => 'Country may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -97,7 +100,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Province may only be alphanumeric characters.'
+				'message' => 'Province may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -111,7 +115,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'City may only be alphanumeric characters.'
+				'message' => 'City may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -125,7 +130,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Address may only be alphanumeric characters.'
+				'message' => 'Address may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -139,7 +145,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Postal code may only be alphanumeric characters.'
+				'message' => 'Postal code may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -153,7 +160,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Phone number may only be alphanumeric characters.'
+				'message' => 'Phone number may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
@@ -167,7 +175,8 @@ class Profile extends AppModel{
 			(
 				'rule' => 'alphaNumeric',
 				'required' => true,
-				'message' => 'Biography may only be alphanumeric characters.'
+				'message' => 'Biography may only be alphanumeric characters.',
+                'allowEmpty' => true
 			),
 			'between' => array
 			(
