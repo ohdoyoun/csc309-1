@@ -35,7 +35,7 @@ class Tag extends AppModel{
 	public function search($tag_name, $like=true){
 		if($like){
 			$condition = '%' + $tag_name + '%';
-			$ans = find('all', array(
+			$ans = $this->find('all', array(
 				'conditions' => array('name LIKE' => $condition),
 				'fields' => array('id'),
 				'callbacks' => false
@@ -43,7 +43,7 @@ class Tag extends AppModel{
 			);
 			return $ans;
 		}else{
-			$ans = find('all', array(
+			$ans = $this->find('all', array(
 				'conditions' => array('name' => $tag_name),
 				'fields' => array('id'),
 				'callbacks' => false
