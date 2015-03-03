@@ -5,11 +5,11 @@
 App::uses('AppModel', 'Model');
 class Tag extends AppModel{
 	
-	public var $name = 'Tag';
+	public $name = 'Tag';
 	
-	public var $useTable = null;
+	public $useTable = null;
 	
-	public var $validate = array(
+	public $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
 			(
