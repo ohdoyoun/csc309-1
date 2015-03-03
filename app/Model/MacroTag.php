@@ -2,11 +2,11 @@
 App::import('Tag', 'Model'); 
 class MacroTag extends Tag{
 	
-	public var $name = 'MacroTag';
+	public $name = 'MacroTag';
 	
-	public var $useTable = 'macro_tags';
+	public $useTable = 'macro_tags';
 
-	public var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'MicroTag' => array(
 			'className' => 'MicroTag',
 			'joinTable' => 'communities',
@@ -30,10 +30,10 @@ class MacroTag extends Tag{
 		)
 	);
 
-	public var $actAs = array( 'Inherit' );
+	public $actAs = array( 'Inherit' );
 	
 	public function lookUpProjects($tag_name, $like=true){
-		var $options['joins'] = array(
+		$options['joins'] = array(
 			array(
 				'table' => 'project_macro_tags',
 				'alias' => 'ProjectMacroTag',
@@ -56,7 +56,7 @@ class MacroTag extends Tag{
 	}
 	
 	public function lookUpProfiles($tag_name, $like=true){
-		var $options['joins'] = array(
+		$options['joins'] = array(
 			array(
 				'table' => 'profile_macro_tags',
 				'alias' => 'ProfileMacroTag',
