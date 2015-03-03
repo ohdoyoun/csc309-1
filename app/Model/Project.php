@@ -2,18 +2,18 @@
 App::uses('AppModel', 'Model');
 class Project extends AppModel{
 	
-	public var $name = 'Project';
+	public $name = 'Project';
 	
-	public var $useTable = 'projects';
+	public $useTable = 'projects';
 	
-	public var $hasOne = array(
+	public $hasOne = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
 			'dependent' => true
 		)
 	);
 
-	public var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'User' => array(
 			'className' => 'User',
 			'joinTable' => 'initiators',
@@ -37,7 +37,7 @@ class Project extends AppModel{
 		)
 	);
 
-	public var $validate = array(
+	public $validate = array(
 		'project_name' => array(
 			'alphaNumeric' => array
 			(
