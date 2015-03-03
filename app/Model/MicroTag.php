@@ -48,9 +48,9 @@ class MicroTag extends Tag{
 			)
 		);
 		if($like){
-			$options['conditions'] = array('Tag.name LIKE' => $tag_name);
+			$options['conditions'] = array('MicroTag.name LIKE' => $tag_name);
 		}else{
-			$options['conditions'] = array('Tag.name' => $tag_name);
+			$options['conditions'] = array('MicroTag.name' => $tag_name);
 		}
 		return $this->find('all', $options);
 	}
@@ -71,9 +71,9 @@ class MicroTag extends Tag{
 			)
 		);
 		if($like){
-			$options['conditions'] = array('Tag.name LIKE' => $tag_name);
+			$options['conditions'] = array('MicroTag.name LIKE' => $tag_name);
 		}else{
-			$options['conditions'] = array('Tag.name' => $tag_name);
+			$options['conditions'] = array('MicroTag.name' => $tag_name);
 		}
 		return $this->find('all', $options);
 	}
