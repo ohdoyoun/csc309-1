@@ -47,6 +47,12 @@ class MacroTag extends Tag{
 				'conditions' => array(ProjectMacroTag.project_id = Project.id)
 			)
 		);
+		if($like){
+			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MacroTag.name' => $tag_name);
+		}
+		return $this->find('all', $options);
 	}
 	
 	public function lookUpProfiles($tag_name, $like=true){
@@ -64,6 +70,12 @@ class MacroTag extends Tag{
 				'conditions' => array(ProfileMacroTag.profile_id = Profile.id)
 			)
 		);
+		if($like){
+			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MacroTag.name' => $tag_name);
+		}
+		return $this->find('all', $options);
 	}
 
 	
