@@ -47,6 +47,12 @@ class MicroTag extends Tag{
 				'conditions' => array(ProjectMicroTag.project_id = Project.id)
 			)
 		);
+		if($like){
+			$options['conditions'] = array('Tag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('Tag.name' => $tag_name);
+		}
+		return $this->find('all', $options);
 	}
 	
 	public function lookUpProfiles($tag_name, $like=true){
@@ -64,6 +70,12 @@ class MicroTag extends Tag{
 				'conditions' => array(ProfileMicroTag.profile_id = Profile.id)
 			)
 		);
+		if($like){
+			$options['conditions'] = array('Tag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('Tag.name' => $tag_name);
+		}
+		return $this->find('all', $options);
 	}
 
 	/* Global $validate takes care of this due to Inheritence.
