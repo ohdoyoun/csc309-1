@@ -2,9 +2,9 @@
 App::uses('AppModel', 'Model');
 class Initiator extends AppModel{
 	
-	public var $name = 'Initiator';
+	public $name = 'Initiator';
 	
-	public var $useTable = 'initiators';
+	public $useTable = 'initiators';
 	
 	/*
 	public function addInitiator($data){
