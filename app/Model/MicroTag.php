@@ -31,6 +31,40 @@ class MicroTag extends Tag{
 	);
 
 	public var $actAs = array( 'Inherit' );
+	
+	public function lookUpProjects($tag_name, $like=true){
+		var $options['joins'] = array(
+			array(
+				'table' => 'project_micro_tags',
+				'alias' => 'ProjectMicroTag',
+				'type' => 'inner',
+				'conditions' => array(MicroTag.id = ProjectMicroTag.micro_tag_id)
+			),
+			array(
+				'table' => 'projects',
+				'alias' => 'Project',
+				'type' => 'inner',
+				'conditions' => array(ProjectMicroTag.project_id = Project.id)
+			)
+		);
+	}
+	
+	public function lookUpProfiles($tag_name, $like=true){
+		var $options['joins'] = array(
+			array(
+				'table' => 'profile_micro_tags',
+				'alias' => 'ProfileMicroTag',
+				'type' => 'inner',
+				'conditions' => array(MicroTag.id = ProfileMicroTag.micro_tag_id)
+			),
+			array(
+				'table' => 'profiles',
+				'alias' => 'Profile',
+				'type' => 'inner',
+				'conditions' => array(ProfileMicroTag.profile_id = Profile.id)
+			)
+		);
+	}
 
 	/* Global $validate takes care of this due to Inheritence.
 
