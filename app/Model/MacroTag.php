@@ -32,6 +32,41 @@ class MacroTag extends Tag{
 
 	public var $actAs = array( 'Inherit' );
 	
+	public function lookUpProjects($tag_name, $like=true){
+		var $options['joins'] = array(
+			array(
+				'table' => 'project_macro_tags',
+				'alias' => 'ProjectMacroTag',
+				'type' => 'inner',
+				'conditions' => array(MacroTag.id = ProjectMacroTag.macro_tag_id)
+			),
+			array(
+				'table' => 'projects',
+				'alias' => 'Project',
+				'type' => 'inner',
+				'conditions' => array(ProjectMacroTag.project_id = Project.id)
+			)
+		);
+	}
+	
+	public function lookUpProfiles($tag_name, $like=true){
+		var $options['joins'] = array(
+			array(
+				'table' => 'profile_macro_tags',
+				'alias' => 'ProfileMacroTag',
+				'type' => 'inner',
+				'conditions' => array(MacroTag.id = ProfileMacroTag.macro_tag_id)
+			),
+			array(
+				'table' => 'profiles',
+				'alias' => 'Profile',
+				'type' => 'inner',
+				'conditions' => array(ProfileMacroTag.profile_id = Profile.id)
+			)
+		);
+	}
+
+	
 	/* Global $validate takes care of this due to Inheritence.
 	
 	public var $validate = array(
