@@ -1,7 +1,7 @@
 <?php
 class ProfilesController extends AppController {
 	
-	$name = 'Profiles';
+	public $name = 'Profiles';
 
     public function isAuthorized($user) {
          if (in_array($this->action, array('user'))) {
