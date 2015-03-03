@@ -2,18 +2,18 @@
 App::uses('AppModel', 'Model');
 class Profile extends AppModel{
 	
-	public var $name = 'Profile';
+	public $name = 'Profile';
 	
-	public var $useTable = 'profiles';
+	public $useTable = 'profiles';
 
-	public var $belongsTo = array(
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id'
 		)
 	);
 
-	public var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'MacroTag' => array(
 			'className' => 'MacroTag',
 			'joinTable' => 'profile_macro_tags',
@@ -30,7 +30,7 @@ class Profile extends AppModel{
 		)
 	);
 
- 	public var $validate = array(
+ 	public $validate = array(
 		'first_name' => array
 		(	
 			'alphaNumeric' => array
