@@ -2,7 +2,7 @@
 App::import('Tag','Model'); 
 class StatusTag extends Tag{
 
-	private var $status = array(
+	private $status = array(
 		'Active',
 		'Completed',
 		'Uncompleted',
@@ -10,20 +10,20 @@ class StatusTag extends Tag{
 		'Cancelled'
 	);
 	
-	public var $name = 'StatusTag';
+	public $name = 'StatusTag';
 	
-	public var $useTable = 'status_tags';
+	public $useTable = 'status_tags';
 	
-	public var $belongsTo = array(
+	public $belongsTo = array(
 		'Project' => array(
 			'classname' => 'Project',
 			'foreignKey' => 'project_id'
 		)
 	);
 
-	public var $actAs = array( 'Inherit' );
+	public $actAs = array( 'Inherit' );
 
-	public var $validate = array(
+	public $validate = array(
 		'name' => array(
 			/* Global $validate takes care of this due to Inheritence.
 
