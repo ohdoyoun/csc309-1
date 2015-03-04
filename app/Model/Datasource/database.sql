@@ -33,10 +33,14 @@ create table profiles(
 /* This table represents all the statuses a project can have. */
 create table status_tags(
 	id int not null auto_increment,
-	name varchar(50),
+	name varchar(20),
 	Primary Key (id)
 );
-
+insert into status_tags (name) values ('Active');
+insert into status_tags (name) values ('Completed');  	
+insert into status_tags (name) values ('Uncompleted');
+insert into status_tags (name) values ('Paused');
+insert into status_tags (name) values ('Cancelled');
 
 /* This table represents all the projects on the website. 
 Note:	details is a file name that can be parsed and displayed.
