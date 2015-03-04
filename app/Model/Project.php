@@ -6,10 +6,10 @@ class Project extends AppModel{
 	
 	public $useTable = 'projects';
 	
-	public $hasOne = array(
+	public $belongsTo = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
-			'dependent' => true
+			'foreignKey' => 'status_tag_id'
 		)
 	);
 
