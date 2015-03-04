@@ -25,7 +25,7 @@ class StatusTag extends Tag{
 
 	public $validate = array(
 		'name' => array(
-			/* Global $validate takes care of this due to Inheritence.
+			Global $validate takes care of this due to Inheritence.
 
 			'alphaNumeric' => array(
 				'rule' => 'alphaNumeric',
@@ -37,7 +37,6 @@ class StatusTag extends Tag{
 				'rule' => array('lengthBetween', 1, 20),
 				'message' => 'Status Tag names must be between 1 to 20 characters.'
 			)
-			*/
 			'oneOf' => array(
 				'rule' => 'oneOf',
 				'required' => true,
@@ -68,6 +67,8 @@ class StatusTag extends Tag{
 		}
 		return true;
 	}
+	
+	public function lookUp($tag_name, $like=true){}
 
 }
 ?>
