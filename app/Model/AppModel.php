@@ -31,7 +31,7 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
   
-  public var $useTable = null;
+  public $useTable = null;
   
     /* Add function for all Models. */
     public function add($data){

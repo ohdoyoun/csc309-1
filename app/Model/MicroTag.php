@@ -1,5 +1,5 @@
 <?php 
-App::import('Tag','Model'); 
+App::uses('Tag','Model'); 
 class MicroTag extends Tag{
 	
 	public $name = 'MicroTag';

@@ -1,5 +1,5 @@
 <?php 
-App::import('Tag', 'Model'); 
+App::uses('Tag', 'Model'); 
 class MacroTag extends Tag{
 	
 	public $name = 'MacroTag';
