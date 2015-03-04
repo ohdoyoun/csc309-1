@@ -38,13 +38,13 @@ class MacroTag extends Tag{
 				'table' => 'project_macro_tags',
 				'alias' => 'ProjectMacroTag',
 				'type' => 'inner',
-				'conditions' => array(MacroTag.id = ProjectMacroTag.macro_tag_id)
+				'conditions' => array('MacroTag.id' => 'ProjectMacroTag.macro_tag_id')
 			),
 			array(
 				'table' => 'projects',
 				'alias' => 'Project',
 				'type' => 'inner',
-				'conditions' => array(ProjectMacroTag.project_id = Project.id)
+				'conditions' => array('ProjectMacroTag.project_id' => 'Project.id')
 			)
 		);
 		if($like){
@@ -61,13 +61,13 @@ class MacroTag extends Tag{
 				'table' => 'profile_macro_tags',
 				'alias' => 'ProfileMacroTag',
 				'type' => 'inner',
-				'conditions' => array(MacroTag.id = ProfileMacroTag.macro_tag_id)
+				'conditions' => array('MacroTag.id' => 'ProfileMacroTag.macro_tag_id')
 			),
 			array(
 				'table' => 'profiles',
 				'alias' => 'Profile',
 				'type' => 'inner',
-				'conditions' => array(ProfileMacroTag.profile_id = Profile.id)
+				'conditions' => array('ProfileMacroTag.profile_id' => 'Profile.id')
 			)
 		);
 		if($like){
