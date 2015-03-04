@@ -14,10 +14,10 @@ class StatusTag extends Tag{
 	
 	public $useTable = 'status_tags';
 	
-	public $belongsTo = array(
+	public $hasMany = array(
 		'Project' => array(
 			'classname' => 'Project',
-			'foreignKey' => 'project_id'
+			'dependent' => true
 		)
 	);
 
