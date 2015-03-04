@@ -1,5 +1,5 @@
 <?php 
-App::import('Tag','Model'); 
+App::uses('Tag','Model'); 
 class StatusTag extends Tag{
 
 	private $status = array(
