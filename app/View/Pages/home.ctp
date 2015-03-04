@@ -33,6 +33,11 @@
 	                        <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
 	                    <?php endif; ?>
                     </a>
+                    <a href="#" data-nav="">
+						<?php if (!($logged_in)): ?>
+	                        <?php echo $this->Html->link('Register', array('controller'=>'users', 'action'=>'register')); ?>
+	                    <?php endif; ?>
+                    </a>
 				</div>
 			</div>
 		</header>
