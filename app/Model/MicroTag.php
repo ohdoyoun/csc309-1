@@ -38,13 +38,13 @@ class MicroTag extends Tag{
 				'table' => 'project_micro_tags',
 				'alias' => 'ProjectMicroTag',
 				'type' => 'inner',
-				'conditions' => array(MicroTag.id = ProjectMicroTag.micro_tag_id)
+				'conditions' => array('MicroTag.id' => 'ProjectMicroTag.micro_tag_id')
 			),
 			array(
 				'table' => 'projects',
 				'alias' => 'Project',
 				'type' => 'inner',
-				'conditions' => array(ProjectMicroTag.project_id = Project.id)
+				'conditions' => array('ProjectMicroTag.project_id' => 'Project.id')
 			)
 		);
 		if($like){
@@ -61,13 +61,13 @@ class MicroTag extends Tag{
 				'table' => 'profile_micro_tags',
 				'alias' => 'ProfileMicroTag',
 				'type' => 'inner',
-				'conditions' => array(MicroTag.id = ProfileMicroTag.micro_tag_id)
+				'conditions' => array('MicroTag.id' => 'ProfileMicroTag.micro_tag_id')
 			),
 			array(
 				'table' => 'profiles',
 				'alias' => 'Profile',
 				'type' => 'inner',
-				'conditions' => array(ProfileMicroTag.profile_id = Profile.id)
+				'conditions' => array('ProfileMicroTag.profile_id' => 'Profile.id')
 			)
 		);
 		if($like){
