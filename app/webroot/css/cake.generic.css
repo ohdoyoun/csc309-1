@@ -23,7 +23,6 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
@@ -110,7 +109,7 @@ p {
 	background: #fff;
 	clear: both;
 	color: #333;
-	padding: 10px 20px 40px 20px;
+	padding: 10px 20px 40px 250px;
 	overflow: auto;
 }
 #footer {
