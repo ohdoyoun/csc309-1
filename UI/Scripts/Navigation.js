@@ -1,5 +1,5 @@
 NavigationModel = function(){
-	var self = this;
+	var self = this; 
 	self.urls = {};
 	
 	self.navigationItems = ko.observableArray();
@@ -45,7 +45,7 @@ NavigationModel = function(){
 	
 	self.navigation = {
 		Account: {
-			"Profile":{content:"Account/Profile", setupCallback:self.setupProfilePage},
+			"Profile":{content:"users", setupCallback:self.setupProfilePage},
 			"Wallet":{content:"Account/Wallet", setupCallback:self.setupWalletPage},
 			"Account Settings":{content:"Account/AccountSettings", setupCallback:self.setupAccountSettingsPage},
 			"Notifications":{content:"Account/Notifications", setupCallback:self.setupNotifications}
