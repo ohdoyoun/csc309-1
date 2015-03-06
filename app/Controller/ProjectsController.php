@@ -18,12 +18,6 @@ class ProjectsController extends AppController {
     
     function create() {
         if (!empty($this->data)) {
-            
-            
-            
-            #$this->Project->set('user_id', $this->Auth->user('id'));
-            
-            #Status tag 0 = beginning
             $project_name = $this->request->data['Project']['project_name'];
             $goal = $this->request->data['Project']['goal'];
             $end_date = $this->request->data['Project']['end_date'];

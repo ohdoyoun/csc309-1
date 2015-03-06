@@ -21,7 +21,18 @@ class ProfilesController extends AppController {
     }
     
     function settings() {
-        
+        if (isset($this->data['Profile']['deleteAccount'])) {
+            $id = $this->Auth->user('id');
+            $this->Profile->User->delete(array('User.id' => $id), true);
+            $this->redirect($this->Auth->logout());
+
+        } elseif (isset($this->data['Profile']['passwordChange'])) {
+            
+        } elseif (isset($this->data['Profile']['timezoneChange'])) {
+            
+        } elseif (isset($this->data['Profile']['signOut'])) {
+            
+        }
     }
     
     function edit() {
