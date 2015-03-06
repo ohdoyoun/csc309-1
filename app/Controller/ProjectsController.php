@@ -50,10 +50,8 @@ class ProjectsController extends AppController {
             	)
             );
             
-            $this->Initiator->add($new_initiator_data);
+            $this->Project->Initiator->add($new_initiator_data);
 
-            
-            debug($this->data);
             if ($this->Project->saveAll($this->data, array('deep' => true))) {            
                 $this->Session->setFlash('Project Created.');
                 $this->redirect(array('action'=>'index'));
