@@ -42,4 +42,13 @@ class AppModel extends Model {
         }
       }
     }
+    
+    /* Search function for all Models. */
+    public function search($id){
+      if($useTable != null){
+        if(!empty($id)){
+          return $this->find('all', array('conditions' => array('id' => $id)));
+        }
+      }
+    }
 }
