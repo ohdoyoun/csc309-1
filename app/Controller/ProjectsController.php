@@ -9,7 +9,7 @@ class ProjectsController extends AppController {
 	}
     
     function view($id = NULL) {
-        $this->set('project', $this->Project->find('first', array('conditions' => array('project.id' => $id))));    
+        $this->set('project', $this->Project->find('first', array('conditions' => array('Project.id' => $id))));    
     }
     
     function create() {
@@ -35,31 +35,27 @@ class ProjectsController extends AppController {
             );
             
             $this->Project->add($new_project_data);
-            
-            $user_id = $this->Auth->user('id'); 
-            $project_id = $this->Project->find('first', array(
-            	'conditions' => array('project_name' => $project_name),
-            	'fields' => array('id')
-            	)
-            );
-            
-            $new_initiator_data = array(
-            	'Initiator' => array(
-            		'project_id' => $project_id,
-            		'user_id' => $user_id
-            	)
-            );
-            
-            $this->Initiator->add($new_initiator_data);
 
-            
-            debug($this->data);
-            if ($this->Project->saveAll($this->data, array('deep' => true))) {            
-                $this->Session->setFlash('Project Created.');
-                $this->redirect(array('action'=>'index'));
+            if ($this->Project->saveAll($new_project_data, array('deep' => true))) { 
+                
+                $user_id = $this->Auth->user('id'); 
+                $project_id = $this->Project->find('first', array('conditions' => array('Project.project_name' => $project_name)))['Project']['id'];
+                
+                $new_initiator_data = array(
+                	'Initiator' => array(
+                		'project_id' => $project_id,
+                		'user_id' => $user_id
+                	)
+                );
+                
+                $this->Project->Initiator->add($new_initiator_data);
+                
+                if ($this->Project->Initiator->saveAll($new_initiator_data, array('deep' => true))) {
+                    $this->Session->setFlash('Project Created.');
+                    $this->redirect(array('action'=>'index'));
+                }
+                
             }
         }
     }
-    
-
 }

@@ -1,5 +1,6 @@
 <?php 
 App::uses('AppModel', 'Model');
+App::uses('CakeTime', 'Utility');
 class Project extends AppModel{
 	
 	public $name = 'Project';
@@ -64,19 +65,10 @@ class Project extends AppModel{
 			'required' => true,
 			'message' => 'Please supply a valid monetary amount.'
 		),
-		'start_date' => array(
-			'rule' => 'date',
-			'required' => true,
-			'message' => 'Projects require a start date.'
-		),
 		'end_date' => array(
-			'rule' => 'date',
-			'required' => true,
-			'message' => 'Projects require an end date.'
-		),
-		'valid_dates' => array(
 			'rule' => 'checkDates',
-			'message' => 'The end date must be later than the start date.'
+			'message' => 'The end date must be later than the start date.',
+			'required' => true
 		),
 		'details' => array(
 			'alphaNumeric' => array
@@ -96,13 +88,13 @@ class Project extends AppModel{
 	/* Checks if the start date is before the end date.
 	- Used for validation check.
 	*/
-	public function checkDates($data){
-		if((isset($this->data[$this->alias]['start'])) &&(isset($this->data[$this->alias]['end']))){
-			return $this->data[$this->alias]['start'] < $this->data[$this->alias]['end'];
-		}
-		return true;
-	}
-	
+	public function checkDates($data) {
+        if (CakeTime::fromString($data['end_date']) > CakeTime::convert(time(), null)) {
+            return true;
+        }
+        return false;
+    }
+
 	/* Inserts a new Project 
 	public function addProject($data){
 		if(!empty($data)){

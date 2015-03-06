@@ -51,7 +51,7 @@ create table projects(
 	goal decimal(10, 2) not null,
 	start_date timestamp default CURRENT_TIMESTAMP,
 	end_date timestamp not null,
-	status_tag_id int default 0,
+	status_tag_id int default 1,
 	details varchar(75) not null,
 	Primary Key (id),
 	Unique(project_name),

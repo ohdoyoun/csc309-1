@@ -31,14 +31,24 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
   
-  public $useTable = null;
+    public $useTable = null;
   
     /* Add function for all Models. */
     public function add($data){
+      $useTable = null;
       if($useTable != null){
         if(!empty($data)){
           $this->create();
           $this->save($data);
+        }
+      }
+    }
+    
+    /* Search function for all Models. */
+    public function search($id){
+      if($useTable != null){
+        if(!empty($id)){
+          return $this->find('all', array('conditions' => array('id' => $id)));
         }
       }
     }
