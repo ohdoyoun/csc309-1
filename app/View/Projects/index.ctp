@@ -13,7 +13,7 @@
     </tr>
     <?php foreach($projects as $project): ?>
     <tr>
-        <td><?php echo $project['Project']['id']; ?></td>
+        <td><a href="projects/view/<?php echo $project['Project']['id']; ?>"><?php echo $project['Project']['id']; ?></a></td>
         <td><?php echo $project['Project']['project_name']; ?></td>
         <td><?php echo $project['Project']['goal']; ?></td>
         <td><?php echo $project['Project']['start_date']; ?></td>

@@ -9,7 +9,7 @@
     <?php foreach($mine as $project): ?>
     <tr>
         <td><?php echo $project['Initiator']['user_id']; ?></td>
-        <td><?php echo $project['Initiator']['project_id']; ?></td>
+        <td><a href="projects/view/<?php echo $project['Initiator']['project_id']; ?>"><?php echo $project['Initiator']['project_id']; ?></a></td>
     </tr>
     <?php endforeach; ?>
 </table>
