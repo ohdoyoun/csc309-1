@@ -16,6 +16,10 @@ class ProjectsController extends AppController {
         $this->set('mine', $this->Project->Initiator->find('all', array('conditions' => array('Initiator.id' => $this->Auth->user('id')))));
     }
     
+    function backed() {
+        $this->set('backed', $this->Project->query("SELECT project_id FROM transactions WHERE user_id=" . $this->Auth->user('id')));
+    }
+    
     function create() {
         if (!empty($this->data)) {
             $project_name = $this->request->data['Project']['project_name'];
