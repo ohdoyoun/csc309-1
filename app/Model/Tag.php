@@ -30,7 +30,7 @@ class Tag extends AppModel{
 	/* Searches though tags for tags given a certain tag name.
 	- If $like = true, then searches using the SQL LIKE operator.
 	- Otherwise, searches for exact $tag_name.*/
-	public function search($tag_name, $like=true){
+	public function searchName($tag_name, $like=true){
 		if($like){
 			$condition = '%' + $tag_name + '%';
 			$ans = $this->find('all', array(
