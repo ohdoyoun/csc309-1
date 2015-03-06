@@ -12,6 +12,10 @@ class ProjectsController extends AppController {
         $this->set('project', $this->Project->find('first', array('conditions' => array('Project.id' => $id))));    
     }
     
+    function mine() {
+        $this->set('mine', $this->Project->Initiator->find('all', array('conditions' => array('Initiator.id' => $this->Auth->user('id')))));
+    }
+    
     function create() {
         if (!empty($this->data)) {
             
