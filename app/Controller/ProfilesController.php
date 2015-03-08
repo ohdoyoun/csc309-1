@@ -35,6 +35,10 @@ class ProfilesController extends AppController {
         }
     }
     
+    function notifications() {
+        
+    }
+    
     function edit() {
         
         $this->set('email', $this->Auth->user('email'));
