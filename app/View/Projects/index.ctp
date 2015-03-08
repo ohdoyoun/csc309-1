@@ -1,25 +1,10 @@
-<h2>All Projects</h2>
+<h2>Discover Projects</h2>
 
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Goal</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Status</th>
-        <th>Details</th>
-    </tr>
-    <?php foreach($projects as $project): ?>
-    <tr>
-        <td><a href="projects/view/<?php echo $project['Project']['id']; ?>"><?php echo $project['Project']['id']; ?></a></td>
-        <td><?php echo $project['Project']['project_name']; ?></td>
-        <td><?php echo $project['Project']['goal']; ?></td>
-        <td><?php echo $project['Project']['start_date']; ?></td>
-        <td><?php echo $project['Project']['end_date']; ?></td>
-        <td><?php echo $project['Project']['status_tag_id']; ?></td>
-        <td><?php echo $project['Project']['details']; ?></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+<?php foreach($projects as $project): ?>
+    <div style="float: left; padding-right: 30px; border-style: ridge; border-width: 5px; padding-left: 30px; width: 250px;">
+        <p>Name: <a href="projects/view/<?php echo $project['Project']['id']; ?>"><?php echo $project['Project']['project_name']; ?></a></p><br>
+        <p>Details: <?php echo $project['Project']['details']; ?></p><br><br>
+        <p>Goal: <?php echo $project['Project']['goal']; ?>, Reached: N/A</p><br>
+        <p>Ending: <?php echo $project['Project']['end_date']; ?></p>
+    </div>
+<?php endforeach; ?>
