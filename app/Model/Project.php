@@ -42,7 +42,7 @@ class Project extends AppModel{
 		'project_name' => array(
 			'alphaNumeric' => array
 			(
-				'rule' => 'alphaNumeric',
+				'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
 				'required' => true,
 				'message' => 'Project names may only be alphanumeric characters.'
 			),
@@ -73,7 +73,7 @@ class Project extends AppModel{
 		'details' => array(
 			'alphaNumeric' => array
 			(
-				'rule' => 'alphaNumeric',
+				'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
 				'required' => true,
 				'message' => 'Project details may only contain alphanumeric characters.'
 			),

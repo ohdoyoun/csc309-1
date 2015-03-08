@@ -21,6 +21,7 @@ class ProjectsController extends AppController {
     }
     
     function create() {
+        
         if (!empty($this->data)) {
             $project_name = $this->request->data['Project']['project_name'];
             $goal = $this->request->data['Project']['goal'];
