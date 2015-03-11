@@ -22,29 +22,17 @@
 	<div class="wrapper">
 		<header id="header">
 			<div class="header-bar">
-				<div class="settings">
-					<a href="#" class="header-link" data-nav="Account">Account</a>
-					<a href="#" class="header-link" data-nav="Projects">Projects</a>
-					<a href="#" class="header-link" data-nav="Communities">Communities</a>
-					<a href="#" data-nav="">
-						<?php if ($logged_in): ?>
-	                        <?php echo $this->Html->link('Sign Out', array('controller'=>'users', 'action'=>'logout')); ?>
-	                    <?php else: ?>
-	                        <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
-	                    <?php endif; ?>
-                    </a>
-                    <a href="#" data-nav="">
-						<?php if (!($logged_in)): ?>
-	                        <?php echo $this->Html->link('Register', array('controller'=>'users', 'action'=>'register')); ?>
-	                    <?php endif; ?>
-                    </a>
+				<div class="settings" data-bind="foreach: headerItems">
+					<a href="#" class="header-link" data-bind="attr: { 'data-nav': nav }, text:name"></a>
 				</div>
 			</div>
 		</header>
 
 		<div class="site-main">
 			<header> 
-				<div id="page-header"></div>
+				<div id="page-header">
+					<?php echo $this->Session->flash(); ?>
+				</div>
 			</header>
 			<section id="main-body">
 			</section>
@@ -57,7 +45,7 @@
 	
 	<nav id="navigation">
 		<ul id="navigation-links" data-bind="foreach: navigationItems">
-			<li><a href="#" data-bind="text: text"></a></li>
+			<li><a href="#" class="nav-link" data-bind="attr: { 'data-nav': text },text: text"></a></li>
 		</ul>
 	</nav>        
 </body>

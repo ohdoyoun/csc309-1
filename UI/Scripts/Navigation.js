@@ -4,93 +4,96 @@ NavigationModel = function(){
 	
 	self.navigationItems = ko.observableArray();
 	self.currentNavigation = ko.observable();
+	self.headerItems = ko.observableArray();
+	self.currentNavType = ko.observable();
 	
-	self.setupProfilePage = function(){	};
-	
-	self.setupWalletPage = function(){	};
-	
-	self.setupAccountSettingsPage = function(){	};
-	
-	self.setupNotifications = function(){	};
-	
-	self.setupMyProjectsPage = function(){	};
-	
-	self.setupBackedProjectsPage = function(){	};
-	
-	self.setupDiscoverProjectsPage = function(){	};
-	
-	self.setupCreateProjectsPage = function(){	};
-	
-	self.setupGlobalStatsPage = function(){	};
-	
-	self.setupActiveCommunitiesPage = function(){	};
-	
-	self.setupCommunityListPage = function(){	};
-	
-	self.setupDashboardPage = function(){	};
-	
-	self.setupStatsPage = function(){	};
-	
-	self.setupBackerInfoPage = function(){	};
-	
-	self.setupSurveysPage = function(){	};
+	self.emptySetup = function(){	};
 	
 	self.setupPrivateMessagesPage = function(){	};
 	self.landingPages = {
 		Account: "Profile",
 		Projects: "My Projects",
 		Communities: "Active Communities",
-		ProjectDetails:"Dashboard"
+		ProjectDetails:"Dashboard",
+		Login:"Login",
+		Logout:"Logout",
+		Register:"Register"
 	};
 	
 	self.navigation = {
 		Account: {
-			"Profile":{content:"users", setupCallback:self.setupProfilePage},
-			"Wallet":{content:"Account/Wallet", setupCallback:self.setupWalletPage},
-			"Account Settings":{content:"Account/AccountSettings", setupCallback:self.setupAccountSettingsPage},
-			"Notifications":{content:"Account/Notifications", setupCallback:self.setupNotifications}
+			navNum:0,
+			"Profile":{content:"profiles/edit", setupCallback:self.emptySetup},
+			"Wallet":{content:"Account/Wallet", setupCallback:self.emptySetup},
+			"Account Settings":{content:"profiles/settings", setupCallback:self.emptySetup},
+			"Notifications":{content:"profiles/notifications", setupCallback:self.emptySetup}
 		},
 		Projects: {
-			"My Projects":{content:"Projects/ProjectLists/MyProjects", setupCallback:self.setupMyProjectsPage},
-			"Backed Projects":{content:"Projects/ProjectLists/BackedProjects", setupCallback:self.setupBackedProjectsPage},
-			"Discover Projects":{content:"Projects/ProjectLists/DiscoverProjects", setupCallback:self.setupDiscoverProjectsPage},
-			"Create Project":{content:"Projects/CreateProject", setupCallback:self.setupCreateProjectsPage},
-			"Statistics":{content:"Projects/GlobalStatistics", setupCallback:self.setupGlobalStatsPage}
+			navNum:0,
+			"My Projects":{content:"projects/mine", setupCallback:self.emptySetup},
+			"Backed Projects":{content:"projects/backed", setupCallback:self.emptySetup},
+			"Discover Projects":{content:"projects", setupCallback:self.emptySetup},
+			"Create Project":{content:"projects/create", setupCallback:self.emptySetup},
+			"Statistics":{content:"Projects/GlobalStatistics", setupCallback:self.emptySetup}
 		},
 		Communities: {
-			"Active Communities":{content:"Communities/ActiveCommunities", setupCallback:self.setupActiveCommunitiesPage},
-			"Community List":{content:"Communities/CommunityList", setupCallback:self.setupCommunityListPage}
+			navNum:0,
+			"Active Communities":{content:"Communities/ActiveCommunities", setupCallback:self.emptySetup},
+			"Community List":{content:"Communities/CommunityList", setupCallback:self.emptySetup}
 		},
 		ProjectDetails:{
-			"Dashboard":{content:"Projects/Dashboard", setupCallback:self.setupDashboardPage},
-			"Statistics":{content:"Projects/Statistics", setupCallback:self.setupStatsPage},
-			"Backer Information":{content:"Projects/BackerInformation", setupCallback:self.setupBackerInfoPage},
-			"Surveys":{content:"Projects/Surveys/Surveys", setupCallback:self.setupSurveysPage},
-			"Private Messages":{content:"Projects/PrivateMessages", setupCallback:self.setupPrivateMessagesPage}
+			navNum:2,
+			"Dashboard":{content:"Projects/Dashboard", setupCallback:self.emptySetup},
+			"Statistics":{content:"Projects/Statistics", setupCallback:self.emptySetup},
+			"Backer Information":{content:"Projects/BackerInformation", setupCallback:self.emptySetup},
+			"Surveys":{content:"Projects/Surveys/Surveys", setupCallback:self.emptySetup},
+			"Private Messages":{content:"Projects/PrivateMessages", setupCallback:self.emptySetup}
+		},
+		Logout:{
+			navNum:0,
+			"Logout":{content:"users/logout", setupCallback:self.emptySetup, hidden:true}			
+		},
+		Login:{
+			navNum:1,
+			"Login":{content:"users/login", setupCallback:self.emptySetup, hidden:true}
+		},
+		Register:{
+			navNum:1,
+			"Register":{content:"users/register", setupCallback:self.emptySetup, hidden:true}
 		}
 	};
+	
+	ko.computed(function(){
+		var items = [];
+		var navNum = self.currentNavType();
+		$.each(self.navigation, function(name, value){
+			if(value.navNum === navNum){
+				items.push({name:name, nav:name});
+			}
+		});
+		self.headerItems(items);
+	});	
 	
 	self.changePage = function(page){
 		var info = self.navigation[self.currentNavigation()][page];
 		$("#main-body").remove.apply($("#main-body").children());
 		Helpers.LoadPartial($("#main-body"),info.content);
 		info.setupCallback();
+		$("#flashMessage").hide();
 	};
 	
-	self.init = function(){
-		$(".header-link").click(function(event){
-			self.changeCurrentNavigation(event.target.attributes["data-nav"].value);
-		});
-		$("#navigation-links").click(function(event){
-			self.changePage(event.target.text);
-		});
-	};
+	self.changeCurrentNavigationType = function(int){
+	    self.currentNavType(int);
+	    self.changeCurrentNavigation(self.headerItems()[0].nav);
+	}
 	
 	self.changeCurrentNavigation = function(value){
 		if(self.navigation[value]){
 			var newNavigations = [];
-			$.each(self.navigation[value], function(name){
-				newNavigations.push({text: name});
+			$.each(self.navigation[value], function(name, content){
+				if(!content.hidden && content.content){
+					newNavigations.push({text: name});
+				}
 			});
 			self.navigationItems.removeAll();
 			self.navigationItems.push.apply(self.navigationItems, newNavigations);
@@ -98,5 +101,17 @@ NavigationModel = function(){
 			self.changePage(self.landingPages[value])
 		}
 	};
-
+	
+	self.init = function(){
+		$(".header-bar").click(function(event){
+		    if(event.target.hasAttribute("data-nav")){
+			    self.changeCurrentNavigation(event.target.attributes["data-nav"].value);
+		    }
+		});
+		$("#navigation-links").click(function(event){
+		    if(event.target.hasAttribute("data-nav")){
+			    self.changePage(event.target.attributes["data-nav"].value);
+		    }
+		});
+	};
 }

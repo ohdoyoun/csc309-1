@@ -9,8 +9,9 @@ var Controller = (new function (){
 		self.pageModel = new PageModel(properties.pageModel);
 		self.navigation.init();
 		self.urls = properties.urls;
-		self.navigation.changeCurrentNavigation("Account");
+		self.navigation.changeCurrentNavigationType(0);
 		ko.applyBindings(self.navigation, document.getElementById("navigation"))
+		ko.applyBindings(self.navigation, document.getElementById("header"))
 	}
 
 }());
