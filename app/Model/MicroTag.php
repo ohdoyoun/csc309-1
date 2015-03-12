@@ -32,7 +32,23 @@ class MicroTag extends Tag{
 
 	public $actAs = array( 'Inherit' );
 	
-	public function lookUpProjects($tag_name, $like=true){
+		/* Looks up profiles and/or projects with a given tag.
+	- Uses the private functions lookUpProfiles and lookUpProjects
+	*/
+	public function lookUp($tag_name, $profile=true, $project=true, $like=true){
+		if($profile && !$project){
+			return lookUpProfile($tag_name, $like);
+		}
+		elseif($project && !$profile){
+			return lookUpProjects($tag_name, $like);
+		}elseif($project && $profile){
+			return array_merge(lookUpProfiles($tag_name, $like), lookUpProects($tag_name, $like));
+		}else{
+			return [];
+		}
+	}
+	
+	private function lookUpProjects($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
 				'table' => 'project_micro_tags',
@@ -55,7 +71,7 @@ class MicroTag extends Tag{
 		return $this->find('all', $options);
 	}
 	
-	public function lookUpProfiles($tag_name, $like=true){
+	private function lookUpProfiles($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
 				'table' => 'profile_micro_tags',
