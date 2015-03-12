@@ -3,6 +3,14 @@ class ProjectsController extends AppController {
 	
 	public $name = 'Projects';
 
+    public function beforeFilter() {
+        parent::beforeFilter(); 
+        if (!($this->Auth->user())) {
+            $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+        }
+        
+    }
+    
 
 	function index() {
 		$this->set('projects', $this->Project->find('all'));
@@ -18,6 +26,10 @@ class ProjectsController extends AppController {
     
     function backed() {
         $this->set('backed', $this->Project->query("SELECT project_id FROM transactions WHERE user_id=" . $this->Auth->user('id')));
+    }
+    
+    function search() {
+        
     }
     
     function create() {

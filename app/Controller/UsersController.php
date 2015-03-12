@@ -18,6 +18,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter(); 
         $this->Auth->allow('register');
+        
     }
     
 
@@ -38,10 +39,24 @@ class UsersController extends AppController {
 	}
     
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        #if (!($this->Auth->user())) {
+        #    $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+        #}
+
+        if($this->Auth->loggedIn()) {
+            $this->Session->destroy();
+            $this->set('logged_in', null);
+            $this->redirect($this->Auth->logout());
+            #$this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+        }
     }
 
+    ############DELETE BEFORE RELEASE#################
 	function index() {
+	   if (!($this->Auth->user())) {
+            $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+        }
+	
 		$this->set('users', $this->User->find('all'));
 	}
 

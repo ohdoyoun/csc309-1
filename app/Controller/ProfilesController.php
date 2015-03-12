@@ -2,6 +2,14 @@
 class ProfilesController extends AppController {
 	
 	public $name = 'Profiles';
+	
+	public function beforeFilter() {
+        parent::beforeFilter(); 
+        if (!($this->Auth->user())) {
+            $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+        }
+        
+    }
 
     public function isAuthorized($user) {
          if (in_array($this->action, array('user'))) {
@@ -37,6 +45,14 @@ class ProfilesController extends AppController {
     
     function notifications() {
         
+    }
+    
+    function search() {
+        if (!empty($this->data)) {
+            if ($this->Profile->User->find('first', array('conditions' => array('User.username' => $this->data['Profile']['username'])))) {
+                $this->set('userSearch', $this->Profile->User->find('first', array('conditions' => array('User.username' => $this->data['Profile']['username'])))['Profile']['id']);
+            }
+        }
     }
     
     function edit() {
@@ -87,7 +103,7 @@ class ProfilesController extends AppController {
                 #Update users email in session
                 $this->Session->write('Auth.User.email', $dataUser['User']['email']);
 				$this->Session->setFlash('Changes successful.');
-				$this->redirect(array('action' => 'edit'));
+				#$this->redirect(array('action' => 'edit'));
 			}
 		}
     } 

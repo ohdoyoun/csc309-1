@@ -28,6 +28,8 @@
 			</div>
 		</header>
 
+		<div id="is-authed" data-value="<?php echo $logged_in ?>"></div>
+
 		<div class="site-main">
 			<header> 
 				<div id="page-header">
