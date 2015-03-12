@@ -6,8 +6,16 @@ NavigationModel = function(){
 	self.currentNavigation = ko.observable();
 	self.headerItems = ko.observableArray();
 	self.currentNavType = ko.observable();
+	self.currentPid = ko.observable();
 	
 	self.emptySetup = function(){	};
+	
+	self.setupMyProjectsPage = function(){
+	    $("#my-projects .project-link").on("click", function(event){
+	        self.currentPid(13);
+			self.changeCurrentNavigation("ProjectDetails");
+		});
+	};
 	
 	self.setupPrivateMessagesPage = function(){	};
 	self.landingPages = {
@@ -30,7 +38,7 @@ NavigationModel = function(){
 		},
 		Projects: {
 			navNum:0,
-			"My Projects":{content:"projects/mine", setupCallback:self.emptySetup},
+			"My Projects":{content:"projects/mine", setupCallback:self.setupMyProjectsPage},
 			"Backed Projects":{content:"projects/backed", setupCallback:self.emptySetup},
 			"Discover Projects":{content:"projects", setupCallback:self.emptySetup},
 			"Create Project":{content:"projects/create", setupCallback:self.emptySetup},
@@ -43,7 +51,7 @@ NavigationModel = function(){
 		},
 		ProjectDetails:{
 			navNum:2,
-			"Dashboard":{content:"Projects/Dashboard", setupCallback:self.emptySetup},
+			"Dashboard":{content:"projects/view/{pId}", setupCallback:self.emptySetup},
 			"Statistics":{content:"Projects/Statistics", setupCallback:self.emptySetup},
 			"Backer Information":{content:"Projects/BackerInformation", setupCallback:self.emptySetup},
 			"Surveys":{content:"Projects/Surveys/Surveys", setupCallback:self.emptySetup},
@@ -77,8 +85,9 @@ NavigationModel = function(){
 	self.changePage = function(page){
 		var info = self.navigation[self.currentNavigation()][page];
 		$("#main-body").remove.apply($("#main-body").children());
-		Helpers.LoadPartial($("#main-body"),info.content);
-		info.setupCallback();
+		var pageUrl = info.content.replace("{pId}", self.currentPid());
+		Helpers.LoadPartial($("#main-body"), pageUrl, info.setupCallback);
+		
 		$("#flashMessage").hide();
 	};
 	
@@ -103,12 +112,12 @@ NavigationModel = function(){
 	};
 	
 	self.init = function(){
-		$(".header-bar").click(function(event){
+		$(".header-bar").on("click", "a.header-link", function(event){
 		    if(event.target.hasAttribute("data-nav")){
 			    self.changeCurrentNavigation(event.target.attributes["data-nav"].value);
 		    }
 		});
-		$("#navigation-links").click(function(event){
+		$("#navigation-links").on("click", "a.nav-link" ,function(event){
 		    if(event.target.hasAttribute("data-nav")){
 			    self.changePage(event.target.attributes["data-nav"].value);
 		    }

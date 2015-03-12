@@ -9,7 +9,8 @@ var Controller = (new function (){
 		self.pageModel = new PageModel(properties.pageModel);
 		self.navigation.init();
 		self.urls = properties.urls;
-		self.navigation.changeCurrentNavigationType(0);
+		var isAuthed = $("#is-authed").attr("data-value") === '1';
+		self.navigation.changeCurrentNavigationType(isAuthed ? 0 : 1 );
 		ko.applyBindings(self.navigation, document.getElementById("navigation"))
 		ko.applyBindings(self.navigation, document.getElementById("header"))
 	}
