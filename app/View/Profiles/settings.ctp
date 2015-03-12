@@ -1,5 +1,5 @@
 <h3>Account Settings</h3>
-
+<br>
 <?php 
     echo $this->Html->div('account-settings'); 
     
@@ -27,4 +27,5 @@
     echo $this->Form->create('Profile', array('action'=>"settings"));
     echo $this->Form->input('signOut', array('value'=>true, 'type'=>'hidden'));
     echo $this->Form->end('Sign Out of All Other Sessions');
+    
 ?>
