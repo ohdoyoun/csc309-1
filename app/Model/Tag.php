@@ -5,10 +5,13 @@
 App::uses('AppModel', 'Model');
 class Tag extends AppModel{
 	
+	// The name of this Model.
 	public $name = 'Tag';
 	
+	// The table that this Model uses.
 	public $useTable = null;
 	
+	// The validation rules that this Model uses.
 	public $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
