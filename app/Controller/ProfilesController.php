@@ -34,14 +34,11 @@ class ProfilesController extends AppController {
             $this->Profile->User->delete(array('User.id' => $id), true);
             $this->redirect($this->Auth->logout());
         } elseif (isset($this->data['Profile']['passwordChange'])) {
-            debug($this->data);
             if (!empty($this->data)) {
                 if ($this->Profile->User->save($this->data)) {
-                    debug('1');
                     $this->Session->setFlash('Password has been changed.');
                     // call $this->redirect() here
                 } else {
-                    debug('2');
                     $this->Session->setFlash('Password could not be changed.');
                 }
             }
@@ -65,8 +62,6 @@ class ProfilesController extends AppController {
     }
     
     function edit() {
-        
-        debug($this->data);
         
         $this->set('email', $this->Auth->user('email'));
         
