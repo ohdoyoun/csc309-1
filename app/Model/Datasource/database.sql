@@ -79,6 +79,12 @@ create table macro_tags(
 	Unique (name)
 );
 
+/* The etnries into the macro_tags table. */
+insert into macro_tags (name) values ('Technology');
+insert into macro_tags (name) values ('Business');
+insert into macro_tags (name) values ('Nature');
+insert into macro_tags (name) values ('Non-Profit');
+
 /* This table represents all the micro tags on the website. */
 create table micro_tags(
 	id int not null auto_increment,
