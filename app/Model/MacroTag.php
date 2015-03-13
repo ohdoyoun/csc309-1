@@ -2,10 +2,15 @@
 App::uses('Tag', 'Model'); 
 class MacroTag extends Tag{
 	
+	// The name of the Model.
 	public $name = 'MacroTag';
 	
+	// The table that this Model is linked to.
 	public $useTable = 'macro_tags';
 
+	/* The associations to that link this Model has to other Models.
+	- The Models linked to this Model are MicroTag, Project and Profile.
+	*/
 	public $hasAndBelongsToMany = array(
 		'MicroTag' => array(
 			'className' => 'MicroTag',
@@ -30,6 +35,7 @@ class MacroTag extends Tag{
 		)
 	);
 
+	// Inheritance property.
 	public $actAs = array( 'Inherit' );
 	
 	/* Looks up profiles and/or projects with a given tag.
@@ -48,6 +54,9 @@ class MacroTag extends Tag{
 		}
 	}
 	
+	/* Looks up the projects with a given macro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
 	private function lookUpProjects($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
@@ -71,6 +80,9 @@ class MacroTag extends Tag{
 		return $this->find('all', $options);
 	}
 	
+	/* Looks up the profiles with a given macro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
 	private function lookUpProfiles($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
@@ -95,8 +107,8 @@ class MacroTag extends Tag{
 	}
 
 	
-	/* Global $validate takes care of this due to Inheritence.
-	
+	/* Validates that name of the macro tag.
+	- Depreciated. Global $validate takes care of this due to Inheritence.
 	public var $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
