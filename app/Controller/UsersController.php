@@ -45,9 +45,7 @@ class UsersController extends AppController {
 
         if($this->Auth->loggedIn()) {
             $this->Session->destroy();
-            $this->set('logged_in', null);
-            $this->redirect($this->Auth->logout());
-            #$this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
+            $this->Auth->logout();
         }
     }
 
