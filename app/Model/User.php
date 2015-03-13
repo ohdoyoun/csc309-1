@@ -4,8 +4,10 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 class User extends AppModel{
 	
+	// The name of this Model.
 	public $name = 'User';
 	
+	// The table that this Model uses.
 	public $useTable = 'users';
 	
 	/* Roles array used to store possible values of the role field.	*/
