@@ -189,7 +189,52 @@ class Profile extends AppModel{
 				'message' => 'Biography must be between 0 to 2000 characters.'
 			)
 		),
+		'old_password' => array
+		(
+	        'rule' => 'checkCurrentPassword',
+	        'message' => 'Wrong password.',
+	        'required' => true
+	    ),
+		'new_password' => array
+		(
+			'between' => array(
+				'rule' => array('lengthBetween', 5, 16),
+				'message' => 'Your password must be between 5 and 16 characters long.',
+				'required' => true
+			),
+			'matchPassword' => array(
+				'rule' => 'matchPasswords',
+				'message' => 'Your passwords do not match!',
+				'required' => true
+			)
+		),
+		'confirm_password' => array
+		(
+			'between' => array(
+				'rule' => array('lengthBetween', 5, 16),
+				'message' => 'Your password must be between 5 and 16 characters long.',
+				'required' => true
+			)
+		)
 	);
+	
+	public function checkCurrentPassword($data) {
+	    $this->id = AuthComponent::user('id');
+	    $password = $this->field('password');
+	    return (AuthComponent::password($data['Profile']['current_password']) == $password);
+	}
+	
+	/* Checks if the password and password2 field contain the same password.
+	 - Used for the match passwords validation check. 
+	*/
+    public function matchPasswords($data) {
+        if ($data['new_password'] == $this->data['Profile']['confirm_password']) {
+            return true;
+        }
+        $this->invalidate('confirm_password', 'Your passwords do not match.');
+        return false;
+    }
+
 
 }
 ?>
