@@ -2,10 +2,15 @@
 App::uses('Tag','Model'); 
 class MicroTag extends Tag{
 	
+	// The name this Model.
 	public $name = 'MicroTag';
 	
+	// The table that this Model uses.
 	public $useTable = 'micro_tags';
 
+	/* The associations to that link this Model has to other Models.
+	- The Models linked to this Model are MacroTag, Project and Profile.
+	*/
 	public $hasAndBelongsToMany = array(
 		'MacroTag' => array(
 			'className' => 'MacroTag',
@@ -30,9 +35,10 @@ class MicroTag extends Tag{
 		)
 	);
 
+	// The Inheritance property.
 	public $actAs = array( 'Inherit' );
 	
-		/* Looks up profiles and/or projects with a given tag.
+	/* Looks up profiles and/or projects with a given tag.
 	- Uses the private functions lookUpProfiles and lookUpProjects
 	*/
 	public function lookUp($tag_name, $profile=true, $project=true, $like=true){
@@ -48,6 +54,9 @@ class MicroTag extends Tag{
 		}
 	}
 	
+	/* Looks up the projects with a given micro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
 	private function lookUpProjects($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
@@ -71,6 +80,9 @@ class MicroTag extends Tag{
 		return $this->find('all', $options);
 	}
 	
+	/* Looks up the profiles with a given micro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
 	private function lookUpProfiles($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
@@ -94,8 +106,8 @@ class MicroTag extends Tag{
 		return $this->find('all', $options);
 	}
 
-	/* Global $validate takes care of this due to Inheritence.
-
+	/* Validates that name of the micro tag.
+	- Depreciated. Global $validate takes care of this due to Inheritance.
 	public var $validate = array(
 		'name' => array(
 			'alphaNumeric' => array
