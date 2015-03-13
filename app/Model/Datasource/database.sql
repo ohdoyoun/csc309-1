@@ -36,6 +36,8 @@ create table status_tags(
 	name varchar(20),
 	Primary Key (id)
 );
+
+/* The entries into the status_tags table.*/
 insert into status_tags (name) values ('Active');
 insert into status_tags (name) values ('Completed');  	
 insert into status_tags (name) values ('Uncompleted');
