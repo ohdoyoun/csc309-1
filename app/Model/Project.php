@@ -3,10 +3,13 @@ App::uses('AppModel', 'Model');
 App::uses('CakeTime', 'Utility');
 class Project extends AppModel{
 	
+	// The name of this Model.
 	public $name = 'Project';
 	
+	// The table that this Model uses.
 	public $useTable = 'projects';
 	
+	// The association that links this Model to the StatusTag Model.
 	public $belongsTo = array(
 		'StatusTag' => array(
 			'className' => 'StatusTag',
@@ -14,6 +17,9 @@ class Project extends AppModel{
 		)
 	);
 
+	/* The associations that link this Model to other Models.
+	 - The Models that this Model is linked to are User, MacroTag and MicroTag.
+	*/
 	public $hasAndBelongsToMany = array(
 		'User' => array(
 			'className' => 'User',
@@ -38,6 +44,7 @@ class Project extends AppModel{
 		)
 	);
 
+	// The validation rules that this Model uses.
 	public $validate = array(
 		'project_name' => array(
 			'alphaNumeric' => array
