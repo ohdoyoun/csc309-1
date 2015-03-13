@@ -2,6 +2,7 @@
 App::uses('Tag','Model'); 
 class StatusTag extends Tag{
 
+	// Private array that holds the possible names of Status tags.
 	private $status = array(
 		'Active',
 		'Completed',
@@ -10,10 +11,13 @@ class StatusTag extends Tag{
 		'Cancelled'
 	);
 	
+	// The name of this Model.
 	public $name = 'StatusTag';
 	
+	// The table that this Model uses.
 	public $useTable = 'status_tags';
 	
+	// The association that this Model has to the Project Model.
 	public $hasMany = array(
 		'Project' => array(
 			'classname' => 'Project',
@@ -21,8 +25,10 @@ class StatusTag extends Tag{
 		)
 	);
 
+	// The Inheritance property.
 	public $actAs = array( 'Inherit' );
 
+	// The validation rules that this Model uses.
 	public $validate = array(
 		'name' => array(
 			#Global $validate takes care of this due to Inheritence.
@@ -67,8 +73,6 @@ class StatusTag extends Tag{
 		}
 		return true;
 	}
-	
-	public function lookUp($tag_name, $like=true){}
 
 }
 ?>
