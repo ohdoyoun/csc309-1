@@ -1,15 +1,12 @@
 <h2>My Projects</h2>
 
-
 <table id="my-projects">
     <tr>
-        <th>Initiator</th>
-        <th>Project ID</th>
+        <th>Your projects you initiated</th>
     </tr>
     <?php foreach($mine as $project): ?>
     <tr>
-        <td><?php echo $project['Initiator']['user_id']; ?></td>
-        <td><a class="project-link" href="#"><?php echo $project['Initiator']['project_id']; ?></a></td>
+        <td><a href="./projects/view/<?php echo $project['projects']['id']; ?>"><?php echo $project['projects']['project_name']; ?></a></td>
     </tr>
     <?php endforeach; ?>
 </table>

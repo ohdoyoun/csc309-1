@@ -37,7 +37,7 @@ class ProjectsController extends AppController {
     }
     
     function mine() {
-        $this->set('mine', $this->Project->Initiator->find('all', array('conditions' => array('Initiator.user_id' => $this->Auth->user('id')))));
+        $this->set('mine', $this->Project->query('SELECT * FROM projects, initiators WHERE initiators.user_id=' . $this->Auth->user('id') . ' and initiators.project_id=projects.id;'));
     }
     
     function backed() {
