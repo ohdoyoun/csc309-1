@@ -11,7 +11,7 @@ echo $this->Form->end('Add');
 <?php 
 if (sizeof($total) > 0) {?>
     <h5>Total funds remaining: <?php echo $total[0][0]['total'] ?> </h5>
-<?php    
+<?php  
 } else {?>
     <h5>Total funds remaining: 0</h5>
 <?php    
@@ -28,7 +28,7 @@ if (sizeof($total) > 0) {?>
     <tr>
         <td><?php echo $trans['transactions']['update_date']; ?></td>
         <td><?php echo $trans['transactions']['funds']; ?></td>
-        <td><a href="./projects/view/<?php echo $trans['transactions']['project_id']; ?>"><?php echo $trans['transactions']['project_id']; ?></a></td>
+        <td><a href="./projects/view/<?php echo $trans['transactions']['project_id']; ?>"><?php echo $trans['projects']['project_name']; ?></a></td>
     </tr>
     <?php endforeach; ?>
 </table>
