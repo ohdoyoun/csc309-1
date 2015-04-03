@@ -50,7 +50,17 @@ class ProjectsController extends AppController {
     }
     
     function statistics() {
-        
+        $this->set('numberOfUsers', $this->Project->query('SELECT count(*) as total FROM users;'));
+        $this->set('numberOfProfiles', $this->Project->query('SELECT count(*) as total FROM profiles;'));
+        $this->set('numberOfProjects', $this->Project->query('SELECT count(*) as total FROM projects;'));
+        $this->set('numberOfCommunities', $this->Project->query('SELECT count(*) as total FROM communities;'));
+        $this->set('moneyInSystem', $this->Project->query('SELECT sum(funds) as total FROM wallet_transactions;'));
+        $this->set('moneySpent', $this->Project->query('SELECT sum(funds) as total FROM transactions;'));
+        $this->set('projectsBeingFunded', $this->Project->query('SELECT count(DISTINCT project_id) as total FROM transactions;'));
+        $this->set('projectsNotBeingFunded', $this->Project->query('SELECT count(*) as total FROM projects;'));
+        $this->set('projectsDone', $this->Project->query('SELECT count(*) as total FROM projects WHERE end_date <= current_timestamp;'));
+        $this->set('projectsActive', $this->Project->query('SELECT count(*) as total FROM projects WHERE end_date >= current_timestamp;'));
+        $this->set('projectsFullyFunded', $this->Project->query('SELECT count(*) as total FROM (SELECT sum(funds) as funded, p.id, p.goal FROM projects AS p, transactions AS t where t.project_id=p.id GROUP BY p.id) AS funds WHERE funded >= goal;'));
     }
     
     function create() {

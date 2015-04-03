@@ -2,7 +2,7 @@
 
 <table id="my-projects">
     <tr>
-        <th>Your projects you've initiated</th>
+        <th>Projects you have initiated</th>
     </tr>
     <?php foreach($mine as $project): ?>
     <tr>

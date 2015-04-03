@@ -3,7 +3,7 @@
 
 <table>
     <tr>
-        <th>Project you've backed</th>
+        <th>Project you have backed</th>
     </tr>
     <?php foreach($backed as $project): ?>
     <tr>
