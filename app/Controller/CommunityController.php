@@ -1,0 +1,3 @@
+class ProfilesController extends AppController {
+
+}
