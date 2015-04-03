@@ -9,8 +9,8 @@ echo $this->Form->end('Add');
 <br>
 
 <?php 
-if (!empty($total)) {?>
-    <h5>Total funds remaining: <?php echo $total ?> </h5>
+if (sizeof($total) > 0) {?>
+    <h5>Total funds remaining: <?php echo $total[0][0]['total'] ?> </h5>
 <?php    
 } else {?>
     <h5>Total funds remaining: 0</h5>

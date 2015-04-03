@@ -13,7 +13,7 @@ class WalletsController extends AppController {
     
     public function index() {
         $this->set('wallet', $this->Wallet->query('SELECT update_date, funds, name as description FROM wallets, wallet_transactions, payment_methods where wallets.id=wallet_transactions.wallet_id and wallets.payment_method_id=payment_methods.id and wallets.user_id=' . $this->Auth->user('id') . ' ORDER BY update_date DESC;'));
-        $this->set('total', $this->Wallet->query('SELECT sum(total) as total FROM (SELECT sum(funds) as total, user_id FROM wallets, wallet_transactions where wallet_id=wallets.id and user_id=' . $this->Auth->user('id') . ' GROUP BY user_id UNION SELECT sum(funds) * -1 as total, user_id FROM transactions where user_id=' . $this->Auth->user('id') . ' GROUP BY user_id) as info GROUP BY user_id;')[0][0]['total']);
+        $this->set('total', $this->Wallet->query('SELECT sum(total) as total FROM (SELECT sum(funds) as total, user_id FROM wallets, wallet_transactions where wallet_id=wallets.id and user_id=' . $this->Auth->user('id') . ' GROUP BY user_id UNION SELECT sum(funds) * -1 as total, user_id FROM transactions where user_id=' . $this->Auth->user('id') . ' GROUP BY user_id) as info GROUP BY user_id;'));
         $this->set('spent', $this->Wallet->query('SELECT update_date, project_id, funds FROM transactions where user_id=' . $this->Auth->user('id') . ' ORDER BY update_date DESC;'));
         if (!empty($this->data)) {
             if (preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->data['Wallet']['Amount'])) {
