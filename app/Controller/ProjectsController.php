@@ -49,6 +49,10 @@ class ProjectsController extends AppController {
         
     }
     
+    function statistics() {
+        
+    }
+    
     function create() {
         
         if (!empty($this->data)) {
