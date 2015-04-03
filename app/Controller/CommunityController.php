@@ -1,3 +1,5 @@
-class ProfilesController extends AppController {
+<?php
+class ControllerController extends AppController {
 
 }
+?>
