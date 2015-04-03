@@ -50,6 +50,7 @@ class ProjectsController extends AppController {
     }
     
     function statistics() {
+        //Global stats
         $this->set('numberOfUsers', $this->Project->query('SELECT count(*) as total FROM users;'));
         $this->set('numberOfProfiles', $this->Project->query('SELECT count(*) as total FROM profiles;'));
         $this->set('numberOfProjects', $this->Project->query('SELECT count(*) as total FROM projects;'));
@@ -61,6 +62,15 @@ class ProjectsController extends AppController {
         $this->set('projectsDone', $this->Project->query('SELECT count(*) as total FROM projects WHERE end_date <= current_timestamp;'));
         $this->set('projectsActive', $this->Project->query('SELECT count(*) as total FROM projects WHERE end_date >= current_timestamp;'));
         $this->set('projectsFullyFunded', $this->Project->query('SELECT count(*) as total FROM (SELECT sum(funds) as funded, p.id, p.goal FROM projects AS p, transactions AS t where t.project_id=p.id GROUP BY p.id) AS funds WHERE funded >= goal;'));
+    
+        //User stats
+        $this->set('numberOfProjectsUser', $this->Project->query('SELECT count(*) as total FROM projects, initiators WHERE projects.id=initiators.project_id and initiators.user_id=' . $this->Auth->user('id') . ';'));
+        $this->set('moneyRaised', $this->Project->query('SELECT sum(funds) as total FROM transactions as t, projects as p, initiators as i WHERE i.project_id=p.id and i.user_id=' . $this->Auth->user('id') . ' and t.project_id=p.id;'));
+        $this->set('projectsBeingFundedUser', $this->Project->query('SELECT count(DISTINCT t.project_id) as total FROM transactions as t, projects as p, initiators as i WHERE i.project_id=p.id and i.user_id=' . $this->Auth->user('id') . ' and t.project_id=p.id;'));
+        $this->set('projectsNotBeingFundedUser', $this->Project->query('SELECT count(*) as total FROM projects, initiators WHERE initiators.project_id=projects.id and initiators.user_id=' . $this->Auth->user('id') . ';'));
+        $this->set('projectsDoneUser', $this->Project->query('SELECT count(*) as total FROM projects, initiators WHERE initiators.project_id=projects.id and initiators.user_id=' . $this->Auth->user('id') . ' and end_date <= current_timestamp;'));
+        $this->set('projectsActiveUser', $this->Project->query('SELECT count(*) as total FROM projects, initiators WHERE initiators.project_id=projects.id and initiators.user_id=' . $this->Auth->user('id') . ' and end_date >= current_timestamp;'));
+        $this->set('projectsFullyFundedUser', $this->Project->query('SELECT count(*) as total FROM (SELECT sum(funds) as funded, p.id, p.goal FROM projects AS p, transactions AS t, initiators AS i where t.project_id=p.id and i.project_id=p.id and i.user_id=' . $this->Auth->user('id') . ' GROUP BY p.id) AS funds WHERE funded >= goal;'));
     }
     
     function create() {

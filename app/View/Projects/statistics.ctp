@@ -18,4 +18,11 @@
 
 
 <br><br><br><h2>Statistics of your projects</h2>
-<p>N/A</p>
+<h5>Number of projects you have initiated: <?php echo $numberOfProjectsUser[0][0]['total']; ?></h5><br>
+<h5>Money raised on all projects: <?php echo $moneyRaised[0][0]['total']; ?></h5><br>
+<h5>Projects being funded: <?php echo $projectsBeingFundedUser[0][0]['total']; ?></h5>
+<h5>Projects not being funded: <?php echo $projectsNotBeingFundedUser[0][0]['total'] - $projectsBeingFundedUser[0][0]['total']; ?></h5><br>
+<h5>Number of active projects: <?php echo $projectsActiveUser[0][0]['total']; ?></h5>
+<h5>Number of projects that ended: <?php echo $projectsDoneUser[0][0]['total']; ?></h5><br>
+
+<h5>Number of projects that completed their goal: <?php echo $projectsFullyFundedUser[0][0]['total']; ?></h5>
