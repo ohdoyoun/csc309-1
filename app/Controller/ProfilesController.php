@@ -1,7 +1,20 @@
 <?php
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 class ProfilesController extends AppController {
 	
 	public $name = 'Profiles';
+	
+	#Change hasher to blowfish to be able to change passwords
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
 	
 	public function beforeFilter() {
         parent::beforeFilter(); 
@@ -34,13 +47,26 @@ class ProfilesController extends AppController {
             $this->Profile->User->delete(array('User.id' => $id), true);
             $this->redirect($this->Auth->logout());
         } elseif (isset($this->data['Profile']['passwordChange'])) {
-            if (!empty($this->data)) {
-                if ($this->Profile->User->save($this->data)) {
-                    $this->Session->setFlash('Password has been changed.');
-                    // call $this->redirect() here
+            //Get password from database
+            $currentPassword = $this->Profile->query('SELECT password FROM users WHERE id=' . $this->Auth->user('id') . ';')[0]['users']['password'];
+            $passwordHasher = new BlowfishPasswordHasher();
+            $data['Profile']['old_password'] = Security::hash($this->data['Profile']['old_password'], 'blowfish', $currentPassword);
+            
+            debug($data['Profile']['old_password']);
+            debug($currentPassword);
+            #debug()
+            
+            if ($currentPassword == $data['Profile']['old_password']) {
+                if ($this->data['Profile']['new_password'] == $this->data['Profile']['confirm_password'] and strlen($this->data['Profile']['new_password']) >= 5) {
+                    $data['Profile']['new_password'] = $passwordHasher->hash($this->data['Profile']['new_password']);
+                    $this->Profile->query('UPDATE users SET password=\'' . $data['Profile']['new_password'] . '\' WHERE id=' . $this->Auth->user('id') . ';');
                 } else {
-                    $this->Session->setFlash('Password could not be changed.');
+                    $this->Session->setFlash('New password mismatch or it is less than 5 characters long.');
+                    debug('1');
                 }
+            } else {
+                $this->Session->setFlash('Your old password doesn\'t match your current password.');
+                debug('2');
             }
         } elseif (isset($this->data['Profile']['timezoneChange'])) {
             
