@@ -62,11 +62,9 @@ class ProfilesController extends AppController {
                     $this->Profile->query('UPDATE users SET password=\'' . $data['Profile']['new_password'] . '\' WHERE id=' . $this->Auth->user('id') . ';');
                 } else {
                     $this->Session->setFlash('New password mismatch or it is less than 5 characters long.');
-                    debug('1');
                 }
             } else {
                 $this->Session->setFlash('Your old password doesn\'t match your current password.');
-                debug('2');
             }
         } elseif (isset($this->data['Profile']['timezoneChange'])) {
             
