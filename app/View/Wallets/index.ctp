@@ -6,6 +6,7 @@ echo $this->Form->create('Wallet', array('action'=>'index'));
 echo $this->Form->input('Amount');
 echo $this->Form->end('Add');
 ?>
+<p>Note: This wallet does not accept real currency during the prototype phase. Instead you can add a maximum of $10000.00 per turn to test the sites features.</p>
 <br>
 
 <?php 
