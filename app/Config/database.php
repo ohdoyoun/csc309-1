@@ -71,7 +71,7 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'gwlodarek-csc309project-1327828',
+		'host' => 'gwlodarek-csc309-1403190',
 		'login' => 'gwlodarek',
 		'password' => '',
 		'database' => 'c9',
