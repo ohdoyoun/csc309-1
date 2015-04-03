@@ -57,6 +57,10 @@ class UsersController extends AppController {
 	
 		$this->set('users', $this->User->find('all'));
 	}
+	
+	function view($id = null) {
+	    $this->set('user', $this->User->find('first', array('conditions' => array('User.id' => $id))));
+	}
 
 	function register() {
         if ($this->Auth->user())
