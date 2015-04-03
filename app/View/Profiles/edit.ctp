@@ -1,4 +1,4 @@
-<h3>Profile of <?php echo $current_user['username']; ?></h3>
+<h3>Your profile</h3>
 
 <?php 
 if (!empty($users)){  
