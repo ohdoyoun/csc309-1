@@ -41,7 +41,7 @@ class ProjectsController extends AppController {
     }
     
     function backed() {
-        $this->set('backed', $this->Project->query("SELECT project_id FROM transactions WHERE user_id=" . $this->Auth->user('id')));
+        $this->set('backed', $this->Project->query("SELECT project_id FROM transactions WHERE user_id=" . $this->Auth->user('id') . " GROUP BY project_id;"));
     }
     
     function search() {
