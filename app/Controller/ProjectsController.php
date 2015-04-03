@@ -17,7 +17,23 @@ class ProjectsController extends AppController {
 	}
     
     function view($id = NULL) {
-        $this->set('project', $this->Project->find('first', array('conditions' => array('Project.id' => $id))));    
+        $this->set('project', $this->Project->find('first', array('conditions' => array('Project.id' => $id))));  
+
+        $this->set('current_amount', $this->Project->query('SELECT sum(funds) as total FROM transactions WHERE project_id=' . $id . ' GROUP BY project_id;'));
+        
+        if (!empty($this->data)) {
+            debug($this->data);
+            if (preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->data['Project']['Amount'])) {
+                if (floatval($this->data['Project']['Amount']) <= floatval($this->Project->query('SELECT sum(total) as total FROM (SELECT sum(funds) as total, user_id FROM wallets, wallet_transactions where wallet_id=wallets.id and user_id=' . $this->Auth->user('id') . ' GROUP BY user_id UNION SELECT sum(funds) * -1 as total, user_id FROM transactions where user_id=' . $this->Auth->user('id') . ' GROUP BY user_id) as info GROUP BY user_id;')[0][0]['total'])) {
+                    $this->Project->query('INSERT INTO transactions (project_id, user_id, funds) VALUES (' . $id . ', ' . $this->Auth->user('id') . ', ' . floatval($this->data['Project']['Amount']) . ');');
+                    $this->Session->setFlash('Funded project successfully.');
+                } else {
+                    $this->Session->setFlash('Not enough funds.');
+                }
+            } else {
+                $this->Session->setFlash('Invalid amount.');
+            }
+        }
     }
     
     function mine() {
