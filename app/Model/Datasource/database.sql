@@ -192,3 +192,15 @@ create table communities(
 	Foreign Key (micro_tag_id) References micro_tags(id),
 	Primary key (id)
 );
+
+/*Reputation system table
+*/
+create table likes(
+	id int not null auto_increment,
+    onUser int not null,
+    fromUser int not null,
+    choice int not null,
+    Foreign Key (fromUser) References users(id),
+    Foreign Key (onUser) References users(id),
+    Primary Key (id)
+);
