@@ -21,8 +21,8 @@ if (sizeof($total) > 0) {?>
 <table>
     <tr>
         <th>Spent on</th>
-        <th>Amount</th>
-        <th>Project</th>
+        <th>Amount spent</th>
+        <th>Towards project</th>
     </tr>
     <?php foreach($spent as $trans): ?>
     <tr>
@@ -38,8 +38,8 @@ if (sizeof($total) > 0) {?>
 <table>
     <tr>
         <th>Added on</th>
-        <th>Amount</th>
-        <th>Type</th>
+        <th>Amount added</th>
+        <th>Payment type</th>
     </tr>
     <?php foreach($wallet as $trans): ?>
     <tr>
