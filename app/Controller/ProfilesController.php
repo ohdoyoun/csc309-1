@@ -45,7 +45,8 @@ class ProfilesController extends AppController {
         } elseif (isset($this->data['Profile']['timezoneChange'])) {
             
         } elseif (isset($this->data['Profile']['signOut'])) {
-            
+            $this->Session->destroy();
+            $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
         }
     }
     
