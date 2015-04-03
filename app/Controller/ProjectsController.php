@@ -14,6 +14,7 @@ class ProjectsController extends AppController {
 
 	function index() {
 		$this->set('projects', $this->Project->find('all'));
+		$this->set('current_amounts', $this->Project->query('SELECT sum(funds) as total, project_id FROM transactions GROUP BY project_id;'));
 	}
     
     function view($id = NULL) {
