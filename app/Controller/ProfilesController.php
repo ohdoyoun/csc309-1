@@ -52,10 +52,6 @@ class ProfilesController extends AppController {
             $passwordHasher = new BlowfishPasswordHasher();
             $data['Profile']['old_password'] = Security::hash($this->data['Profile']['old_password'], 'blowfish', $currentPassword);
             
-            debug($data['Profile']['old_password']);
-            debug($currentPassword);
-            #debug()
-            
             if ($currentPassword == $data['Profile']['old_password']) {
                 if ($this->data['Profile']['new_password'] == $this->data['Profile']['confirm_password'] and strlen($this->data['Profile']['new_password']) >= 5) {
                     $data['Profile']['new_password'] = $passwordHasher->hash($this->data['Profile']['new_password']);
