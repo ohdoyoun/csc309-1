@@ -24,6 +24,22 @@
         echo $this->Form->input('Testimony');
         echo $this->Form->end('Submit');
     } ?>
+    
+    <?php if (sizeof($testimonials) > 0) { ?>
+        <br><br><h5>Testimonials from funders:</h5>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Testimony</th>
+            </tr>
+            <?php foreach($testimonials as $testimony): ?>
+            <tr>
+                <td><a href="/users/view/ <?php echo $testimony['testimonials']['user_id']; ?>"><?php echo $testimony['users']['username']; ?></a></td>
+                <td><?php echo $testimony['testimonials']['testimony']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php } ?>
 <?php } else {?>
     <h3>No such project exists!</h3>
 <?php }?>

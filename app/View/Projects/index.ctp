@@ -4,7 +4,7 @@
 <?php foreach($projects as $project): ?>
     
     <div style="float: left; padding-right: 30px; border-style: ridge; border-width: 5px; padding-left: 30px; width: 250px; height: 300px; padding-top: 15px; margin-right: 10px;">
-        <p>Name: <a href="projects/view/<?php echo $project['Project']['id']; ?>"><?php echo $project['Project']['project_name']; ?></a></p><br>
+        <p>Name: <a href="/projects/view/<?php echo $project['Project']['id']; ?>"><?php echo $project['Project']['project_name']; ?></a></p><br>
         <p>Goal: $<?php echo $project['Project']['goal']; ?></p>
         <?php foreach($current_amounts as $current):
             if ($current['transactions']['project_id'] == $project['Project']['id']) {?>
