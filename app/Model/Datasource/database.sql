@@ -222,3 +222,15 @@ create table posts(
 	Primary Key(id),
 	Foreign Key (communities_id) References communities(id)
 );
+
+/* Table to save users notification preferences */
+create table notifications(
+	user_id int not null,
+	newCommentsBacked tinyint not null default 0,
+	newUpdatesBacked tinyint not null default 0,
+	newPledgesStarted tinyint not null default 0,
+	newCommentsStarted tinyint not null default 0,
+	newProjects tinyint not null default 0,
+	Foreign Key (user_id) References users(id),
+	Primary Key(user_id)
+);
