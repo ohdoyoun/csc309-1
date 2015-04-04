@@ -19,21 +19,34 @@ class ProjectsController extends AppController {
     
     function view($id = NULL) {
         $this->set('project', $this->Project->find('first', array('conditions' => array('Project.id' => $id))));  
-
         $this->set('current_amount', $this->Project->query('SELECT sum(funds) as total FROM transactions WHERE project_id=' . $id . ' GROUP BY project_id;'));
+        
+        $fundedProject = $this->Project->query('SELECT count(*) as total FROM transactions WHERE project_id=' . $id . ' and user_id=' . $this->Auth->user('id') . ';')[0][0]['total'];
+        $gaveTestimony = $this->Project->query('SELECT count(*) as total FROM testimonials WHERE project_id=' . $id . ' and user_id=' . $this->Auth->user('id') . ';')[0][0]['total'];
+        
+        if ($fundedProject >= 1 and $gaveTestimony == 0) {
+            $this->set('canGiveTestimony', true);
+        } else {
+            $this->set('canGiveTestimony', false);
+        }
         
         if (!empty($this->data)) {
             debug($this->data);
-            if (preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->data['Project']['Amount'])) {
-                if (floatval($this->data['Project']['Amount']) <= floatval($this->Project->query('SELECT sum(total) as total FROM (SELECT sum(funds) as total, user_id FROM wallets, wallet_transactions where wallet_id=wallets.id and user_id=' . $this->Auth->user('id') . ' GROUP BY user_id UNION SELECT sum(funds) * -1 as total, user_id FROM transactions where user_id=' . $this->Auth->user('id') . ' GROUP BY user_id) as info GROUP BY user_id;')[0][0]['total'])) {
-                    $this->Project->query('INSERT INTO transactions (project_id, user_id, funds) VALUES (' . $id . ', ' . $this->Auth->user('id') . ', ' . floatval($this->data['Project']['Amount']) . ');');
-                    $this->Session->setFlash('Funded project successfully.');
+            if (isset($this->data['Project']['fund'])) {
+                if(preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->data['Project']['Amount'])) {
+                    if (floatval($this->data['Project']['Amount']) <= floatval($this->Project->query('SELECT sum(total) as total FROM (SELECT sum(funds) as total, user_id FROM wallets, wallet_transactions where wallet_id=wallets.id and user_id=' . $this->Auth->user('id') . ' GROUP BY user_id UNION SELECT sum(funds) * -1 as total, user_id FROM transactions where user_id=' . $this->Auth->user('id') . ' GROUP BY user_id) as info GROUP BY user_id;')[0][0]['total'])) {
+                        $this->Project->query('INSERT INTO transactions (project_id, user_id, funds) VALUES (' . $id . ', ' . $this->Auth->user('id') . ', ' . floatval($this->data['Project']['Amount']) . ');');
+                        $this->Session->setFlash('Funded project successfully.');
+                        $this->redirect(array('controller'=>'projects', 'action'=>'view/' . $id));
+                    } else {
+                        $this->Session->setFlash('Not enough funds.');
+                    }
                 } else {
-                    $this->Session->setFlash('Not enough funds.');
+                    $this->Session->setFlash('Invalid amount.');
                 }
-            } else {
-                $this->Session->setFlash('Invalid amount.');
-            }
+            } elseif (isset($this->data['Project']['feedback'])) {
+                
+            } 
         }
     }
     

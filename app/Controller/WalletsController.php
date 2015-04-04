@@ -22,6 +22,7 @@ class WalletsController extends AppController {
                     $insertID = $this->Wallet->query('SELECT id FROM wallets where user_id=' . $this->Auth->user('id') . ' ORDER BY id DESC LIMIT 1;')[0]['wallets']['id'];
                     $this->Wallet->query('INSERT INTO wallet_transactions (wallet_id, funds) VALUES ('. $insertID . ', ' . floatval($this->data['Wallet']['Amount']) . ');');
                     $this->Session->setFlash('Funds added successfully.');
+                    $this->redirect(array('controller'=>'wallets', 'action'=>'index'));
                 } else {
                     $this->Session->setFlash('You can only add $10000.00 or less!');
                 }

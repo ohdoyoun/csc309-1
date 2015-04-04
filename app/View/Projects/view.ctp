@@ -12,9 +12,18 @@
     <h5>Fund this project!</h5>
     <?php
         echo $this->Form->create('Project', array('action'=>'view/' . $project['Project']['id']));
+        echo $this->Form->hidden('fund');
         echo $this->Form->input('Amount');
         echo $this->Form->end('Fund');
     ?>
+    <?php if ($canGiveTestimony) { ?>
+    <h5>Give a testimony!</h5>
+    <?php
+        echo $this->Form->create('Project', array('action'=>'view/' . $project['Project']['id']));
+        echo $this->Form->hidden('feedback');
+        echo $this->Form->input('Testimony');
+        echo $this->Form->end('Submit');
+    } ?>
 <?php } else {?>
     <h3>No such project exists!</h3>
 <?php }?>
