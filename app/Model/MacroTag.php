@@ -48,7 +48,7 @@ class MacroTag extends Tag{
 		elseif($project && !$profile){
 			return lookUpProjects($tag_name, $like);
 		}elseif($project && $profile){
-			return array_merge(lookUpProfiles($tag_name, $like), lookUpProects($tag_name, $like));
+			return array_merge(lookUpProfiles($tag_name, $like), lookUpProjects($tag_name, $like));
 		}else{
 			return [];
 		}

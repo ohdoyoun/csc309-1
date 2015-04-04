@@ -7,6 +7,8 @@ class ControllerController extends AppController {
     $this->set('communities', $name->find('all'));
   }
   
+  
+  
 
 }
 ?>
