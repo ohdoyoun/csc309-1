@@ -1,10 +1,10 @@
 <?php
-class ControllerController extends AppController {
+class CommunityController extends AppController {
   
   public $name = 'Community';
   
-  function index(){
-    $this->set('communities', $name->find('all'));
+  public function index(){
+    $this->set('communities', $this->Community->find('all'));
   }
   
   

@@ -17,12 +17,14 @@
     echo $this->Form->input('passwordChange', array('value'=>true, 'type'=>'hidden'));
     echo $this->Form->end('Change Password');
     
-    echo $this->Form->create('Profile', array('action'=>"settings"));
-    echo $this->Form->label('Time-Zone:');
-    echo $this->Html->para(null, 'We use your Time Zone to send notification emails, for project activities and reminders.');
-    echo $this->Form->label('Your Time Zone is currenty set to:');
-    echo $this->Form->input('timezoneChange', array('value'=>true, 'type'=>'hidden'));
-    echo $this->Form->end('Change Time Zone');
+    if (false) {
+        echo $this->Form->create('Profile', array('action'=>"settings"));
+        echo $this->Form->label('Time-Zone:');
+        echo $this->Html->para(null, 'We use your Time Zone to send notification emails, for project activities and reminders.');
+        echo $this->Form->label('Your Time Zone is currenty set to:');
+        echo $this->Form->input('timezoneChange', array('value'=>true, 'type'=>'hidden'));
+        echo $this->Form->end('Change Time Zone');
+    }
     
     echo $this->Form->create('Profile', array('action'=>"settings"));
     echo $this->Form->input('signOut', array('value'=>true, 'type'=>'hidden'));
