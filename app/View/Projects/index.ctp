@@ -19,7 +19,6 @@
             $setRaised = false;
         } ?>
         
-        
         <p>Ending on <?php echo $project['Project']['end_date']; ?></p><br>
         <p style="text-overflow: ellipsis; word-wrap:break-word;">Details: <?php echo $project['Project']['details']; ?></p><br><br>
 
