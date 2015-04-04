@@ -33,9 +33,29 @@ if (sizeof($user) > 0) {
     <?php }
     if (sizeof($user['User']) > 0) { ?>
         <br>
-        <h5>You can contact <?php echo $user['User']['username'] ?> at <?php echo $user['User']['email'] ?></h5>
-    <?php }
-    
+        <h5>You can contact <?php echo $user['User']['username'] ?> at <?php echo $user['User']['email'] ?></h5><br><br>
+    <?php } ?>
+    	<center>
+    		<?php if ($logged_in): ?>
+    			<?php
+    				echo $this->Form->create('User', array('action'=>'view/' . $id));
+    				echo $this->Form->hidden('like');
+    				echo $this->Form->hidden('id', array('value' => $id));
+    				echo $this->Form->submit('Like');  
+    				echo $this->Form->end();
+    			?>
+    			<?php
+    				echo $this->Form->create('User', array('action'=>'view/' . $id));
+    				echo $this->Form->hidden('dislike');
+    				echo $this->Form->hidden('id', array('value' => $id));
+    				echo $this->Form->submit('Dislike');  
+    				echo $this->Form->end();
+    			?>
+    			<br>
+    		<?php endif; ?><br>
+    		<div>Likes: <?php echo $popularity[0]?>, Dislikes: <?php echo $popularity[1] ?></div><br><br>
+		</center>
+    <?php
 } else { ?>
 <h2>No such user exists.</h2>
 <?php }

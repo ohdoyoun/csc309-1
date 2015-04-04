@@ -60,6 +60,35 @@ class UsersController extends AppController {
 	
 	function view($id = null) {
 	    $this->set('user', $this->User->find('first', array('conditions' => array('User.id' => $id))));
+	    
+	    $this->set('id', $id);
+	    
+	    $popularity = array();
+        array_push($popularity, $this->User->query('SELECT count(*) as count FROM likes WHERE choice=1 and onUser=' . $id . ';')[0][0]['count']);
+        array_push($popularity, $this->User->query('SELECT count(*) as count FROM likes WHERE choice=-1 and onUser=' . $id . ';')[0][0]['count']);
+        $this->set('popularity', $popularity);
+        
+        if (!empty($this->data)) {  
+            if (isset($this->data['User']['like'])) {
+                if ($this->User->query('SELECT count(*) as count from likes WHERE choice=1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';')[0][0]['count'] > 0) {
+                    $this->User->query('DELETE FROM likes WHERE choice=1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';');
+                    $this->redirect(array('controller'=>'users', 'action'=>'view/' . $id));
+                } else {
+                    $this->User->query('DELETE FROM likes WHERE choice=-1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';');
+                    $this->User->query('INSERT INTO likes (onUser, fromUser, choice) VALUES (' . $this->data['User']['id'] . ',' . $this->Auth->user('id') . ',1);');
+                    $this->redirect(array('controller'=>'users', 'action'=>'view/' . $id));
+                }
+            } else if (isset($this->data['User']['dislike'])) {
+                if ($this->User->query('SELECT count(*) as count from likes WHERE choice=-1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';')[0][0]['count'] > 0) {
+                    $this->User->query('DELETE FROM likes WHERE choice=-1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';');
+                    $this->redirect(array('controller'=>'users', 'action'=>'view/' . $id));
+                } else {
+                    $this->User->query('DELETE FROM likes WHERE choice=1 and onUser=' . $this->data['User']['id'] . ' and fromUser=' . $this->Auth->user('id') . ';');
+                    $this->User->query('INSERT INTO likes (onUser, fromUser, choice) VALUES (' . $this->data['User']['id'] . ',' . $this->Auth->user('id') . ',-1);');
+                    $this->redirect(array('controller'=>'users', 'action'=>'view/' . $id));
+                }
+            }
+        }
 	}
 
 	function register() {
