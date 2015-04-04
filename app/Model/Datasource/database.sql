@@ -84,6 +84,28 @@ insert into macro_tags (name) values ('Technology');
 insert into macro_tags (name) values ('Business');
 insert into macro_tags (name) values ('Nature');
 insert into macro_tags (name) values ('Non-Profit');
+insert into macro_tags (name) values ('Health');
+insert into macro_tags (name) values ('Education');
+insert into macro_tags (name) values ('Finance');
+insert into macro_tags (name) values ('Travel');
+insert into macro_tags (name) values ('Personal');
+insert into macro_tags (name) values ('Fitness');
+insert into macro_tags (name) values ('Politics');
+insert into macro_tags (name) values ('Art');
+insert into macro_tags (name) values ('Comics');
+insert into macro_tags (name) values ('Crafts');
+insert into macro_tags (name) values ('Dance');
+insert into macro_tags (name) values ('Design');
+insert into macro_tags (name) values ('Fashion');
+insert into macro_tags (name) values ('Film & Video');
+insert into macro_tags (name) values ('Food');
+insert into macro_tags (name) values ('Games');
+insert into macro_tags (name) values ('Music');
+insert into macro_tags (name) values ('Journalism');
+insert into macro_tags (name) values ('Photography');
+insert into macro_tags (name) values ('Publishing');
+insert into macro_tags (name) values ('Theater');
+
 
 /* This table represents all the micro tags on the website. */
 create table micro_tags(
