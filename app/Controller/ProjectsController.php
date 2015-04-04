@@ -45,7 +45,13 @@ class ProjectsController extends AppController {
                     $this->Session->setFlash('Invalid amount.');
                 }
             } elseif (isset($this->data['Project']['feedback'])) {
-                
+                if (strlen($this->data['Project']['Testimony']) > 0 and strlen($this->data['Project']['Testimony']) <= 1000) {
+                    $this->Project->query('INSERT INTO testimonials (project_id, user_id, testimony) VALUES (' . $id . ', ' . $this->Auth->user('id') . ', \'' . $this->data['Project']['Testimony'] . '\');');
+                    $this->Session->setFlash('Testimony added.');
+                    $this->redirect(array('controller'=>'projects', 'action'=>'view/' . $id));
+                } else {
+                    $this->Session->setFlash('Testimony must be less than or equal to 1000 characters and not empty.');
+                }
             } 
         }
     }
