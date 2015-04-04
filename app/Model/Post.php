@@ -9,7 +9,7 @@ class Post extends AppModel{
   
   // Associations to other Models.
   public $belongsTo = array(
-    'Community' = > array(
+    'Community' => array(
       'className' => 'Community',
       'foreignKey' => 'communities_id'
     )

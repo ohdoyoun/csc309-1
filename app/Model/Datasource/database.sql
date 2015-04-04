@@ -217,8 +217,9 @@ create table testimonials(
 
 /* Posts for the Community Walls. */
 create table posts(
-	id int not null auto_incremment,
+	id int not null auto_increment,
 	communities_id int not null,
+	post varchar(1000) not null,
 	Primary Key(id),
 	Foreign Key (communities_id) References communities(id)
 );
