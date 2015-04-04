@@ -75,7 +75,19 @@ class ProfilesController extends AppController {
     }
     
     function notifications() {
+        $hasPreferences = $this->Profile->query('SELECT count(*) as total FROM notifications WHERE user_id=' . $this->Auth->user('id') . ';')[0][0]['total'];
+        $this->set('hasPreferences', $hasPreferences);
         
+        $this->set('checkedValues', $this->Profile->query('SELECT * FROM notifications WHERE user_id=' . $this->Auth->user('id') . ';')[0]['notifications']);
+        
+        if (!empty($this->data)) {
+            if ($hasPreferences) {
+                $this->Profile->query('DELETE FROM notifications WHERE user_id=' . $this->Auth->user('id') . ';');
+                $this->Profile->query('INSERT INTO notifications (user_id, newCommentsBacked, newUpdatesBacked, newPledgesStarted, newCommentsStarted, newProjects) VALUES (' . $this->Auth->user('id') . ', ' . $this->data['Profile']['newCommentsBacked'] . ', ' . $this->data['Profile']['newProjectUpdates'] . ', ' . $this->data['Profile']['newPledges'] . ', ' . $this->data['Profile']['newCommentsYours'] . ', ' . $this->data['Profile']['newCommunities'] . ');');
+            } else {
+                $this->Profile->query('INSERT INTO notifications (user_id, newCommentsBacked, newUpdatesBacked, newPledgesStarted, newCommentsStarted, newProjects) VALUES (' . $this->Auth->user('id') . ', ' . $this->data['Profile']['newCommentsBacked'] . ', ' . $this->data['Profile']['newProjectUpdates'] . ', ' . $this->data['Profile']['newPledges'] . ', ' . $this->data['Profile']['newCommentsYours'] . ', ' . $this->data['Profile']['newCommunities'] . ');');
+            }
+        }
     }
     
     function search() {
