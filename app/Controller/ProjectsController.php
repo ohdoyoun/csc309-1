@@ -30,6 +30,8 @@ class ProjectsController extends AppController {
             $this->set('canGiveTestimony', false);
         }
         
+        $this->set('testimonials', $this->Project->query('SELECT testimony, user_id, username FROM testimonials, users WHERE project_id=' . $id . ' and user_id=users.id;'));
+        
         if (!empty($this->data)) {
             if (isset($this->data['Project']['fund'])) {
                 if(preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->data['Project']['Amount'])) {
