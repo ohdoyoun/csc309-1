@@ -214,3 +214,11 @@ create table testimonials(
 	Foreign Key (user_id) References users(id),
 	Primary Key (id)
 );
+
+/* Posts for the Community Walls. */
+create table posts(
+	id int not null auto_incremment,
+	communities_id int not null,
+	Primary Key(id),
+	Foreign Key (communities_id) References communities(id)
+);
