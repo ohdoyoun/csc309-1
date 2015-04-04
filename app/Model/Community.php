@@ -8,5 +8,12 @@ class Community extends AppModel{
 	// The name of the Model.
 	public $name = 'Community';
 	
+	public $hasMany = array(
+		'Post' => array(
+			'className' => 'Post',
+			'dependent' => true
+			)
+		);
+	
 }
 ?>
