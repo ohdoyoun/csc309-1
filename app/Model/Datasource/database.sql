@@ -195,7 +195,7 @@ create table communities(
 
 /*Reputation system table for users*/
 create table likes(
-	id int not null auto_increment,
+    id int not null auto_increment,
     onUser int not null,
     fromUser int not null,
     choice int not null,
@@ -211,6 +211,6 @@ create table testimonials(
 	user_id int not null,
 	testimony varchar(1000) not null,
 	Foreign Key (project_id) References projects(id),
-    Foreign Key (user_id) References users(id),
-    Primary Key (id)
+	Foreign Key (user_id) References users(id),
+	Primary Key (id)
 );
