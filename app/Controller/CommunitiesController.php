@@ -4,7 +4,11 @@ class CommunitiesController extends AppController {
   public $name = 'Communities';
   
   public function index(){
-    #$this->set('communities', $this->Community->query('SELECT '));
+    $this->set('communities', $this->Community->query('SELECT * FROM communities, micro_tags, macro_tags WHERE communities.macro_tag_id=macro_tags.id and communities.micro_tag_id=micro_tags.id;'));
+  }
+  
+  public function view($id = null) {
+    
   }
   
   public function create() {
