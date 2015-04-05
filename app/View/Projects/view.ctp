@@ -34,7 +34,7 @@
             </tr>
             <?php foreach($testimonials as $testimony): ?>
             <tr>
-                <td><a href="/users/view/ <?php echo $testimony['testimonials']['user_id']; ?>"><?php echo $testimony['users']['username']; ?></a></td>
+                <td><a href="/users/view/<?php echo $testimony['testimonials']['user_id']; ?>"><?php echo $testimony['users']['username']; ?></a></td>
                 <td><?php echo $testimony['testimonials']['testimony']; ?></td>
             </tr>
             <?php endforeach; ?>

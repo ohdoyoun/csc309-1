@@ -57,6 +57,7 @@ class CommunitiesController extends AppController {
         $this->set('macro_projects', $this->MacroTag->lookUpProjects($tag_name));
         $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
       }
+    }
     if($tag_flag==1){
       if($profiles){
         $this->set('macro_profiles', $this->MacroTag->lookUpProfiles($tag_name));
@@ -66,6 +67,7 @@ class CommunitiesController extends AppController {
         $this->set('macro_projects', $this->MacroTag->lookUpProjects($tag_name));
         $this->set('micro_projects', null);
       }
+    }
     if($tag_flag==2){
       if($profiles){
         $this->set('macro_profiles', null);
@@ -75,6 +77,7 @@ class CommunitiesController extends AppController {
         $this->set('macro_projects', null);
         $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
       }
+    }
   }
   
   /* Implements the search functionality. 
