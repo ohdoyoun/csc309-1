@@ -11,6 +11,10 @@ class CommunitiesController extends AppController {
     
   }
   
+  public function results(){
+    help_search($tag_name, $profiles, $projects, $tag_flag);
+  }
+  
   public function create() {
     $tags = $this->Community->query('SELECT * FROM macro_tags;');
     
@@ -88,29 +92,30 @@ class CommunitiesController extends AppController {
     $tag_options = ['Communities', 'Sub-Communities', 'All'];
     if (!empty($this->data)) {
       if (strlen($this->data['Communities']['tag_name']) > 0){
-        $tag_name = $this->data['Communities']['tag_name'];
+        $this->set('tag_name', $this->data['Communities']['tag_name']);
         $item = $this->data['Communities']['category'];
         $tag = $this->data['Communities']['community'];
         if(in_array($item, $item_options) && in_array($tag, $tag_options)){
           switch($item){
             case 'Profiles':
-              $profiles = true;
-              $projects = false;
+              $this->set('profiles', true);
+              $this->set('projects', false);
             case 'Projects':
-              $profiles = false;
-              $projects = true;
+              $this->set('profiles', false);
+              $this->set('projects', true);
             default:
-              $profiles = true;
-              $projects = true;
+              $this->set('profiles', true);
+              $this->set('projects', true);
           }
           switch($tag){
             case 'Communities':
-              help_search($tag_name, $profiles, $projects, 1);
+              $this->set('tag_flag', 1);
             case 'Sub-Communities':
-              help_search($tag_name, $profiles, $projects, 2);
+              $this->set('tag_flag', 2);
             default:
-              help_search($tag_name, $profiles, $projects);
+              $this->set('tag_flag', 0);
           }
+          $this->redirect(array('controller'=>'communities', 'action'=>'results'));
         }
       }
     }
@@ -119,6 +124,5 @@ class CommunitiesController extends AppController {
   
   
   
-
 }
 ?>

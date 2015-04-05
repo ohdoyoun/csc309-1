@@ -242,6 +242,7 @@ create table posts(
 	id int not null auto_increment,
 	communities_id int not null,
 	post varchar(1000) not null,
+	created timestamp default CURRENT_TIMESTAMP,
 	Primary Key(id),
 	Foreign Key (communities_id) References communities(id)
 );
