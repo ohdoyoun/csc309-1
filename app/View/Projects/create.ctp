@@ -8,6 +8,9 @@
 	echo $this->Form->input('goal');
 	echo $this->Form->input('end_date');
 	echo $this->Form->input('details');
+	echo $this->Form->input('category', array('type' => 'select', 'label' => 'Project Category', 'options' => $macroTags));
+	echo $this->Form->input('other', array('label' => 'Other Categories'));
+	
 	echo $this->Form->end('Create');
 ?>
 </div>

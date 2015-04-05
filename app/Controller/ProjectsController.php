@@ -97,6 +97,15 @@ class ProjectsController extends AppController {
     }
     
     function create() {
+        $tags = $this->Project->query('SELECT * FROM macro_tags;');
+        
+        $cleanedTags = array();
+        
+        foreach($tags as $tag):
+          $cleanedTags[$tag['macro_tags']['id']] = $tag['macro_tags']['name'];
+        endforeach;
+        
+        $this->set('macroTags', $cleanedTags);
         
         if (!empty($this->data)) {
             $project_name = $this->request->data['Project']['project_name'];
@@ -130,6 +139,12 @@ class ProjectsController extends AppController {
                 $this->Project->Initiator->add($new_initiator_data);
                 
                 if ($this->Project->Initiator->saveAll($new_initiator_data, array('deep' => true))) {
+                    $this->Project->query('INSERT INTO project_macro_tags (macro_tag_id, project_id) VALUES (' . $this->data['Project']['category'] . ', ' . $project_id . ');');
+                    if ($this->Project->query('SELECT count(*) as total FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\';')[0][0]['total'] == 0) {
+                        $this->Project->query('INSERT INTO micro_tags (name) VALUES (\'' . $this->data['Project']['other'] . '\');');
+                    }
+                    $micro_tag_id = $this->Project->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
+                    $this->Project->query('INSERT INTO project_micro_tags (micro_tag_id, project_id) VALUES (' . $micro_tag_id . ', ' . $project_id . ');');
                     $this->Session->setFlash('Project Created.');
                     $this->redirect(array('action'=>'index'));
                 }
