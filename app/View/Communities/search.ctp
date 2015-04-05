@@ -30,9 +30,3 @@
 ?>
 </div>
 
-<?php 
-debug($macro_profiles);
-debug($micro_profiles);
-debug($macro_projects);
-debug($micro_projects);
-?>
