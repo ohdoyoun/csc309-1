@@ -146,7 +146,7 @@ class ProjectsController extends AppController {
                     $micro_tag_id = $this->Project->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
                     $this->Project->query('INSERT INTO project_micro_tags (micro_tag_id, project_id) VALUES (' . $micro_tag_id . ', ' . $project_id . ');');
                     $this->Session->setFlash('Project Created.');
-                    $this->redirect(array('action'=>'index'));
+                    $this->redirect(array('action'=>'mine'));
                 }
                 
             }
