@@ -40,7 +40,7 @@ class MacroTag extends Tag{
 	
 	/* Looks up profiles and/or projects with a given tag.
 	- Uses the private functions lookUpProfiles and lookUpProjects
-	*/
+	
 	public function lookUp($tag_name, $profile=true, $project=true, $like=true){
 		if($profile && !$project){
 			return lookUpProfile($tag_name, $like);
@@ -53,11 +53,12 @@ class MacroTag extends Tag{
 			return [];
 		}
 	}
+	*/
 	
 	/* Looks up the projects with a given macro tag name.
 	- Private function to be used by the public lookUp function.
 	*/
-	private function lookUpProjects($tag_name, $like=true){
+	public function lookUpProjects($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
 				'table' => 'project_macro_tags',
@@ -83,7 +84,7 @@ class MacroTag extends Tag{
 	/* Looks up the profiles with a given macro tag name.
 	- Private function to be used by the public lookUp function.
 	*/
-	private function lookUpProfiles($tag_name, $like=true){
+	public function lookUpProfiles($tag_name, $like=true){
 		$options['joins'] = array(
 			array(
 				'table' => 'profile_macro_tags',
