@@ -148,15 +148,16 @@ class ProfilesController extends AppController {
             
             if (strlen($this->data['Profile']['other']) > 0 and strlen($this->data['Profile']['other']) <= 50) {
     			if ($this->Profile->save($dataSave, false) and $this->Profile->User->save($dataUser, false)) {
-    			    $this->Profile->query('DELETE FROM profile_macro_tags WHERE profile_id=' . $prof_id . ';');
-    			    $this->Profile->query('DELETE FROM profile_micro_tags WHERE profile_id=' . $prof_id . ';');
+    			    $profileId = $this->Profile->query('SELECT id FROM profiles WHERE user_id=' . $this->Auth->user('id') . ';')[0]['profiles']['id'];
+    			    $this->Profile->query('DELETE FROM profile_macro_tags WHERE profile_id=' . $profileId . ';');
+    			    $this->Profile->query('DELETE FROM profile_micro_tags WHERE profile_id=' . $profileId . ';');
     			    
-                    $this->Profile->query('INSERT INTO profile_macro_tags (macro_tag_id, profile_id) VALUES (' . $this->data['Profile']['category'] . ', ' . $prof_id . ');');
+                    $this->Profile->query('INSERT INTO profile_macro_tags (macro_tag_id, profile_id) VALUES (' . $this->data['Profile']['category'] . ', ' . $profileId . ');');
                     if ($this->Profile->query('SELECT count(*) as total FROM micro_tags WHERE name=\'' . $this->data['Profile']['other'] . '\';')[0][0]['total'] == 0) {
                         $this->Profile->query('INSERT INTO micro_tags (name) VALUES (\'' . $this->data['Profile']['other'] . '\');');
                     }
                     $micro_tag_id = $this->Profile->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Profile']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
-                    $this->Profile->query('INSERT INTO profile_micro_tags (micro_tag_id, profile_id) VALUES (' . $micro_tag_id . ', ' . $prof_id . ');');
+                    $this->Profile->query('INSERT INTO profile_micro_tags (micro_tag_id, profile_id) VALUES (' . $micro_tag_id . ', ' . $profileId . ');');
                         
                     #Update users email in session
                     $this->Session->write('Auth.User.email', $dataUser['User']['email']);
