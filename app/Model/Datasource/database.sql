@@ -24,7 +24,7 @@ create table profiles(
    	city varchar(100),
    	address varchar(100),
    	postal_code varchar(20),
-   	phone_number varchar(20),
+   	phone_number varchar(10),
    	bio varchar(2000),
 	Primary Key (id),
 	Foreign Key (user_id) References users(id)
