@@ -9,7 +9,7 @@ class CommunitiesController extends AppController {
   
   public function view($id = null) {
     if($id != null){
-      $this->set('posts', $this->Post->find('all', array('conditions' => array('Post.communities_id' => $id))));
+      $this->set('posts', $this->Community->Post->find('all', array('conditions' => array('Post.communities_id' => $id))));
       $community = $this->Community->findById($id);
       $message = $community['macro_tags']['name'] + " : " + $community['micro_tags']['name'];
       $this->set('message', $message);
