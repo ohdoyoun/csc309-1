@@ -15,8 +15,8 @@
 		'selected' => 'All'
 		)
 	);
-	echo $this->Form->input('category', array(
-		'type' => 'radio', 
+	echo $this->Form->input('community', array(
+		'type' => 'select', 
 		'label' => 'Search Category Options', 
 		'options' => array(
 			'Communities', 
