@@ -49,14 +49,32 @@ class CommunitiesController extends AppController {
   */
   private function help_search($tag_name, $profiles=true, $projects=true, $tag_flag=0){
     if($tag_flag==0){
-      return array_merge($this->MacroTag->lookup($tag_name, $profiles, $projects), $this->MicroTag->lookup($tag_name, $profiles, $projects));
-    }
+      if($profiles){
+        $this->set('macro_profiles', $this->MacroTag->lookUpProfiles($tag_name));
+        $this->set('micro_profiles', $this->MicroTag->lookUpProfiles($tag_name));
+      }
+      if($projects){
+        $this->set('macro_projects', $this->MacroTag->lookUpProjects($tag_name));
+        $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
+      }
     if($tag_flag==1){
-      return $this->MacroTag->lookup($tag_name, $profiles, $projects);
-    }
+      if($profiles){
+        $this->set('macro_profiles', $this->MacroTag->lookUpProfiles($tag_name));
+        $this->set('micro_profiles', null);
+      }
+      if($projects){
+        $this->set('macro_projects', $this->MacroTag->lookUpProjects($tag_name));
+        $this->set('micro_projects', null);
+      }
     if($tag_flag==2){
-      return $this->MicroTag->lookup($tag_name, $profiles, $projects);
-    }
+      if($profiles){
+        $this->set('macro_profiles', null);
+        $this->set('micro_profiles', $this->MicroTag->lookUpProfiles($tag_name));
+      }
+      if($projects){
+        $this->set('macro_projects', null);
+        $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
+      }
   }
   
   /* Implements the search functionality. 
@@ -84,11 +102,11 @@ class CommunitiesController extends AppController {
           }
           switch($tag){
             case 'Communities':
-              return help_search($tag_name, $profiles, $projects, 1);
+              help_search($tag_name, $profiles, $projects, 1);
             case 'Sub-Communities':
-              return help_search($tag_name, $profiles, $projects, 2);
+              help_search($tag_name, $profiles, $projects, 2);
             default:
-              return help_search($tag_name, $profiles, $projects);
+              help_search($tag_name, $profiles, $projects);
           }
         }
       }
