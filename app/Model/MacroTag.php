@@ -59,6 +59,9 @@ class MacroTag extends Tag{
 	- Private function to be used by the public lookUp function.
 	*/
 	public function lookUpProjects($tag_name, $like=true){
+		if($tag_name == null){
+			return $this->find('all');
+		}
 		$options['joins'] = array(
 			array(
 				'table' => 'project_macro_tags',
@@ -85,6 +88,9 @@ class MacroTag extends Tag{
 	- Private function to be used by the public lookUp function.
 	*/
 	public function lookUpProfiles($tag_name, $like=true){
+		if($tag_name == null){
+			return $this->find('all');
+		}
 		$options['joins'] = array(
 			array(
 				'table' => 'profile_macro_tags',
