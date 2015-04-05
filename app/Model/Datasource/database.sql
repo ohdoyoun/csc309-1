@@ -240,12 +240,13 @@ create table testimonials(
 /* Posts for the Community Walls. */
 create table posts(
 	id int not null auto_increment,
-	communities_id int not null,
-	profiles_id int not null,
+	community_id int not null,
+	user_id int not null,
 	details varchar(1000) not null,
 	created timestamp default CURRENT_TIMESTAMP,
 	Primary Key(id),
-	Foreign Key (communities_id) References communities(id)
+	Foreign Key (community_id) References communities(id),
+	Foreign Key (user_id) References users(id)
 );
 
 /* Table to save users notification preferences */
