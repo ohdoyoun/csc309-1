@@ -124,10 +124,6 @@ class CommunitiesController extends AppController {
           } else {
             $tag_flag = 0;
           }
-          
-          debug($tag_flag);
-          debug($tag_name);
-          
 
           if($tag_flag==0){
             if($profiles){
