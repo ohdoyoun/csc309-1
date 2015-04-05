@@ -106,6 +106,7 @@ class UsersController extends AppController {
                 #Automatically login if successfully registered.
                 $user = $this->User->findByUsername($this->request->data['username']);
                 $this->Auth->login($user);
+                $this->User->query('INSERT INTO notifications (user_id) VALUES (' . $this->Auth->user('id') . ');');
 				$this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
 			} else {
 				$this->Session->setFlash('Please correct the fields highlighted in red to register.');
