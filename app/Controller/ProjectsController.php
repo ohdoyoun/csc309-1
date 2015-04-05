@@ -63,7 +63,7 @@ class ProjectsController extends AppController {
     }
     
     function mine() {
-        $this->set('mine', $this->Project->query('SELECT * FROM projects, initiators WHERE initiators.user_id=' . $this->Auth->user('id') . ' and initiators.project_id=projects.id;'));
+        $this->set('mine', $this->Project->query('SELECT * FROM initiators, projects LEFT OUTER JOIN (SELECT sum(funds), project_id FROM transactions GROUP BY project_id) as funds ON (funds.project_id=projects.id) WHERE initiators.user_id=' . $this->Auth->user('id') . ' and initiators.project_id=projects.id;'));
     }
     
     function backed() {
