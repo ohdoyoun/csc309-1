@@ -3,7 +3,6 @@
 class ProjectsController extends AppController {
 	
 	public $name = 'Projects';
-	public $helpers = array('GoogleChart.GoogleChart');
 
     public function beforeFilter() {
         parent::beforeFilter(); 
