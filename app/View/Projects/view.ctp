@@ -27,7 +27,7 @@
     
     <?php if (sizeof($testimonials) > 0) { ?>
         <br><br><h5>Testimonials from funders:</h5>
-        <table>
+        <table style="width:50%;">
             <tr>
                 <th>User</th>
                 <th>Testimony</th>
@@ -36,6 +36,22 @@
             <tr>
                 <td><a href="/users/view/<?php echo $testimony['testimonials']['user_id']; ?>"><?php echo $testimony['users']['username']; ?></a></td>
                 <td><?php echo $testimony['testimonials']['testimony']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php } ?>
+    
+    <?php if (sizeof($backers) > 0) { ?>
+        <br><br><h5>Backers:</h5>
+        <table style="width:45%;">
+            <tr>
+                <th>User</th>
+                <th>Amount</th>
+            </tr>
+            <?php foreach($backers as $backer): ?>
+            <tr>
+                <td><a href="/users/view/<?php echo $backer['u']['id']; ?>"><?php echo $backer['u']['username']; ?></a></td>
+                <td><?php echo $backer['t']['funds']; ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
