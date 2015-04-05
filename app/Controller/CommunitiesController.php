@@ -137,22 +137,22 @@ class CommunitiesController extends AppController {
           }
           if($tag_flag==1){
             if($profiles){
-              $this->set('macro_profiles', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('macro_profiles', $this->MacroTag->lookUpProfiles($tag_name));
               $this->set('micro_profiles', null);
             }
             if($projects){
-              $this->set('macro_projects', ClassRegistry::init('MacroTag')->lookUpProjects($tag_name));
+              $this->set('macro_projects', $this->MacroTag->lookUpProjects($tag_name));
               $this->set('micro_projects', null);
             }
           }
           if($tag_flag==2){
             if($profiles){
               $this->set('macro_profiles', null);
-              $this->set('micro_profiles', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_profiles', $this->MicroTag->lookUpProfiles($tag_name));
             }
             if($projects){
               $this->set('macro_projects', null);
-              $this->set('micro_projects', ClassRegistry::init('MicroTag')->lookUpProjects($tag_name));
+              $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
             }
           }
         }
