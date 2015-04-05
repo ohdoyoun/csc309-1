@@ -7,12 +7,14 @@
         <th>Profile Name</th>
         <th>Community Name</th>
     </tr>
-    <?php foreach($macro_profiles as $row): ?>
-    <tr>
-        <td><?php echo $row['profiles']['name']; ?></a></td>
-        <td><?php echo $row['macro_tags']['name'] ?></td>
-    </tr>
-    <?php endforeach; ?>
+    <?php
+    if($macro_profiles != null){
+        foreach($macro_profiles as $row):
+        echo "<tr>";
+            echo "<td>$row['profiles']['id']</td>";
+           echo "<td>$row['macro_tags']['name']</td>";
+        echo "</tr>";
+    }?>
 </table>
 </br>
 
@@ -22,12 +24,14 @@
         <th>Project Name</th>
         <th>Community Name</th>
     </tr>
-    <?php foreach($macro_projects as $row): ?>
-    <tr>
-        <td><?php echo $row['projects']['name']; ?></a></td>
-        <td><?php echo $row['macro_tags']['name'] ?></td>
-    </tr>
-    <?php endforeach; ?>
+    <?php
+    if($macro_projects != null){
+        foreach($macro_projects as $row):
+        echo "<tr>";
+            echo "<td>$row['projects']['name']</td>";
+           echo "<td>$row['macro_tags']['name']</td>";
+        echo "</tr>";
+    }?>
 </table></br>
 </br>
 
@@ -38,12 +42,14 @@
         <th>Profile Name</th>
         <th>Sub-Community Name</th>
     </tr>
-    <?php foreach($micro_profiles as $row): ?>
-    <tr>
-        <td><?php echo $row['profiles']['name']; ?></a></td>
-        <td><?php echo $row['micro_tags']['name'] ?></td>
-    </tr>
-    <?php endforeach; ?>
+    <?php
+    if($micro_profiles != null){
+        foreach($micro_profiles as $row):
+        echo "<tr>";
+            echo "<td>$row['profiles']['id']</td>";
+           echo "<td>$row['micro_tags']['name']</td>";
+        echo "</tr>";
+    }?>
 </table>
 </br>
 
@@ -53,10 +59,14 @@
         <th>Project Name</th>
         <th>Sub-Community Name</th>
     </tr>
-    <?php foreach($micro_projects as $row): ?>
-    <tr>
-        <td><?php echo $row['projects']['name']; ?></a></td>
-        <td><?php echo $row['micro_tags']['name'] ?></td>
-    </tr>
-    <?php endforeach; ?>
+    <?php 
+    if($micro_projects != null){
+        foreach($micro_projects as $row):
+        echo "<tr>";
+            echo "<td>$row['projects']['name']</td>";
+           echo "<td>$row['micro_tags']['name']</td>";
+        echo "</tr>";
+    }
+    endforeach; 
+    ?>
 </table>
