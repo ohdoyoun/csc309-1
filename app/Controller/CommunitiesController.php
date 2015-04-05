@@ -61,7 +61,7 @@ class CommunitiesController extends AppController {
     1 = Perform the lookup function on just the Macro Tags.
     2 = Perform the lookup function on just the Micro Tags.
   */
-  private function help_search($tag_name, $profiles=true, $projects=true, $tag_flag=0){
+  /*private function help_search($tag_name, $profiles=true, $projects=true, $tag_flag=0){
     if($tag_flag==0){
       if($profiles){
         $this->set('macro_profiles', $this->MacroTag->lookUpProfiles($tag_name));
@@ -92,41 +92,76 @@ class CommunitiesController extends AppController {
         $this->set('micro_projects', $this->MicroTag->lookUpProjects($tag_name));
       }
     }
-  }
+  }*/
   
   /* Implements the search functionality. 
   Able to search for projects and profiles within the communties using Macro Tags and Micro Tags.
   */
   public function search() {
-    $item_options = ['Profiles', 'Projects', 'All'];
-    $tag_options = ['Communities', 'Sub-Communities', 'All'];
+    $item_options = [0, 1, 2];
+    $tag_options = [0, 1, 2];
     if (!empty($this->data)) {
       if (strlen($this->data['Communities']['tag_name']) > 0){
-        $this->set('tag_name', $this->data['Communities']['tag_name']);
+        $tag_name = $this->data['Communities']['tag_name'];
         $item = $this->data['Communities']['category'];
         $tag = $this->data['Communities']['community'];
         if(in_array($item, $item_options) && in_array($tag, $tag_options)){
-          switch($item){
-            case 'Profiles':
-              $this->set('profiles', true);
-              $this->set('projects', false);
-            case 'Projects':
-              $this->set('profiles', false);
-              $this->set('projects', true);
-            default:
-              $this->set('profiles', true);
-              $this->set('projects', true);
+          if ($item == 0) {
+            $profiles = true;
+            $projects = false;
+          } elseif ($item == 1) {
+            $profiles = false;
+            $projects = true;
+          } else {
+            $profiles = true;
+            $projects = true;
           }
-          switch($tag){
-            case 'Communities':
-              $this->set('tag_flag', 1);
-            case 'Sub-Communities':
-              $this->set('tag_flag', 2);
-            default:
-              $this->set('tag_flag', 0);
+          
+          if ($tag == 0) {
+            $tag_flag = 1;
+          } elseif ($tag == 1) {
+            $tag_flag = 2;
+          } else {
+            $tag_flag = 0;
           }
-          $this->redirect(array('controller'=>'communities', 'action'=>'results'));
+          
+          debug($tag_flag);
+          debug($tag_name);
+          
+
+          if($tag_flag==0){
+            if($profiles){
+              $this->set('macro_profiles', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_profiles', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+            }
+            if($projects){
+              $this->set('macro_projects', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_projects', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+            }
+          }
+          if($tag_flag==1){
+            if($profiles){
+              $this->set('macro_profiles', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_profiles', null);
+            }
+            if($projects){
+              $this->set('macro_projects', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_projects', null);
+            }
+          }
+          if($tag_flag==2){
+            if($profiles){
+              $this->set('macro_profiles', null);
+              $this->set('micro_profiles', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+            }
+            if($projects){
+              $this->set('macro_projects', null);
+              $this->set('micro_projects', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+            }
+          }
         }
+      } else {
+        $this->Session->setFlash('Please fill out the field Tag Name');
       }
     }
     
