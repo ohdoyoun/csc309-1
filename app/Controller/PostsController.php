@@ -1,5 +1,5 @@
 <?php
-class PostController extends AppController{
+class PostsController extends AppController{
   
   public function create(){
   
