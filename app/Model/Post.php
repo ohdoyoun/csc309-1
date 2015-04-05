@@ -12,7 +12,12 @@ class Post extends AppModel{
     'Community' => array(
       'className' => 'Community',
       'foreignKey' => 'communities_id'
+    ),
+    'User' => array(
+      'className' => 'User',
+      'foreignKey' => 'user_id'
     )
+      
   );
 
 }
