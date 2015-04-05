@@ -163,15 +163,15 @@ class Profile extends AppModel{
 		(
 			'alphaNumeric' => array
 			(
-				'rule' => 'alphaNumeric',
+				'rule' => 'isValidPhoneFormat',
 				'required' => true,
 				'message' => 'Phone number may only be alphanumeric characters.',
                 'allowEmpty' => true
 			),
 			'between' => array
 			(
-				'rule' => array('lengthBetween', 1, 20),
-				'message' => 'Phone number must be between 1 to 20 characters.'
+				'rule' => array('lengthBetween', 1, 10),
+				'message' => 'Phone number must be between 1 to 10 characters.'
 			)
 		),
 		'biography' => array
@@ -234,6 +234,25 @@ class Profile extends AppModel{
         $this->invalidate('confirm_password', 'Your passwords do not match.');
         return false;
     }
+    
+    /*isValidPhoneFormat() - Custom method to validate Phone Number
+	 * @params Int $phone
+	 */
+	 function isValidPhoneFormat($phone){
+	 $phone_no=$phone['phone_num'];
+	 $errors = array();
+	    if(empty($phone_no)) {
+	        $errors [] = "Please enter Phone Number";
+	    }
+	    else if (!preg_match('/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s.]{0,1}[0-9]{3}[-\s.]{0,1}[0-9]{4}$/', $phone_no)) {
+	        $errors [] = "Please enter valid Phone Number";
+	    } 
+	
+	    if (!empty($errors))
+	    return implode("\n", $errors);
+	
+	    return true;
+	}
 
 
 }
