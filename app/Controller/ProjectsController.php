@@ -126,31 +126,38 @@ class ProjectsController extends AppController {
             
             $this->Project->add($new_project_data);
 
-            if ($this->Project->saveAll($new_project_data, array('deep' => true))) { 
+            if (strlen($this->data['Project']['other']) > 0 and strlen($this->data['Project']['other']) <= 50) {
+                if ($this->Project->saveAll($new_project_data, array('deep' => true))) { 
+                    
+                    $user_id = $this->Auth->user('id'); 
+                    $project_id = $this->Project->find('first', array('conditions' => array('Project.project_name' => $project_name)))['Project']['id'];
+                    
+                    $new_initiator_data = array(
+                    	'Initiator' => array(
+                    		'project_id' => $project_id,
+                    		'user_id' => $user_id
+                    	)
+                    );
+                    
+                    $this->Project->Initiator->add($new_initiator_data);
                 
-                $user_id = $this->Auth->user('id'); 
-                $project_id = $this->Project->find('first', array('conditions' => array('Project.project_name' => $project_name)))['Project']['id'];
                 
-                $new_initiator_data = array(
-                	'Initiator' => array(
-                		'project_id' => $project_id,
-                		'user_id' => $user_id
-                	)
-                );
-                
-                $this->Project->Initiator->add($new_initiator_data);
-                
-                if ($this->Project->Initiator->saveAll($new_initiator_data, array('deep' => true))) {
-                    $this->Project->query('INSERT INTO project_macro_tags (macro_tag_id, project_id) VALUES (' . $this->data['Project']['category'] . ', ' . $project_id . ');');
-                    if ($this->Project->query('SELECT count(*) as total FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\';')[0][0]['total'] == 0) {
-                        $this->Project->query('INSERT INTO micro_tags (name) VALUES (\'' . $this->data['Project']['other'] . '\');');
+                    if ($this->Project->Initiator->saveAll($new_initiator_data, array('deep' => true))) {
+                    
+                        $this->Project->query('INSERT INTO project_macro_tags (macro_tag_id, project_id) VALUES (' . $this->data['Project']['category'] . ', ' . $project_id . ');');
+                        if ($this->Project->query('SELECT count(*) as total FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\';')[0][0]['total'] == 0) {
+                            $this->Project->query('INSERT INTO micro_tags (name) VALUES (\'' . $this->data['Project']['other'] . '\');');
+                        }
+                        $micro_tag_id = $this->Project->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
+                        $this->Project->query('INSERT INTO project_micro_tags (micro_tag_id, project_id) VALUES (' . $micro_tag_id . ', ' . $project_id . ');');
+                        $this->Session->setFlash('Project Created.');
+                        $this->redirect(array('action'=>'mine'));
                     }
-                    $micro_tag_id = $this->Project->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Project']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
-                    $this->Project->query('INSERT INTO project_micro_tags (micro_tag_id, project_id) VALUES (' . $micro_tag_id . ', ' . $project_id . ');');
-                    $this->Session->setFlash('Project Created.');
-                    $this->redirect(array('action'=>'mine'));
-                }
                 
+                }
+            } else {
+                    $this->Session->setFlash('Other categories must be in between 1 and 50 characters');
+                    $this->redirect(array('controller'=>'projects', 'action'=>'create'));
             }
         }
     }
