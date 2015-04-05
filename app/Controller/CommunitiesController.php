@@ -9,15 +9,17 @@ class CommunitiesController extends AppController {
   
   public function view($id = null) {
     if($id != null){
-      $this->set('posts', $this->Community->Post->find('all', array(
-        'conditions' => array('Post.community_id' => $id),
-        'order' => array('Post.created'))));
-      $community = $this->Community->findById($id);
-      $message = $community['macro_tags']['name'] + " : " + $community['micro_tags']['name'];
-      $this->set('message', $message);
-    }else{
-      $this->set('message'. 'Could not find this Community!');
-      $this->set('posts', null);
+      if ($this->Community->query('SELECT count(*) FROM communities WHERE id=' . $id . ';')[0][0]['count(*)'] > 0) {
+        $this->set('posts', $this->Community->query('SELECT * FROM posts, users WHERE posts.user_id=users.id and community_id=' . $id . ';'));
+        $macro_tag = $this->Community->query('SELECT * FROM communities, macro_tags WHERE communities.macro_tag_id=macro_tags.id and communities.id=' . $id . ';')[0]['macro_tags']['name'];
+        $micro_tag = $this->Community->query('SELECT * FROM communities, micro_tags WHERE communities.micro_tag_id=micro_tags.id and communities.id=' . $id . ';')[0]['micro_tags']['name'];
+        $message = $macro_tag . " : " . $micro_tag;
+        $this->set('message', $message);
+        
+      } else {
+        $this->set('message', 'Could not find this Community!');
+        $this->set('posts', null);
+      }
     }
   }
   
@@ -93,6 +95,109 @@ class CommunitiesController extends AppController {
       }
     }
   }*/
+	/* Looks up the projects with a given macro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
+	private function lookUpProjectsMacro($tag_name, $like=true){
+		$options['joins'] = array(
+			array(
+				'table' => 'project_macro_tags',
+				'alias' => 'ProjectMacroTag',
+				'type' => 'inner',
+				'conditions' => array('MacroTag.id' => 'ProjectMacroTag.macro_tag_id')
+			),
+			array(
+				'table' => 'projects',
+				'alias' => 'Project',
+				'type' => 'inner',
+				'conditions' => array('ProjectMacroTag.project_id' => 'Project.id')
+			)
+		);
+		if($like){
+			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MacroTag.name' => $tag_name);
+		}
+		return ClassRegistry::init('MacroTag')->find('all', $options);
+	}
+	
+	/* Looks up the profiles with a given macro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
+	private function lookUpProfilesMacro($tag_name, $like=true){
+		$options['joins'] = array(
+			array(
+				'table' => 'profile_macro_tags',
+				'alias' => 'ProfileMacroTag',
+				'type' => 'inner',
+				'conditions' => array('MacroTag.id' => 'ProfileMacroTag.macro_tag_id')
+			),
+			array(
+				'table' => 'profiles',
+				'alias' => 'Profile',
+				'type' => 'inner',
+				'conditions' => array('ProfileMacroTag.profile_id' => 'Profile.id')
+			)
+		);
+		if($like){
+			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MacroTag.name' => $tag_name);
+		}
+		return ClassRegistry::init('MacroTag')->find('all', $options);
+	}
+
+	/* Looks up the projects with a given micro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
+	public function lookUpProjectsMicro($tag_name, $like=true){
+		$options['joins'] = array(
+			array(
+				'table' => 'project_micro_tags',
+				'alias' => 'ProjectMicroTag',
+				'type' => 'inner',
+				'conditions' => array('MicroTag.id' => 'ProjectMicroTag.micro_tag_id')
+			),
+			array(
+				'table' => 'projects',
+				'alias' => 'Project',
+				'type' => 'inner',
+				'conditions' => array('ProjectMicroTag.project_id' => 'Project.id')
+			)
+		);
+		if($like){
+			$options['conditions'] = array('MicroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MicroTag.name' => $tag_name);
+		}
+		return ClassRegistry::init('MicroTag')->find('all', $options);
+	}
+	
+	/* Looks up the profiles with a given micro tag name.
+	- Private function to be used by the public lookUp function.
+	*/
+	public function lookUpProfilesMicro($tag_name, $like=true){
+		$options['joins'] = array(
+			array(
+				'table' => 'profile_micro_tags',
+				'alias' => 'ProfileMicroTag',
+				'type' => 'inner',
+				'conditions' => array('MicroTag.id' => 'ProfileMicroTag.micro_tag_id')
+			),
+			array(
+				'table' => 'profiles',
+				'alias' => 'Profile',
+				'type' => 'inner',
+				'conditions' => array('ProfileMicroTag.profile_id' => 'Profile.id')
+			)
+		);
+		if($like){
+			$options['conditions'] = array('MicroTag.name LIKE' => $tag_name);
+		}else{
+			$options['conditions'] = array('MicroTag.name' => $tag_name);
+		}
+		return ClassRegistry::init('MicroTag')->find('all', $options);
+	}
   
   /* Implements the search functionality. 
   Able to search for projects and profiles within the communties using Macro Tags and Micro Tags.
@@ -127,32 +232,32 @@ class CommunitiesController extends AppController {
 
           if($tag_flag==0){
             if($profiles){
-              $this->set('macro_profiles', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
-              $this->set('micro_profiles', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+              $this->set('macro_profiles', $this->lookUpProfilesMacro($tag_name));
+              $this->set('micro_profiles', $this->lookUpProfilesMicro($tag_name));
             }
             if($projects){
-              $this->set('macro_projects', ClassRegistry::init('MacroTag')->lookUpProjects($tag_name));
-              $this->set('micro_projects', ClassRegistry::init('MicroTag')->lookUpProjects($tag_name));
+              $this->set('macro_projects', $this->lookUpProjectsMacro($tag_name));
+              $this->set('micro_projects', $this->lookUpProjectsMicro($tag_name));
             }
           }
           if($tag_flag==1){
             if($profiles){
-              $this->set('macro_profiles', ClassRegistry::init('MacroTag')->lookUpProfiles($tag_name));
+              $this->set('macro_profiles', $this->lookUpProfilesMacro($tag_name));
               $this->set('micro_profiles', null);
             }
             if($projects){
-              $this->set('macro_projects', ClassRegistry::init('MacroTag')->lookUpProjects($tag_name));
+              $this->set('macro_projects', $this->lookUpProjectsMacro($tag_name));
               $this->set('micro_projects', null);
             }
           }
           if($tag_flag==2){
             if($profiles){
               $this->set('macro_profiles', null);
-              $this->set('micro_profiles', ClassRegistry::init('MicroTag')->lookUpProfiles($tag_name));
+              $this->set('micro_profiles', $this->lookUpProfilesMicro($tag_name));
             }
             if($projects){
               $this->set('macro_projects', null);
-              $this->set('micro_projects', ClassRegistry::init('MicroTag')->lookUpProjects($tag_name));
+              $this->set('micro_projects', $this->lookUpProjectsMacro($tag_name));
             }
           }
         }

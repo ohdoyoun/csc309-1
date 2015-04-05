@@ -55,57 +55,6 @@ class MacroTag extends Tag{
 	}
 	*/
 	
-	/* Looks up the projects with a given macro tag name.
-	- Private function to be used by the public lookUp function.
-	*/
-	public function lookUpProjects($tag_name, $like=true){
-		$options['joins'] = array(
-			array(
-				'table' => 'project_macro_tags',
-				'alias' => 'ProjectMacroTag',
-				'type' => 'inner',
-				'conditions' => array('MacroTag.id' => 'ProjectMacroTag.macro_tag_id')
-			),
-			array(
-				'table' => 'projects',
-				'alias' => 'Project',
-				'type' => 'inner',
-				'conditions' => array('ProjectMacroTag.project_id' => 'Project.id')
-			)
-		);
-		if($like){
-			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
-		}else{
-			$options['conditions'] = array('MacroTag.name' => $tag_name);
-		}
-		return $this->find('all', $options);
-	}
-	
-	/* Looks up the profiles with a given macro tag name.
-	- Private function to be used by the public lookUp function.
-	*/
-	public function lookUpProfiles($tag_name, $like=true){
-		$options['joins'] = array(
-			array(
-				'table' => 'profile_macro_tags',
-				'alias' => 'ProfileMacroTag',
-				'type' => 'inner',
-				'conditions' => array('MacroTag.id' => 'ProfileMacroTag.macro_tag_id')
-			),
-			array(
-				'table' => 'profiles',
-				'alias' => 'Profile',
-				'type' => 'inner',
-				'conditions' => array('ProfileMacroTag.profile_id' => 'Profile.id')
-			)
-		);
-		if($like){
-			$options['conditions'] = array('MacroTag.name LIKE' => $tag_name);
-		}else{
-			$options['conditions'] = array('MacroTag.name' => $tag_name);
-		}
-		return $this->find('all', $options);
-	}
 
 	
 	/* Validates that name of the macro tag.
