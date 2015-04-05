@@ -19,7 +19,7 @@ class User extends AppModel{
 	/* The associations of this Model with other Models based on the database. */
 	public $hasOne = array(
 		'Profile' => array(
-			'classname' => 'Profile',
+			'className' => 'Profile',
 			'dependent' => true
 		/* This is commneted out until we deal with money matters.		
 		),
@@ -27,6 +27,13 @@ class User extends AppModel{
 			'classname' => 'Wallet'
 			'dependent' => true
 		*/
+		)
+	);
+	
+	public $hasMany = array(
+		'Post' => array(
+			'className' => 'User',
+			'dependent' => true
 		)
 	);
 	
