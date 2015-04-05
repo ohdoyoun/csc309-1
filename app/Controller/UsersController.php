@@ -34,6 +34,7 @@ class UsersController extends AppController {
                $this->redirect($this->Auth->redirect());
            } else {
                $this->Session->setFlash("Login failed");
+               $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
            }
        }
 	}
