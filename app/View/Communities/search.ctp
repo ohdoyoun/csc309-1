@@ -31,6 +31,7 @@
 </div>
 <h2>Search Results</h2>
 <?php 
+<<<<<<< HEAD
     if($marco_profiles == null){
         echo "<p>This is MacroTagProfiles! " + null + "</p>"; 
     }

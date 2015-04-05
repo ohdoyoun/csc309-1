@@ -247,6 +247,7 @@ class CommunitiesController extends AppController {
             }
             if($projects){
               $this->set('macro_projects', $this->lookUpProjectsMacro($tag_name));
+
               $this->set('micro_projects', null);
             }
           }
@@ -258,6 +259,7 @@ class CommunitiesController extends AppController {
             if($projects){
               $this->set('macro_projects', null);
               $this->set('micro_projects', $this->lookUpProjectsMacro($tag_name));
+
             }
           }
         }
