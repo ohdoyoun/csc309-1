@@ -1,10 +1,5 @@
 <h3>Your profile</h3>
 
-<?php
- debug($macroTag);
- debug($microTag);
-?>
-
 <?php 
 if (!empty($users)){  
     echo $this->Form->create('Profile', array('action'=>"edit"));
@@ -33,8 +28,8 @@ if (!empty($users)){
                             );
     echo $this->Form->input('gender', array('options' => array('Male'=>'Male', 'Female'=>'Female'), 'default'=>$users['gender']));
     echo $this->Form->input('bio', array('default'=>$users['bio'], 'label'=>"Biography"));
-    echo $this->Form->input('category', array('type' => 'select', 'label' => 'Main Interest', 'options' => $macroTags));
-	echo $this->Form->input('other', array('label' => 'Other Interests'));
+    echo $this->Form->input('category', array('type' => 'select', 'label' => 'Main Interest', 'options' => $macroTags, 'selected' => $macroTag[0]['profile_macro_tags']['macro_tag_id']));
+	echo $this->Form->input('other', array('label' => 'Other Interests', 'default' => $microTag[0]['micro_tags']['name']));
     echo $this->Form->end('Save changes');
 } else {
     echo $this->Form->create('Profile', array('action'=>"edit"));
