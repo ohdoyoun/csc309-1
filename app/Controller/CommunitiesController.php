@@ -41,7 +41,58 @@ class CommunitiesController extends AppController {
     }
   }
   
+  /* Helper function. Returns the lookup function on Macro Tags, Micro Tags or both.
+  $tag_flag possible options:
+    0 = Perform the lookup function on both Macro Tags and Micro Tags.
+    1 = Perform the lookup function on just the Macro Tags.
+    2 = Perform the lookup function on just the Micro Tags.
+  */
+  private function help_search($tag_name, $profiles=true, $projects=true, $tag_flag=0){
+    if($tag_flag==0){
+      return array_merge($this->MacroTag->lookup($tag_name, $profiles, $projects), $this->MicroTag->lookup($tag_name, $profiles, $projects));
+    }
+    if($tag_flag==1){
+      return $this->MacroTag->lookup($tag_name, $profiles, $projects);
+    }
+    if($tag_flag==2){
+      return $this->MicroTag->lookup($tag_name, $profiles, $projects)
+    }
+  }
+  
+  /* Implements the search functionality. 
+  Able to search for projects and profiles within the communties using Macro Tags and Micro Tags.
+  */
   public function search() {
+    $item_options = ['Profiles', 'Projects', 'All'];
+    $tag_options = ['Communities', 'Sub-Communities', 'All'];
+    if (!empty($this->data)) {
+      if (strlen($this->data['Communities']['tag_name']) > 0){
+        $tag_name = $this->data['Communities']['tag_name'];
+        $item = $this->data['Communities']['category'];
+        $tag = $this->data['Communities']['community'];
+        if(in_array($item, $item_options) && in_array($tag, $tag_options)){
+          switch($item){
+            case 'Profiles':
+              $profiles = true;
+              $projects = false;
+            case 'Projects':
+              $profiles = false;
+              $projects = true;
+            default:
+              $profiles = true;
+              $projects = true;
+          }
+          switch($tag){
+            case 'Communities':
+              return help_search($tag_name, $profiles, $projects, 1);
+            case 'Sub-Communities':
+              return help_search($tag_name, $profiles, $projects, 2);
+            default:
+              return help_search($tag_name, $profiles, $projects);
+          }
+        }
+      }
+    }
     
   }
   
