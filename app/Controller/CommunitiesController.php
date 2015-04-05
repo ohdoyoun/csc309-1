@@ -11,7 +11,8 @@ class CommunitiesController extends AppController {
     if($id != null){
       $this->set('posts', $this->Post->find('all', 'conditions' => array('Post.communities_id' => $id)));
       $community = $this->Community->findById($id);
-      $this->set('message', $community['name']);
+      $message = $community['macro_tags']['name'] + " : " + $community['micro_tags']['name'];
+      $this->set('message', $message);
     }else{
       $this->set('message'. 'Could not find this Community!');
       $this->set('posts', null);
