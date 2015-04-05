@@ -55,7 +55,7 @@ class CommunitiesController extends AppController {
       return $this->MacroTag->lookup($tag_name, $profiles, $projects);
     }
     if($tag_flag==2){
-      return $this->MicroTag->lookup($tag_name, $profiles, $projects)
+      return $this->MicroTag->lookup($tag_name, $profiles, $projects);
     }
   }
   
