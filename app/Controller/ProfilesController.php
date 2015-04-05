@@ -95,6 +95,15 @@ class ProfilesController extends AppController {
     }
     
     function edit() {
+        $tags = $this->Profile->query('SELECT * FROM macro_tags;');
+        
+        $cleanedTags = array();
+        
+        foreach($tags as $tag):
+          $cleanedTags[$tag['macro_tags']['id']] = $tag['macro_tags']['name'];
+        endforeach;
+        
+        $this->set('macroTags', $cleanedTags);
         
         $this->set('email', $this->Auth->user('email'));
         
@@ -104,8 +113,10 @@ class ProfilesController extends AppController {
         $userprofile = NULL;
         if (!empty($userprofile = $this->Profile->find('first', array('conditions' => $conditions)))) {
             $this->set('users', $userprofile['Profile']);
-            $prof_id = $userprofile['Profile']['id'];#$up['id'];
-
+            $prof_id = $userprofile['Profile']['id'];
+            $profileId = $this->Profile->query('SELECT id FROM profiles WHERE user_id=' . $this->Auth->user('id') . ';')[0]['profiles']['id'];
+            $this->set('macroTag', $this->Profile->query('SELECT macro_tag_id FROM profile_macro_tags WHERE profile_id=' . $profileId . ';'));
+            $this->set('microTag', $this->Profile->query('SELECT micro_tags.name FROM profile_micro_tags, micro_tags WHERE profile_micro_tags.micro_tag_id=micro_tags.id and profile_id=' . $profileId . ';'));
             
         } else {
             $this->Session->setFlash("Profile Setup");
@@ -136,12 +147,28 @@ class ProfilesController extends AppController {
             $dataUser['User']['id'] = $this->Auth->user('id');
             $dataUser['User']['email'] = $this->request->data['Profile']['email'];
             
-			if ($this->Profile->save($dataSave, false) and $this->Profile->User->save($dataUser, false)) {
-                
-                #Update users email in session
-                $this->Session->write('Auth.User.email', $dataUser['User']['email']);
-				$this->Session->setFlash('Changes successful.');
-			}
+            if (strlen($this->data['Profile']['other']) > 0 and strlen($this->data['Profile']['other']) <= 50) {
+    			if ($this->Profile->save($dataSave, false) and $this->Profile->User->save($dataUser, false)) {
+    			    $profileId = $this->Profile->query('SELECT id FROM profiles WHERE user_id=' . $this->Auth->user('id') . ';')[0]['profiles']['id'];
+    			    $this->Profile->query('DELETE FROM profile_macro_tags WHERE profile_id=' . $profileId . ';');
+    			    $this->Profile->query('DELETE FROM profile_micro_tags WHERE profile_id=' . $profileId . ';');
+    			    
+                    $this->Profile->query('INSERT INTO profile_macro_tags (macro_tag_id, profile_id) VALUES (' . $this->data['Profile']['category'] . ', ' . $profileId . ');');
+                    if ($this->Profile->query('SELECT count(*) as total FROM micro_tags WHERE name=\'' . $this->data['Profile']['other'] . '\';')[0][0]['total'] == 0) {
+                        $this->Profile->query('INSERT INTO micro_tags (name) VALUES (\'' . $this->data['Profile']['other'] . '\');');
+                    }
+                    $micro_tag_id = $this->Profile->query('SELECT id FROM micro_tags WHERE name=\'' . $this->data['Profile']['other'] . '\' LIMIT 1;')[0]['micro_tags']['id'];
+                    $this->Profile->query('INSERT INTO profile_micro_tags (micro_tag_id, profile_id) VALUES (' . $micro_tag_id . ', ' . $profileId . ');');
+                        
+                    #Update users email in session
+                    $this->Session->write('Auth.User.email', $dataUser['User']['email']);
+    				$this->Session->setFlash('Changes successful.');
+    				$this->redirect(array('controller' => 'profiles', 'action' => 'edit'));
+    			}
+            } else {
+                    $this->Session->setFlash('Other interests must be in between 1 and 50 characters');
+                    $this->redirect(array('controller'=>'profiles', 'action'=>'edit'));
+            }
 		}
     } 
 }

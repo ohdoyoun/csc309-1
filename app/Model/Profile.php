@@ -165,7 +165,7 @@ class Profile extends AppModel{
 			(
 				'rule' => 'isValidPhoneFormat',
 				'required' => true,
-				'message' => 'Phone number may only be alphanumeric characters.',
+				'message' => 'Please enter a valid phone number.',
                 'allowEmpty' => true
 			),
 			'between' => array
