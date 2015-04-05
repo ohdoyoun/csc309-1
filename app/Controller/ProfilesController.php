@@ -103,7 +103,6 @@ class ProfilesController extends AppController {
         $prof_id = NULL;
         $userprofile = NULL;
         if (!empty($userprofile = $this->Profile->find('first', array('conditions' => $conditions)))) {
-            $this->Session->setFlash("Your Profile");
             $this->set('users', $userprofile['Profile']);
             $prof_id = $userprofile['Profile']['id'];#$up['id'];
 
@@ -142,7 +141,6 @@ class ProfilesController extends AppController {
                 #Update users email in session
                 $this->Session->write('Auth.User.email', $dataUser['User']['email']);
 				$this->Session->setFlash('Changes successful.');
-				#$this->redirect(array('action' => 'edit'));
 			}
 		}
     } 
