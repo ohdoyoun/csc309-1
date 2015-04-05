@@ -8,7 +8,14 @@ class CommunitiesController extends AppController {
   }
   
   public function view($id = null) {
-    
+    if($id != null){
+      $this->set('posts', $this->Post->find('all', 'conditions' => array('Post.communities_id' => $id)));
+      $community = $this->Community->findById($id);
+      $this->set('message', $community['name']);
+    }else{
+      $this->set('message'. 'Could not find this Community!');
+      $this->set('posts', null);
+    }
   }
   
   public function results(){
